@@ -1,0 +1,2 @@
+squeezenet/init_net.pb filter=lfs diff=lfs merge=lfs -text
+squeezenet/predict_net.pb filter=lfs diff=lfs merge=lfs -text
