@@ -12,7 +12,7 @@ To download a model folder locally, run
 
     python -m caffe2.python.models.download squeezenet
   
-which will create a folder `squeezenet/` containing both an `init_net.pb` and `run_net.pb`.
+which will create a folder `squeezenet/` containing both an `init_net.pb` and `exec_net.pb`.
 
 ### Install
 To install a model, run
