@@ -22,5 +22,5 @@ To install a model, run
 which will allow later `import`s of the model directly in Python:
 
     from caffe2.python.models import squeezenet
-    print(squeezenet.run_net.name)
+    print(squeezenet.exec_net.name)
     
