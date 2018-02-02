@@ -11,7 +11,7 @@ Install [Caffe2](https://github.com/caffe2/caffe2) with Python bindings.
 To download a model locally, run
 
     python -m caffe2.python.models.download squeezenet
-  
+
 which will create a folder `squeezenet/` containing both an `init_net.pb` and `predict_net.pb`.
 
 ### Install
@@ -19,10 +19,19 @@ which will create a folder `squeezenet/` containing both an `init_net.pb` and `p
 To install a model, run
 
     python -m caffe2.python.models.download -i squeezenet
-    
+
 which will allow later `import`s of the model directly in Python:
 
     from caffe2.python.models import squeezenet
     print(squeezenet.init_net.name)
     print(squeezenet.predict_net.name)
-    
+
+### Subdirectories
+
+To download a model in a subdirectory (for example, style transfer), run
+
+    python -m caffe2.python.models.download style_transfer/crayon
+
+and this will create a folder `style_transfer/crayon/` containing both an `init_net.pb` and `predict_net.pb`.
+
+Same applies to the `-i` install option.
