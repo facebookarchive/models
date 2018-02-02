@@ -1,0 +1,355 @@
+name: "vgg16"
+op {
+  input: "gpu_0/data"
+  input: "gpu_0/conv1_w"
+  input: "gpu_0/conv1_b"
+  output: "gpu_0/conv1"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 7
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 2
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/conv1"
+  output: "gpu_0/conv1"
+  name: ""
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/conv1"
+  output: "gpu_0/norm1"
+  output: "gpu_0/scale1"
+  name: ""
+  type: "LRN"
+  arg {
+    name: "beta"
+    f: 0.75
+  }
+  arg {
+    name: "bias"
+    f: 2.0
+  }
+  arg {
+    name: "alpha"
+    f: 0.000500000023749
+  }
+  arg {
+    name: "size"
+    i: 5
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/norm1"
+  output: "gpu_0/pool1"
+  name: ""
+  type: "MaxPool"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 2
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/pool1"
+  input: "gpu_0/conv2_w"
+  input: "gpu_0/conv2_b"
+  output: "gpu_0/conv2"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 5
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 2
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/conv2"
+  output: "gpu_0/conv2"
+  name: ""
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/conv2"
+  output: "gpu_0/norm2"
+  output: "gpu_0/scale2"
+  name: ""
+  type: "LRN"
+  arg {
+    name: "beta"
+    f: 0.75
+  }
+  arg {
+    name: "bias"
+    f: 2.0
+  }
+  arg {
+    name: "alpha"
+    f: 0.000500000023749
+  }
+  arg {
+    name: "size"
+    i: 5
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/norm2"
+  output: "gpu_0/pool2"
+  name: ""
+  type: "MaxPool"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 2
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/pool2"
+  input: "gpu_0/conv3_w"
+  input: "gpu_0/conv3_b"
+  output: "gpu_0/conv3"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/conv3"
+  output: "gpu_0/conv3"
+  name: ""
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/conv3"
+  input: "gpu_0/conv4_w"
+  input: "gpu_0/conv4_b"
+  output: "gpu_0/conv4"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/conv4"
+  output: "gpu_0/conv4"
+  name: ""
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/conv4"
+  input: "gpu_0/conv5_w"
+  input: "gpu_0/conv5_b"
+  output: "gpu_0/conv5"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/conv5"
+  output: "gpu_0/conv5"
+  name: ""
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/conv5"
+  output: "gpu_0/pool5"
+  name: ""
+  type: "MaxPool"
+  arg {
+    name: "kernel"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 2
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/pool5"
+  input: "gpu_0/fc6_w"
+  input: "gpu_0/fc6_b"
+  output: "gpu_0/fc6"
+  name: ""
+  type: "FC"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/fc6"
+  output: "gpu_0/fc6"
+  name: ""
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/fc6"
+  input: "gpu_0/fc7_w"
+  input: "gpu_0/fc7_b"
+  output: "gpu_0/fc7"
+  name: ""
+  type: "FC"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/fc7"
+  output: "gpu_0/fc7"
+  name: ""
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/fc7"
+  input: "gpu_0/fc8_w"
+  input: "gpu_0/fc8_b"
+  output: "gpu_0/pred"
+  name: ""
+  type: "FC"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "gpu_0/pred"
+  output: "gpu_0/softmax"
+  name: ""
+  type: "Softmax"
+  device_option {
+  }
+  engine: ""
+}
+external_input: "gpu_0/data"
+external_input: "gpu_0/conv1_w"
+external_input: "gpu_0/conv1_b"
+external_input: "gpu_0/conv2_w"
+external_input: "gpu_0/conv2_b"
+external_input: "gpu_0/conv3_w"
+external_input: "gpu_0/conv3_b"
+external_input: "gpu_0/conv4_w"
+external_input: "gpu_0/conv4_b"
+external_input: "gpu_0/conv5_w"
+external_input: "gpu_0/conv5_b"
+external_input: "gpu_0/fc6_w"
+external_input: "gpu_0/fc6_b"
+external_input: "gpu_0/fc7_w"
+external_input: "gpu_0/fc7_b"
+external_input: "gpu_0/fc8_w"
+external_input: "gpu_0/fc8_b"
+external_input: "gpu_0/imagenet1k_blobs_queue_e24a6638-b332-4e67-a127-91f5e17e2e11"
+external_output: "gpu_0/softmax"

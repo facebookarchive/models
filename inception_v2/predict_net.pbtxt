@@ -1,0 +1,5917 @@
+name: "InceptionNetwork"
+op {
+  input: "data"
+  input: "conv1/7x7_s2_w"
+  output: "conv1/7x7_s2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 3
+  }
+  arg {
+    name: "kernel"
+    i: 7
+  }
+}
+op {
+  input: "conv1/7x7_s2"
+  input: "conv1/7x7_s2/bn_scale"
+  input: "conv1/7x7_s2/bn_bias"
+  input: "conv1/7x7_s2/bn_mean"
+  input: "conv1/7x7_s2/bn_var"
+  output: "conv1/7x7_s2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "conv1/7x7_s2/bn"
+  input: "conv1/7x7_s2/bn/sc_w"
+  output: "conv1/7x7_s2/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "conv1/7x7_s2/bn/sc_internal"
+  input: "conv1/7x7_s2/bn/sc_b"
+  output: "conv1/7x7_s2/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "conv1/7x7_s2/bn/sc"
+  output: "conv1/7x7_s2/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "conv1/7x7_s2/bn/sc"
+  output: "pool1/3x3_s2"
+  type: "MaxPool"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "pad_r"
+    i: 1
+  }
+  arg {
+    name: "pad_b"
+    i: 1
+  }
+  arg {
+    name: "pad_t"
+    i: 0
+  }
+  arg {
+    name: "pad_l"
+    i: 0
+  }
+}
+op {
+  input: "pool1/3x3_s2"
+  input: "conv2/3x3_reduce_w"
+  output: "conv2/3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "conv2/3x3_reduce"
+  input: "conv2/3x3_reduce/bn_scale"
+  input: "conv2/3x3_reduce/bn_bias"
+  input: "conv2/3x3_reduce/bn_mean"
+  input: "conv2/3x3_reduce/bn_var"
+  output: "conv2/3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "conv2/3x3_reduce/bn"
+  input: "conv2/3x3_reduce/bn/sc_w"
+  output: "conv2/3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "conv2/3x3_reduce/bn/sc_internal"
+  input: "conv2/3x3_reduce/bn/sc_b"
+  output: "conv2/3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "conv2/3x3_reduce/bn/sc"
+  output: "conv2/3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "conv2/3x3_reduce/bn/sc"
+  input: "conv2/3x3_w"
+  output: "conv2/3x3"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "conv2/3x3"
+  input: "conv2/3x3/bn_scale"
+  input: "conv2/3x3/bn_bias"
+  input: "conv2/3x3/bn_mean"
+  input: "conv2/3x3/bn_var"
+  output: "conv2/3x3/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "conv2/3x3/bn"
+  input: "conv2/3x3/bn/sc_w"
+  output: "conv2/3x3/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "conv2/3x3/bn/sc_internal"
+  input: "conv2/3x3/bn/sc_b"
+  output: "conv2/3x3/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "conv2/3x3/bn/sc"
+  output: "conv2/3x3/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "conv2/3x3/bn/sc"
+  output: "pool2/3x3_s2"
+  type: "MaxPool"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "pad_r"
+    i: 1
+  }
+  arg {
+    name: "pad_b"
+    i: 1
+  }
+  arg {
+    name: "pad_t"
+    i: 0
+  }
+  arg {
+    name: "pad_l"
+    i: 0
+  }
+}
+op {
+  input: "pool2/3x3_s2"
+  input: "inception_3a/1x1_w"
+  output: "inception_3a/1x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/1x1"
+  input: "inception_3a/1x1/bn_scale"
+  input: "inception_3a/1x1/bn_bias"
+  input: "inception_3a/1x1/bn_mean"
+  input: "inception_3a/1x1/bn_var"
+  output: "inception_3a/1x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3a/1x1/bn"
+  input: "inception_3a/1x1/bn/sc_w"
+  output: "inception_3a/1x1/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/1x1/bn/sc_internal"
+  input: "inception_3a/1x1/bn/sc_b"
+  output: "inception_3a/1x1/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/1x1/bn/sc"
+  output: "inception_3a/1x1/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "pool2/3x3_s2"
+  input: "inception_3a/3x3_reduce_w"
+  output: "inception_3a/3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/3x3_reduce"
+  input: "inception_3a/3x3_reduce/bn_scale"
+  input: "inception_3a/3x3_reduce/bn_bias"
+  input: "inception_3a/3x3_reduce/bn_mean"
+  input: "inception_3a/3x3_reduce/bn_var"
+  output: "inception_3a/3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3a/3x3_reduce/bn"
+  input: "inception_3a/3x3_reduce/bn/sc_w"
+  output: "inception_3a/3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/3x3_reduce/bn/sc_internal"
+  input: "inception_3a/3x3_reduce/bn/sc_b"
+  output: "inception_3a/3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/3x3_reduce/bn/sc"
+  output: "inception_3a/3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3a/3x3_reduce/bn/sc"
+  input: "inception_3a/3x3_w"
+  output: "inception_3a/3x3"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_3a/3x3"
+  input: "inception_3a/3x3/bn_scale"
+  input: "inception_3a/3x3/bn_bias"
+  input: "inception_3a/3x3/bn_mean"
+  input: "inception_3a/3x3/bn_var"
+  output: "inception_3a/3x3/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3a/3x3/bn"
+  input: "inception_3a/3x3/bn/sc_w"
+  output: "inception_3a/3x3/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/3x3/bn/sc_internal"
+  input: "inception_3a/3x3/bn/sc_b"
+  output: "inception_3a/3x3/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/3x3/bn/sc"
+  output: "inception_3a/3x3/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "pool2/3x3_s2"
+  input: "inception_3a/double3x3_reduce_w"
+  output: "inception_3a/double3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/double3x3_reduce"
+  input: "inception_3a/double3x3_reduce/bn_scale"
+  input: "inception_3a/double3x3_reduce/bn_bias"
+  input: "inception_3a/double3x3_reduce/bn_mean"
+  input: "inception_3a/double3x3_reduce/bn_var"
+  output: "inception_3a/double3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3a/double3x3_reduce/bn"
+  input: "inception_3a/double3x3_reduce/bn/sc_w"
+  output: "inception_3a/double3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/double3x3_reduce/bn/sc_internal"
+  input: "inception_3a/double3x3_reduce/bn/sc_b"
+  output: "inception_3a/double3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/double3x3_reduce/bn/sc"
+  output: "inception_3a/double3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3a/double3x3_reduce/bn/sc"
+  input: "inception_3a/double3x3a_w"
+  output: "inception_3a/double3x3a"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_3a/double3x3a"
+  input: "inception_3a/double3x3a/bn_scale"
+  input: "inception_3a/double3x3a/bn_bias"
+  input: "inception_3a/double3x3a/bn_mean"
+  input: "inception_3a/double3x3a/bn_var"
+  output: "inception_3a/double3x3a/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3a/double3x3a/bn"
+  input: "inception_3a/double3x3a/bn/sc_w"
+  output: "inception_3a/double3x3a/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/double3x3a/bn/sc_internal"
+  input: "inception_3a/double3x3a/bn/sc_b"
+  output: "inception_3a/double3x3a/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/double3x3a/bn/sc"
+  output: "inception_3a/double3x3a/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3a/double3x3a/bn/sc"
+  input: "inception_3a/double3x3b_w"
+  output: "inception_3a/double3x3b"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_3a/double3x3b"
+  input: "inception_3a/double3x3b/bn_scale"
+  input: "inception_3a/double3x3b/bn_bias"
+  input: "inception_3a/double3x3b/bn_mean"
+  input: "inception_3a/double3x3b/bn_var"
+  output: "inception_3a/double3x3b/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3a/double3x3b/bn"
+  input: "inception_3a/double3x3b/bn/sc_w"
+  output: "inception_3a/double3x3b/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/double3x3b/bn/sc_internal"
+  input: "inception_3a/double3x3b/bn/sc_b"
+  output: "inception_3a/double3x3b/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/double3x3b/bn/sc"
+  output: "inception_3a/double3x3b/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "pool2/3x3_s2"
+  output: "inception_3a/pool"
+  type: "AveragePool"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3a/pool"
+  input: "inception_3a/pool_proj_w"
+  output: "inception_3a/pool_proj"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/pool_proj"
+  input: "inception_3a/pool_proj/bn_scale"
+  input: "inception_3a/pool_proj/bn_bias"
+  input: "inception_3a/pool_proj/bn_mean"
+  input: "inception_3a/pool_proj/bn_var"
+  output: "inception_3a/pool_proj/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3a/pool_proj/bn"
+  input: "inception_3a/pool_proj/bn/sc_w"
+  output: "inception_3a/pool_proj/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/pool_proj/bn/sc_internal"
+  input: "inception_3a/pool_proj/bn/sc_b"
+  output: "inception_3a/pool_proj/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3a/pool_proj/bn/sc"
+  output: "inception_3a/pool_proj/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3a/1x1/bn/sc"
+  input: "inception_3a/3x3/bn/sc"
+  input: "inception_3a/double3x3b/bn/sc"
+  input: "inception_3a/pool_proj/bn/sc"
+  output: "inception_3a/output"
+  output: "_inception_3a/output_dims"
+  type: "Concat"
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3a/output"
+  input: "inception_3b/1x1_w"
+  output: "inception_3b/1x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/1x1"
+  input: "inception_3b/1x1/bn_scale"
+  input: "inception_3b/1x1/bn_bias"
+  input: "inception_3b/1x1/bn_mean"
+  input: "inception_3b/1x1/bn_var"
+  output: "inception_3b/1x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3b/1x1/bn"
+  input: "inception_3b/1x1/bn/sc_w"
+  output: "inception_3b/1x1/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/1x1/bn/sc_internal"
+  input: "inception_3b/1x1/bn/sc_b"
+  output: "inception_3b/1x1/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/1x1/bn/sc"
+  output: "inception_3b/1x1/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3a/output"
+  input: "inception_3b/3x3_reduce_w"
+  output: "inception_3b/3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/3x3_reduce"
+  input: "inception_3b/3x3_reduce/bn_scale"
+  input: "inception_3b/3x3_reduce/bn_bias"
+  input: "inception_3b/3x3_reduce/bn_mean"
+  input: "inception_3b/3x3_reduce/bn_var"
+  output: "inception_3b/3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3b/3x3_reduce/bn"
+  input: "inception_3b/3x3_reduce/bn/sc_w"
+  output: "inception_3b/3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/3x3_reduce/bn/sc_internal"
+  input: "inception_3b/3x3_reduce/bn/sc_b"
+  output: "inception_3b/3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/3x3_reduce/bn/sc"
+  output: "inception_3b/3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3b/3x3_reduce/bn/sc"
+  input: "inception_3b/3x3_w"
+  output: "inception_3b/3x3"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_3b/3x3"
+  input: "inception_3b/3x3/bn_scale"
+  input: "inception_3b/3x3/bn_bias"
+  input: "inception_3b/3x3/bn_mean"
+  input: "inception_3b/3x3/bn_var"
+  output: "inception_3b/3x3/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3b/3x3/bn"
+  input: "inception_3b/3x3/bn/sc_w"
+  output: "inception_3b/3x3/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/3x3/bn/sc_internal"
+  input: "inception_3b/3x3/bn/sc_b"
+  output: "inception_3b/3x3/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/3x3/bn/sc"
+  output: "inception_3b/3x3/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3a/output"
+  input: "inception_3b/double3x3_reduce_w"
+  output: "inception_3b/double3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/double3x3_reduce"
+  input: "inception_3b/double3x3_reduce/bn_scale"
+  input: "inception_3b/double3x3_reduce/bn_bias"
+  input: "inception_3b/double3x3_reduce/bn_mean"
+  input: "inception_3b/double3x3_reduce/bn_var"
+  output: "inception_3b/double3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3b/double3x3_reduce/bn"
+  input: "inception_3b/double3x3_reduce/bn/sc_w"
+  output: "inception_3b/double3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/double3x3_reduce/bn/sc_internal"
+  input: "inception_3b/double3x3_reduce/bn/sc_b"
+  output: "inception_3b/double3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/double3x3_reduce/bn/sc"
+  output: "inception_3b/double3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3b/double3x3_reduce/bn/sc"
+  input: "inception_3b/double3x3a_w"
+  output: "inception_3b/double3x3a"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_3b/double3x3a"
+  input: "inception_3b/double3x3a/bn_scale"
+  input: "inception_3b/double3x3a/bn_bias"
+  input: "inception_3b/double3x3a/bn_mean"
+  input: "inception_3b/double3x3a/bn_var"
+  output: "inception_3b/double3x3a/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3b/double3x3a/bn"
+  input: "inception_3b/double3x3a/bn/sc_w"
+  output: "inception_3b/double3x3a/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/double3x3a/bn/sc_internal"
+  input: "inception_3b/double3x3a/bn/sc_b"
+  output: "inception_3b/double3x3a/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/double3x3a/bn/sc"
+  output: "inception_3b/double3x3a/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3b/double3x3a/bn/sc"
+  input: "inception_3b/double3x3b_w"
+  output: "inception_3b/double3x3b"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_3b/double3x3b"
+  input: "inception_3b/double3x3b/bn_scale"
+  input: "inception_3b/double3x3b/bn_bias"
+  input: "inception_3b/double3x3b/bn_mean"
+  input: "inception_3b/double3x3b/bn_var"
+  output: "inception_3b/double3x3b/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3b/double3x3b/bn"
+  input: "inception_3b/double3x3b/bn/sc_w"
+  output: "inception_3b/double3x3b/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/double3x3b/bn/sc_internal"
+  input: "inception_3b/double3x3b/bn/sc_b"
+  output: "inception_3b/double3x3b/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/double3x3b/bn/sc"
+  output: "inception_3b/double3x3b/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3a/output"
+  output: "inception_3b/pool"
+  type: "AveragePool"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3b/pool"
+  input: "inception_3b/pool_proj_w"
+  output: "inception_3b/pool_proj"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/pool_proj"
+  input: "inception_3b/pool_proj/bn_scale"
+  input: "inception_3b/pool_proj/bn_bias"
+  input: "inception_3b/pool_proj/bn_mean"
+  input: "inception_3b/pool_proj/bn_var"
+  output: "inception_3b/pool_proj/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3b/pool_proj/bn"
+  input: "inception_3b/pool_proj/bn/sc_w"
+  output: "inception_3b/pool_proj/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/pool_proj/bn/sc_internal"
+  input: "inception_3b/pool_proj/bn/sc_b"
+  output: "inception_3b/pool_proj/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3b/pool_proj/bn/sc"
+  output: "inception_3b/pool_proj/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3b/1x1/bn/sc"
+  input: "inception_3b/3x3/bn/sc"
+  input: "inception_3b/double3x3b/bn/sc"
+  input: "inception_3b/pool_proj/bn/sc"
+  output: "inception_3b/output"
+  output: "_inception_3b/output_dims"
+  type: "Concat"
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3b/output"
+  input: "inception_3c/3x3_reduce_w"
+  output: "inception_3c/3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_3c/3x3_reduce"
+  input: "inception_3c/3x3_reduce/bn_scale"
+  input: "inception_3c/3x3_reduce/bn_bias"
+  input: "inception_3c/3x3_reduce/bn_mean"
+  input: "inception_3c/3x3_reduce/bn_var"
+  output: "inception_3c/3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3c/3x3_reduce/bn"
+  input: "inception_3c/3x3_reduce/bn/sc_w"
+  output: "inception_3c/3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3c/3x3_reduce/bn/sc_internal"
+  input: "inception_3c/3x3_reduce/bn/sc_b"
+  output: "inception_3c/3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3c/3x3_reduce/bn/sc"
+  output: "inception_3c/3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3c/3x3_reduce/bn/sc"
+  input: "inception_3c/3x3_w"
+  output: "inception_3c/3x3"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_3c/3x3"
+  input: "inception_3c/3x3/bn_scale"
+  input: "inception_3c/3x3/bn_bias"
+  input: "inception_3c/3x3/bn_mean"
+  input: "inception_3c/3x3/bn_var"
+  output: "inception_3c/3x3/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3c/3x3/bn"
+  input: "inception_3c/3x3/bn/sc_w"
+  output: "inception_3c/3x3/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3c/3x3/bn/sc_internal"
+  input: "inception_3c/3x3/bn/sc_b"
+  output: "inception_3c/3x3/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3c/3x3/bn/sc"
+  output: "inception_3c/3x3/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3b/output"
+  input: "inception_3c/double3x3_reduce_w"
+  output: "inception_3c/double3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_3c/double3x3_reduce"
+  input: "inception_3c/double3x3_reduce/bn_scale"
+  input: "inception_3c/double3x3_reduce/bn_bias"
+  input: "inception_3c/double3x3_reduce/bn_mean"
+  input: "inception_3c/double3x3_reduce/bn_var"
+  output: "inception_3c/double3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3c/double3x3_reduce/bn"
+  input: "inception_3c/double3x3_reduce/bn/sc_w"
+  output: "inception_3c/double3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3c/double3x3_reduce/bn/sc_internal"
+  input: "inception_3c/double3x3_reduce/bn/sc_b"
+  output: "inception_3c/double3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3c/double3x3_reduce/bn/sc"
+  output: "inception_3c/double3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3c/double3x3_reduce/bn/sc"
+  input: "inception_3c/double3x3a_w"
+  output: "inception_3c/double3x3a"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_3c/double3x3a"
+  input: "inception_3c/double3x3a/bn_scale"
+  input: "inception_3c/double3x3a/bn_bias"
+  input: "inception_3c/double3x3a/bn_mean"
+  input: "inception_3c/double3x3a/bn_var"
+  output: "inception_3c/double3x3a/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3c/double3x3a/bn"
+  input: "inception_3c/double3x3a/bn/sc_w"
+  output: "inception_3c/double3x3a/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3c/double3x3a/bn/sc_internal"
+  input: "inception_3c/double3x3a/bn/sc_b"
+  output: "inception_3c/double3x3a/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3c/double3x3a/bn/sc"
+  output: "inception_3c/double3x3a/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3c/double3x3a/bn/sc"
+  input: "inception_3c/double3x3b_w"
+  output: "inception_3c/double3x3b"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_3c/double3x3b"
+  input: "inception_3c/double3x3b/bn_scale"
+  input: "inception_3c/double3x3b/bn_bias"
+  input: "inception_3c/double3x3b/bn_mean"
+  input: "inception_3c/double3x3b/bn_var"
+  output: "inception_3c/double3x3b/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3c/double3x3b/bn"
+  input: "inception_3c/double3x3b/bn/sc_w"
+  output: "inception_3c/double3x3b/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3c/double3x3b/bn/sc_internal"
+  input: "inception_3c/double3x3b/bn/sc_b"
+  output: "inception_3c/double3x3b/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_3c/double3x3b/bn/sc"
+  output: "inception_3c/double3x3b/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3b/output"
+  output: "inception_3c/pool"
+  type: "MaxPool"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "pad_r"
+    i: 1
+  }
+  arg {
+    name: "pad_b"
+    i: 1
+  }
+  arg {
+    name: "pad_t"
+    i: 0
+  }
+  arg {
+    name: "pad_l"
+    i: 0
+  }
+}
+op {
+  input: "inception_3c/3x3/bn/sc"
+  input: "inception_3c/double3x3b/bn/sc"
+  input: "inception_3c/pool"
+  output: "inception_3c/output"
+  output: "_inception_3c/output_dims"
+  type: "Concat"
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_3c/output"
+  input: "inception_4a/1x1_w"
+  output: "inception_4a/1x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/1x1"
+  input: "inception_4a/1x1/bn_scale"
+  input: "inception_4a/1x1/bn_bias"
+  input: "inception_4a/1x1/bn_mean"
+  input: "inception_4a/1x1/bn_var"
+  output: "inception_4a/1x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4a/1x1/bn"
+  input: "inception_4a/1x1/bn/sc_w"
+  output: "inception_4a/1x1/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/1x1/bn/sc_internal"
+  input: "inception_4a/1x1/bn/sc_b"
+  output: "inception_4a/1x1/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/1x1/bn/sc"
+  output: "inception_4a/1x1/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3c/output"
+  input: "inception_4a/3x3_reduce_w"
+  output: "inception_4a/3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/3x3_reduce"
+  input: "inception_4a/3x3_reduce/bn_scale"
+  input: "inception_4a/3x3_reduce/bn_bias"
+  input: "inception_4a/3x3_reduce/bn_mean"
+  input: "inception_4a/3x3_reduce/bn_var"
+  output: "inception_4a/3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4a/3x3_reduce/bn"
+  input: "inception_4a/3x3_reduce/bn/sc_w"
+  output: "inception_4a/3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/3x3_reduce/bn/sc_internal"
+  input: "inception_4a/3x3_reduce/bn/sc_b"
+  output: "inception_4a/3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/3x3_reduce/bn/sc"
+  output: "inception_4a/3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4a/3x3_reduce/bn/sc"
+  input: "inception_4a/3x3_w"
+  output: "inception_4a/3x3"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4a/3x3"
+  input: "inception_4a/3x3/bn_scale"
+  input: "inception_4a/3x3/bn_bias"
+  input: "inception_4a/3x3/bn_mean"
+  input: "inception_4a/3x3/bn_var"
+  output: "inception_4a/3x3/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4a/3x3/bn"
+  input: "inception_4a/3x3/bn/sc_w"
+  output: "inception_4a/3x3/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/3x3/bn/sc_internal"
+  input: "inception_4a/3x3/bn/sc_b"
+  output: "inception_4a/3x3/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/3x3/bn/sc"
+  output: "inception_4a/3x3/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3c/output"
+  input: "inception_4a/double3x3_reduce_w"
+  output: "inception_4a/double3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/double3x3_reduce"
+  input: "inception_4a/double3x3_reduce/bn_scale"
+  input: "inception_4a/double3x3_reduce/bn_bias"
+  input: "inception_4a/double3x3_reduce/bn_mean"
+  input: "inception_4a/double3x3_reduce/bn_var"
+  output: "inception_4a/double3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4a/double3x3_reduce/bn"
+  input: "inception_4a/double3x3_reduce/bn/sc_w"
+  output: "inception_4a/double3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/double3x3_reduce/bn/sc_internal"
+  input: "inception_4a/double3x3_reduce/bn/sc_b"
+  output: "inception_4a/double3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/double3x3_reduce/bn/sc"
+  output: "inception_4a/double3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4a/double3x3_reduce/bn/sc"
+  input: "inception_4a/double3x3a_w"
+  output: "inception_4a/double3x3a"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4a/double3x3a"
+  input: "inception_4a/double3x3a/bn_scale"
+  input: "inception_4a/double3x3a/bn_bias"
+  input: "inception_4a/double3x3a/bn_mean"
+  input: "inception_4a/double3x3a/bn_var"
+  output: "inception_4a/double3x3a/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4a/double3x3a/bn"
+  input: "inception_4a/double3x3a/bn/sc_w"
+  output: "inception_4a/double3x3a/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/double3x3a/bn/sc_internal"
+  input: "inception_4a/double3x3a/bn/sc_b"
+  output: "inception_4a/double3x3a/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/double3x3a/bn/sc"
+  output: "inception_4a/double3x3a/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4a/double3x3a/bn/sc"
+  input: "inception_4a/double3x3b_w"
+  output: "inception_4a/double3x3b"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4a/double3x3b"
+  input: "inception_4a/double3x3b/bn_scale"
+  input: "inception_4a/double3x3b/bn_bias"
+  input: "inception_4a/double3x3b/bn_mean"
+  input: "inception_4a/double3x3b/bn_var"
+  output: "inception_4a/double3x3b/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4a/double3x3b/bn"
+  input: "inception_4a/double3x3b/bn/sc_w"
+  output: "inception_4a/double3x3b/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/double3x3b/bn/sc_internal"
+  input: "inception_4a/double3x3b/bn/sc_b"
+  output: "inception_4a/double3x3b/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/double3x3b/bn/sc"
+  output: "inception_4a/double3x3b/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_3c/output"
+  output: "inception_4a/pool"
+  type: "AveragePool"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4a/pool"
+  input: "inception_4a/pool_proj_w"
+  output: "inception_4a/pool_proj"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/pool_proj"
+  input: "inception_4a/pool_proj/bn_scale"
+  input: "inception_4a/pool_proj/bn_bias"
+  input: "inception_4a/pool_proj/bn_mean"
+  input: "inception_4a/pool_proj/bn_var"
+  output: "inception_4a/pool_proj/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4a/pool_proj/bn"
+  input: "inception_4a/pool_proj/bn/sc_w"
+  output: "inception_4a/pool_proj/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/pool_proj/bn/sc_internal"
+  input: "inception_4a/pool_proj/bn/sc_b"
+  output: "inception_4a/pool_proj/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4a/pool_proj/bn/sc"
+  output: "inception_4a/pool_proj/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4a/1x1/bn/sc"
+  input: "inception_4a/3x3/bn/sc"
+  input: "inception_4a/double3x3b/bn/sc"
+  input: "inception_4a/pool_proj/bn/sc"
+  output: "inception_4a/output"
+  output: "_inception_4a/output_dims"
+  type: "Concat"
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4a/output"
+  input: "inception_4b/1x1_w"
+  output: "inception_4b/1x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/1x1"
+  input: "inception_4b/1x1/bn_scale"
+  input: "inception_4b/1x1/bn_bias"
+  input: "inception_4b/1x1/bn_mean"
+  input: "inception_4b/1x1/bn_var"
+  output: "inception_4b/1x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4b/1x1/bn"
+  input: "inception_4b/1x1/bn/sc_w"
+  output: "inception_4b/1x1/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/1x1/bn/sc_internal"
+  input: "inception_4b/1x1/bn/sc_b"
+  output: "inception_4b/1x1/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/1x1/bn/sc"
+  output: "inception_4b/1x1/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4a/output"
+  input: "inception_4b/3x3_reduce_w"
+  output: "inception_4b/3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/3x3_reduce"
+  input: "inception_4b/3x3_reduce/bn_scale"
+  input: "inception_4b/3x3_reduce/bn_bias"
+  input: "inception_4b/3x3_reduce/bn_mean"
+  input: "inception_4b/3x3_reduce/bn_var"
+  output: "inception_4b/3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4b/3x3_reduce/bn"
+  input: "inception_4b/3x3_reduce/bn/sc_w"
+  output: "inception_4b/3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/3x3_reduce/bn/sc_internal"
+  input: "inception_4b/3x3_reduce/bn/sc_b"
+  output: "inception_4b/3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/3x3_reduce/bn/sc"
+  output: "inception_4b/3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4b/3x3_reduce/bn/sc"
+  input: "inception_4b/3x3_w"
+  output: "inception_4b/3x3"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4b/3x3"
+  input: "inception_4b/3x3/bn_scale"
+  input: "inception_4b/3x3/bn_bias"
+  input: "inception_4b/3x3/bn_mean"
+  input: "inception_4b/3x3/bn_var"
+  output: "inception_4b/3x3/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4b/3x3/bn"
+  input: "inception_4b/3x3/bn/sc_w"
+  output: "inception_4b/3x3/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/3x3/bn/sc_internal"
+  input: "inception_4b/3x3/bn/sc_b"
+  output: "inception_4b/3x3/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/3x3/bn/sc"
+  output: "inception_4b/3x3/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4a/output"
+  input: "inception_4b/double3x3_reduce_w"
+  output: "inception_4b/double3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/double3x3_reduce"
+  input: "inception_4b/double3x3_reduce/bn_scale"
+  input: "inception_4b/double3x3_reduce/bn_bias"
+  input: "inception_4b/double3x3_reduce/bn_mean"
+  input: "inception_4b/double3x3_reduce/bn_var"
+  output: "inception_4b/double3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4b/double3x3_reduce/bn"
+  input: "inception_4b/double3x3_reduce/bn/sc_w"
+  output: "inception_4b/double3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/double3x3_reduce/bn/sc_internal"
+  input: "inception_4b/double3x3_reduce/bn/sc_b"
+  output: "inception_4b/double3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/double3x3_reduce/bn/sc"
+  output: "inception_4b/double3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4b/double3x3_reduce/bn/sc"
+  input: "inception_4b/double3x3a_w"
+  output: "inception_4b/double3x3a"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4b/double3x3a"
+  input: "inception_4b/double3x3a/bn_scale"
+  input: "inception_4b/double3x3a/bn_bias"
+  input: "inception_4b/double3x3a/bn_mean"
+  input: "inception_4b/double3x3a/bn_var"
+  output: "inception_4b/double3x3a/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4b/double3x3a/bn"
+  input: "inception_4b/double3x3a/bn/sc_w"
+  output: "inception_4b/double3x3a/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/double3x3a/bn/sc_internal"
+  input: "inception_4b/double3x3a/bn/sc_b"
+  output: "inception_4b/double3x3a/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/double3x3a/bn/sc"
+  output: "inception_4b/double3x3a/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4b/double3x3a/bn/sc"
+  input: "inception_4b/double3x3b_w"
+  output: "inception_4b/double3x3b"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4b/double3x3b"
+  input: "inception_4b/double3x3b/bn_scale"
+  input: "inception_4b/double3x3b/bn_bias"
+  input: "inception_4b/double3x3b/bn_mean"
+  input: "inception_4b/double3x3b/bn_var"
+  output: "inception_4b/double3x3b/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4b/double3x3b/bn"
+  input: "inception_4b/double3x3b/bn/sc_w"
+  output: "inception_4b/double3x3b/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/double3x3b/bn/sc_internal"
+  input: "inception_4b/double3x3b/bn/sc_b"
+  output: "inception_4b/double3x3b/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/double3x3b/bn/sc"
+  output: "inception_4b/double3x3b/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4a/output"
+  output: "inception_4b/pool"
+  type: "AveragePool"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4b/pool"
+  input: "inception_4b/pool_proj_w"
+  output: "inception_4b/pool_proj"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/pool_proj"
+  input: "inception_4b/pool_proj/bn_scale"
+  input: "inception_4b/pool_proj/bn_bias"
+  input: "inception_4b/pool_proj/bn_mean"
+  input: "inception_4b/pool_proj/bn_var"
+  output: "inception_4b/pool_proj/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4b/pool_proj/bn"
+  input: "inception_4b/pool_proj/bn/sc_w"
+  output: "inception_4b/pool_proj/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/pool_proj/bn/sc_internal"
+  input: "inception_4b/pool_proj/bn/sc_b"
+  output: "inception_4b/pool_proj/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4b/pool_proj/bn/sc"
+  output: "inception_4b/pool_proj/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4b/1x1/bn/sc"
+  input: "inception_4b/3x3/bn/sc"
+  input: "inception_4b/double3x3b/bn/sc"
+  input: "inception_4b/pool_proj/bn/sc"
+  output: "inception_4b/output"
+  output: "_inception_4b/output_dims"
+  type: "Concat"
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4b/output"
+  input: "inception_4c/1x1_w"
+  output: "inception_4c/1x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/1x1"
+  input: "inception_4c/1x1/bn_scale"
+  input: "inception_4c/1x1/bn_bias"
+  input: "inception_4c/1x1/bn_mean"
+  input: "inception_4c/1x1/bn_var"
+  output: "inception_4c/1x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4c/1x1/bn"
+  input: "inception_4c/1x1/bn/sc_w"
+  output: "inception_4c/1x1/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/1x1/bn/sc_internal"
+  input: "inception_4c/1x1/bn/sc_b"
+  output: "inception_4c/1x1/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/1x1/bn/sc"
+  output: "inception_4c/1x1/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4b/output"
+  input: "inception_4c/3x3_reduce_w"
+  output: "inception_4c/3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/3x3_reduce"
+  input: "inception_4c/3x3_reduce/bn_scale"
+  input: "inception_4c/3x3_reduce/bn_bias"
+  input: "inception_4c/3x3_reduce/bn_mean"
+  input: "inception_4c/3x3_reduce/bn_var"
+  output: "inception_4c/3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4c/3x3_reduce/bn"
+  input: "inception_4c/3x3_reduce/bn/sc_w"
+  output: "inception_4c/3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/3x3_reduce/bn/sc_internal"
+  input: "inception_4c/3x3_reduce/bn/sc_b"
+  output: "inception_4c/3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/3x3_reduce/bn/sc"
+  output: "inception_4c/3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4c/3x3_reduce/bn/sc"
+  input: "inception_4c/3x3_w"
+  output: "inception_4c/3x3"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4c/3x3"
+  input: "inception_4c/3x3/bn_scale"
+  input: "inception_4c/3x3/bn_bias"
+  input: "inception_4c/3x3/bn_mean"
+  input: "inception_4c/3x3/bn_var"
+  output: "inception_4c/3x3/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4c/3x3/bn"
+  input: "inception_4c/3x3/bn/sc_w"
+  output: "inception_4c/3x3/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/3x3/bn/sc_internal"
+  input: "inception_4c/3x3/bn/sc_b"
+  output: "inception_4c/3x3/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/3x3/bn/sc"
+  output: "inception_4c/3x3/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4b/output"
+  input: "inception_4c/double3x3_reduce_w"
+  output: "inception_4c/double3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/double3x3_reduce"
+  input: "inception_4c/double3x3_reduce/bn_scale"
+  input: "inception_4c/double3x3_reduce/bn_bias"
+  input: "inception_4c/double3x3_reduce/bn_mean"
+  input: "inception_4c/double3x3_reduce/bn_var"
+  output: "inception_4c/double3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4c/double3x3_reduce/bn"
+  input: "inception_4c/double3x3_reduce/bn/sc_w"
+  output: "inception_4c/double3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/double3x3_reduce/bn/sc_internal"
+  input: "inception_4c/double3x3_reduce/bn/sc_b"
+  output: "inception_4c/double3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/double3x3_reduce/bn/sc"
+  output: "inception_4c/double3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4c/double3x3_reduce/bn/sc"
+  input: "inception_4c/double3x3a_w"
+  output: "inception_4c/double3x3a"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4c/double3x3a"
+  input: "inception_4c/double3x3a/bn_scale"
+  input: "inception_4c/double3x3a/bn_bias"
+  input: "inception_4c/double3x3a/bn_mean"
+  input: "inception_4c/double3x3a/bn_var"
+  output: "inception_4c/double3x3a/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4c/double3x3a/bn"
+  input: "inception_4c/double3x3a/bn/sc_w"
+  output: "inception_4c/double3x3a/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/double3x3a/bn/sc_internal"
+  input: "inception_4c/double3x3a/bn/sc_b"
+  output: "inception_4c/double3x3a/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/double3x3a/bn/sc"
+  output: "inception_4c/double3x3a/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4c/double3x3a/bn/sc"
+  input: "inception_4c/double3x3b_w"
+  output: "inception_4c/double3x3b"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4c/double3x3b"
+  input: "inception_4c/double3x3b/bn_scale"
+  input: "inception_4c/double3x3b/bn_bias"
+  input: "inception_4c/double3x3b/bn_mean"
+  input: "inception_4c/double3x3b/bn_var"
+  output: "inception_4c/double3x3b/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4c/double3x3b/bn"
+  input: "inception_4c/double3x3b/bn/sc_w"
+  output: "inception_4c/double3x3b/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/double3x3b/bn/sc_internal"
+  input: "inception_4c/double3x3b/bn/sc_b"
+  output: "inception_4c/double3x3b/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/double3x3b/bn/sc"
+  output: "inception_4c/double3x3b/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4b/output"
+  output: "inception_4c/pool"
+  type: "AveragePool"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4c/pool"
+  input: "inception_4c/pool_proj_w"
+  output: "inception_4c/pool_proj"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/pool_proj"
+  input: "inception_4c/pool_proj/bn_scale"
+  input: "inception_4c/pool_proj/bn_bias"
+  input: "inception_4c/pool_proj/bn_mean"
+  input: "inception_4c/pool_proj/bn_var"
+  output: "inception_4c/pool_proj/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4c/pool_proj/bn"
+  input: "inception_4c/pool_proj/bn/sc_w"
+  output: "inception_4c/pool_proj/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/pool_proj/bn/sc_internal"
+  input: "inception_4c/pool_proj/bn/sc_b"
+  output: "inception_4c/pool_proj/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4c/pool_proj/bn/sc"
+  output: "inception_4c/pool_proj/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4c/1x1/bn/sc"
+  input: "inception_4c/3x3/bn/sc"
+  input: "inception_4c/double3x3b/bn/sc"
+  input: "inception_4c/pool_proj/bn/sc"
+  output: "inception_4c/output"
+  output: "_inception_4c/output_dims"
+  type: "Concat"
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4c/output"
+  input: "inception_4d/1x1_w"
+  output: "inception_4d/1x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/1x1"
+  input: "inception_4d/1x1/bn_scale"
+  input: "inception_4d/1x1/bn_bias"
+  input: "inception_4d/1x1/bn_mean"
+  input: "inception_4d/1x1/bn_var"
+  output: "inception_4d/1x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4d/1x1/bn"
+  input: "inception_4d/1x1/bn/sc_w"
+  output: "inception_4d/1x1/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/1x1/bn/sc_internal"
+  input: "inception_4d/1x1/bn/sc_b"
+  output: "inception_4d/1x1/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/1x1/bn/sc"
+  output: "inception_4d/1x1/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4c/output"
+  input: "inception_4d/3x3_reduce_w"
+  output: "inception_4d/3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/3x3_reduce"
+  input: "inception_4d/3x3_reduce/bn_scale"
+  input: "inception_4d/3x3_reduce/bn_bias"
+  input: "inception_4d/3x3_reduce/bn_mean"
+  input: "inception_4d/3x3_reduce/bn_var"
+  output: "inception_4d/3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4d/3x3_reduce/bn"
+  input: "inception_4d/3x3_reduce/bn/sc_w"
+  output: "inception_4d/3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/3x3_reduce/bn/sc_internal"
+  input: "inception_4d/3x3_reduce/bn/sc_b"
+  output: "inception_4d/3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/3x3_reduce/bn/sc"
+  output: "inception_4d/3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4d/3x3_reduce/bn/sc"
+  input: "inception_4d/3x3_w"
+  output: "inception_4d/3x3"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4d/3x3"
+  input: "inception_4d/3x3/bn_scale"
+  input: "inception_4d/3x3/bn_bias"
+  input: "inception_4d/3x3/bn_mean"
+  input: "inception_4d/3x3/bn_var"
+  output: "inception_4d/3x3/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4d/3x3/bn"
+  input: "inception_4d/3x3/bn/sc_w"
+  output: "inception_4d/3x3/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/3x3/bn/sc_internal"
+  input: "inception_4d/3x3/bn/sc_b"
+  output: "inception_4d/3x3/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/3x3/bn/sc"
+  output: "inception_4d/3x3/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4c/output"
+  input: "inception_4d/double3x3_reduce_w"
+  output: "inception_4d/double3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/double3x3_reduce"
+  input: "inception_4d/double3x3_reduce/bn_scale"
+  input: "inception_4d/double3x3_reduce/bn_bias"
+  input: "inception_4d/double3x3_reduce/bn_mean"
+  input: "inception_4d/double3x3_reduce/bn_var"
+  output: "inception_4d/double3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4d/double3x3_reduce/bn"
+  input: "inception_4d/double3x3_reduce/bn/sc_w"
+  output: "inception_4d/double3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/double3x3_reduce/bn/sc_internal"
+  input: "inception_4d/double3x3_reduce/bn/sc_b"
+  output: "inception_4d/double3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/double3x3_reduce/bn/sc"
+  output: "inception_4d/double3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4d/double3x3_reduce/bn/sc"
+  input: "inception_4d/double3x3a_w"
+  output: "inception_4d/double3x3a"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4d/double3x3a"
+  input: "inception_4d/double3x3a/bn_scale"
+  input: "inception_4d/double3x3a/bn_bias"
+  input: "inception_4d/double3x3a/bn_mean"
+  input: "inception_4d/double3x3a/bn_var"
+  output: "inception_4d/double3x3a/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4d/double3x3a/bn"
+  input: "inception_4d/double3x3a/bn/sc_w"
+  output: "inception_4d/double3x3a/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/double3x3a/bn/sc_internal"
+  input: "inception_4d/double3x3a/bn/sc_b"
+  output: "inception_4d/double3x3a/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/double3x3a/bn/sc"
+  output: "inception_4d/double3x3a/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4d/double3x3a/bn/sc"
+  input: "inception_4d/double3x3b_w"
+  output: "inception_4d/double3x3b"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4d/double3x3b"
+  input: "inception_4d/double3x3b/bn_scale"
+  input: "inception_4d/double3x3b/bn_bias"
+  input: "inception_4d/double3x3b/bn_mean"
+  input: "inception_4d/double3x3b/bn_var"
+  output: "inception_4d/double3x3b/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4d/double3x3b/bn"
+  input: "inception_4d/double3x3b/bn/sc_w"
+  output: "inception_4d/double3x3b/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/double3x3b/bn/sc_internal"
+  input: "inception_4d/double3x3b/bn/sc_b"
+  output: "inception_4d/double3x3b/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/double3x3b/bn/sc"
+  output: "inception_4d/double3x3b/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4c/output"
+  output: "inception_4d/pool"
+  type: "AveragePool"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4d/pool"
+  input: "inception_4d/pool_proj_w"
+  output: "inception_4d/pool_proj"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/pool_proj"
+  input: "inception_4d/pool_proj/bn_scale"
+  input: "inception_4d/pool_proj/bn_bias"
+  input: "inception_4d/pool_proj/bn_mean"
+  input: "inception_4d/pool_proj/bn_var"
+  output: "inception_4d/pool_proj/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4d/pool_proj/bn"
+  input: "inception_4d/pool_proj/bn/sc_w"
+  output: "inception_4d/pool_proj/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/pool_proj/bn/sc_internal"
+  input: "inception_4d/pool_proj/bn/sc_b"
+  output: "inception_4d/pool_proj/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4d/pool_proj/bn/sc"
+  output: "inception_4d/pool_proj/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4d/1x1/bn/sc"
+  input: "inception_4d/3x3/bn/sc"
+  input: "inception_4d/double3x3b/bn/sc"
+  input: "inception_4d/pool_proj/bn/sc"
+  output: "inception_4d/output"
+  output: "_inception_4d/output_dims"
+  type: "Concat"
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4d/output"
+  input: "inception_4e/3x3_reduce_w"
+  output: "inception_4e/3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4e/3x3_reduce"
+  input: "inception_4e/3x3_reduce/bn_scale"
+  input: "inception_4e/3x3_reduce/bn_bias"
+  input: "inception_4e/3x3_reduce/bn_mean"
+  input: "inception_4e/3x3_reduce/bn_var"
+  output: "inception_4e/3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4e/3x3_reduce/bn"
+  input: "inception_4e/3x3_reduce/bn/sc_w"
+  output: "inception_4e/3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4e/3x3_reduce/bn/sc_internal"
+  input: "inception_4e/3x3_reduce/bn/sc_b"
+  output: "inception_4e/3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4e/3x3_reduce/bn/sc"
+  output: "inception_4e/3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4e/3x3_reduce/bn/sc"
+  input: "inception_4e/3x3_w"
+  output: "inception_4e/3x3"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4e/3x3"
+  input: "inception_4e/3x3/bn_scale"
+  input: "inception_4e/3x3/bn_bias"
+  input: "inception_4e/3x3/bn_mean"
+  input: "inception_4e/3x3/bn_var"
+  output: "inception_4e/3x3/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4e/3x3/bn"
+  input: "inception_4e/3x3/bn/sc_w"
+  output: "inception_4e/3x3/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4e/3x3/bn/sc_internal"
+  input: "inception_4e/3x3/bn/sc_b"
+  output: "inception_4e/3x3/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4e/3x3/bn/sc"
+  output: "inception_4e/3x3/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4d/output"
+  input: "inception_4e/double3x3_reduce_w"
+  output: "inception_4e/double3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_4e/double3x3_reduce"
+  input: "inception_4e/double3x3_reduce/bn_scale"
+  input: "inception_4e/double3x3_reduce/bn_bias"
+  input: "inception_4e/double3x3_reduce/bn_mean"
+  input: "inception_4e/double3x3_reduce/bn_var"
+  output: "inception_4e/double3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4e/double3x3_reduce/bn"
+  input: "inception_4e/double3x3_reduce/bn/sc_w"
+  output: "inception_4e/double3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4e/double3x3_reduce/bn/sc_internal"
+  input: "inception_4e/double3x3_reduce/bn/sc_b"
+  output: "inception_4e/double3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4e/double3x3_reduce/bn/sc"
+  output: "inception_4e/double3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4e/double3x3_reduce/bn/sc"
+  input: "inception_4e/double3x3a_w"
+  output: "inception_4e/double3x3a"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4e/double3x3a"
+  input: "inception_4e/double3x3a/bn_scale"
+  input: "inception_4e/double3x3a/bn_bias"
+  input: "inception_4e/double3x3a/bn_mean"
+  input: "inception_4e/double3x3a/bn_var"
+  output: "inception_4e/double3x3a/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4e/double3x3a/bn"
+  input: "inception_4e/double3x3a/bn/sc_w"
+  output: "inception_4e/double3x3a/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4e/double3x3a/bn/sc_internal"
+  input: "inception_4e/double3x3a/bn/sc_b"
+  output: "inception_4e/double3x3a/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4e/double3x3a/bn/sc"
+  output: "inception_4e/double3x3a/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4e/double3x3a/bn/sc"
+  input: "inception_4e/double3x3b_w"
+  output: "inception_4e/double3x3b"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_4e/double3x3b"
+  input: "inception_4e/double3x3b/bn_scale"
+  input: "inception_4e/double3x3b/bn_bias"
+  input: "inception_4e/double3x3b/bn_mean"
+  input: "inception_4e/double3x3b/bn_var"
+  output: "inception_4e/double3x3b/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4e/double3x3b/bn"
+  input: "inception_4e/double3x3b/bn/sc_w"
+  output: "inception_4e/double3x3b/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4e/double3x3b/bn/sc_internal"
+  input: "inception_4e/double3x3b/bn/sc_b"
+  output: "inception_4e/double3x3b/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_4e/double3x3b/bn/sc"
+  output: "inception_4e/double3x3b/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4d/output"
+  output: "inception_4e/pool"
+  type: "MaxPool"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "pad_r"
+    i: 1
+  }
+  arg {
+    name: "pad_b"
+    i: 1
+  }
+  arg {
+    name: "pad_t"
+    i: 0
+  }
+  arg {
+    name: "pad_l"
+    i: 0
+  }
+}
+op {
+  input: "inception_4e/3x3/bn/sc"
+  input: "inception_4e/double3x3b/bn/sc"
+  input: "inception_4e/pool"
+  output: "inception_4e/output"
+  output: "_inception_4e/output_dims"
+  type: "Concat"
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_4e/output"
+  input: "inception_5a/1x1_w"
+  output: "inception_5a/1x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/1x1"
+  input: "inception_5a/1x1/bn_scale"
+  input: "inception_5a/1x1/bn_bias"
+  input: "inception_5a/1x1/bn_mean"
+  input: "inception_5a/1x1/bn_var"
+  output: "inception_5a/1x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5a/1x1/bn"
+  input: "inception_5a/1x1/bn/sc_w"
+  output: "inception_5a/1x1/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/1x1/bn/sc_internal"
+  input: "inception_5a/1x1/bn/sc_b"
+  output: "inception_5a/1x1/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/1x1/bn/sc"
+  output: "inception_5a/1x1/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4e/output"
+  input: "inception_5a/3x3_reduce_w"
+  output: "inception_5a/3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/3x3_reduce"
+  input: "inception_5a/3x3_reduce/bn_scale"
+  input: "inception_5a/3x3_reduce/bn_bias"
+  input: "inception_5a/3x3_reduce/bn_mean"
+  input: "inception_5a/3x3_reduce/bn_var"
+  output: "inception_5a/3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5a/3x3_reduce/bn"
+  input: "inception_5a/3x3_reduce/bn/sc_w"
+  output: "inception_5a/3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/3x3_reduce/bn/sc_internal"
+  input: "inception_5a/3x3_reduce/bn/sc_b"
+  output: "inception_5a/3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/3x3_reduce/bn/sc"
+  output: "inception_5a/3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_5a/3x3_reduce/bn/sc"
+  input: "inception_5a/3x3_w"
+  output: "inception_5a/3x3"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_5a/3x3"
+  input: "inception_5a/3x3/bn_scale"
+  input: "inception_5a/3x3/bn_bias"
+  input: "inception_5a/3x3/bn_mean"
+  input: "inception_5a/3x3/bn_var"
+  output: "inception_5a/3x3/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5a/3x3/bn"
+  input: "inception_5a/3x3/bn/sc_w"
+  output: "inception_5a/3x3/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/3x3/bn/sc_internal"
+  input: "inception_5a/3x3/bn/sc_b"
+  output: "inception_5a/3x3/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/3x3/bn/sc"
+  output: "inception_5a/3x3/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4e/output"
+  input: "inception_5a/double3x3_reduce_w"
+  output: "inception_5a/double3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/double3x3_reduce"
+  input: "inception_5a/double3x3_reduce/bn_scale"
+  input: "inception_5a/double3x3_reduce/bn_bias"
+  input: "inception_5a/double3x3_reduce/bn_mean"
+  input: "inception_5a/double3x3_reduce/bn_var"
+  output: "inception_5a/double3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5a/double3x3_reduce/bn"
+  input: "inception_5a/double3x3_reduce/bn/sc_w"
+  output: "inception_5a/double3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/double3x3_reduce/bn/sc_internal"
+  input: "inception_5a/double3x3_reduce/bn/sc_b"
+  output: "inception_5a/double3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/double3x3_reduce/bn/sc"
+  output: "inception_5a/double3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_5a/double3x3_reduce/bn/sc"
+  input: "inception_5a/double3x3a_w"
+  output: "inception_5a/double3x3a"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_5a/double3x3a"
+  input: "inception_5a/double3x3a/bn_scale"
+  input: "inception_5a/double3x3a/bn_bias"
+  input: "inception_5a/double3x3a/bn_mean"
+  input: "inception_5a/double3x3a/bn_var"
+  output: "inception_5a/double3x3a/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5a/double3x3a/bn"
+  input: "inception_5a/double3x3a/bn/sc_w"
+  output: "inception_5a/double3x3a/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/double3x3a/bn/sc_internal"
+  input: "inception_5a/double3x3a/bn/sc_b"
+  output: "inception_5a/double3x3a/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/double3x3a/bn/sc"
+  output: "inception_5a/double3x3a/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_5a/double3x3a/bn/sc"
+  input: "inception_5a/double3x3b_w"
+  output: "inception_5a/double3x3b"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_5a/double3x3b"
+  input: "inception_5a/double3x3b/bn_scale"
+  input: "inception_5a/double3x3b/bn_bias"
+  input: "inception_5a/double3x3b/bn_mean"
+  input: "inception_5a/double3x3b/bn_var"
+  output: "inception_5a/double3x3b/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5a/double3x3b/bn"
+  input: "inception_5a/double3x3b/bn/sc_w"
+  output: "inception_5a/double3x3b/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/double3x3b/bn/sc_internal"
+  input: "inception_5a/double3x3b/bn/sc_b"
+  output: "inception_5a/double3x3b/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/double3x3b/bn/sc"
+  output: "inception_5a/double3x3b/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_4e/output"
+  output: "inception_5a/pool"
+  type: "AveragePool"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5a/pool"
+  input: "inception_5a/pool_proj_w"
+  output: "inception_5a/pool_proj"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/pool_proj"
+  input: "inception_5a/pool_proj/bn_scale"
+  input: "inception_5a/pool_proj/bn_bias"
+  input: "inception_5a/pool_proj/bn_mean"
+  input: "inception_5a/pool_proj/bn_var"
+  output: "inception_5a/pool_proj/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5a/pool_proj/bn"
+  input: "inception_5a/pool_proj/bn/sc_w"
+  output: "inception_5a/pool_proj/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/pool_proj/bn/sc_internal"
+  input: "inception_5a/pool_proj/bn/sc_b"
+  output: "inception_5a/pool_proj/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5a/pool_proj/bn/sc"
+  output: "inception_5a/pool_proj/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_5a/1x1/bn/sc"
+  input: "inception_5a/3x3/bn/sc"
+  input: "inception_5a/double3x3b/bn/sc"
+  input: "inception_5a/pool_proj/bn/sc"
+  output: "inception_5a/output"
+  output: "_inception_5a/output_dims"
+  type: "Concat"
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5a/output"
+  input: "inception_5b/1x1_w"
+  output: "inception_5b/1x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/1x1"
+  input: "inception_5b/1x1/bn_scale"
+  input: "inception_5b/1x1/bn_bias"
+  input: "inception_5b/1x1/bn_mean"
+  input: "inception_5b/1x1/bn_var"
+  output: "inception_5b/1x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5b/1x1/bn"
+  input: "inception_5b/1x1/bn/sc_w"
+  output: "inception_5b/1x1/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/1x1/bn/sc_internal"
+  input: "inception_5b/1x1/bn/sc_b"
+  output: "inception_5b/1x1/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/1x1/bn/sc"
+  output: "inception_5b/1x1/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_5a/output"
+  input: "inception_5b/3x3_reduce_w"
+  output: "inception_5b/3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/3x3_reduce"
+  input: "inception_5b/3x3_reduce/bn_scale"
+  input: "inception_5b/3x3_reduce/bn_bias"
+  input: "inception_5b/3x3_reduce/bn_mean"
+  input: "inception_5b/3x3_reduce/bn_var"
+  output: "inception_5b/3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5b/3x3_reduce/bn"
+  input: "inception_5b/3x3_reduce/bn/sc_w"
+  output: "inception_5b/3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/3x3_reduce/bn/sc_internal"
+  input: "inception_5b/3x3_reduce/bn/sc_b"
+  output: "inception_5b/3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/3x3_reduce/bn/sc"
+  output: "inception_5b/3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_5b/3x3_reduce/bn/sc"
+  input: "inception_5b/3x3_w"
+  output: "inception_5b/3x3"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_5b/3x3"
+  input: "inception_5b/3x3/bn_scale"
+  input: "inception_5b/3x3/bn_bias"
+  input: "inception_5b/3x3/bn_mean"
+  input: "inception_5b/3x3/bn_var"
+  output: "inception_5b/3x3/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5b/3x3/bn"
+  input: "inception_5b/3x3/bn/sc_w"
+  output: "inception_5b/3x3/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/3x3/bn/sc_internal"
+  input: "inception_5b/3x3/bn/sc_b"
+  output: "inception_5b/3x3/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/3x3/bn/sc"
+  output: "inception_5b/3x3/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_5a/output"
+  input: "inception_5b/double3x3_reduce_w"
+  output: "inception_5b/double3x3_reduce"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/double3x3_reduce"
+  input: "inception_5b/double3x3_reduce/bn_scale"
+  input: "inception_5b/double3x3_reduce/bn_bias"
+  input: "inception_5b/double3x3_reduce/bn_mean"
+  input: "inception_5b/double3x3_reduce/bn_var"
+  output: "inception_5b/double3x3_reduce/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5b/double3x3_reduce/bn"
+  input: "inception_5b/double3x3_reduce/bn/sc_w"
+  output: "inception_5b/double3x3_reduce/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/double3x3_reduce/bn/sc_internal"
+  input: "inception_5b/double3x3_reduce/bn/sc_b"
+  output: "inception_5b/double3x3_reduce/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/double3x3_reduce/bn/sc"
+  output: "inception_5b/double3x3_reduce/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_5b/double3x3_reduce/bn/sc"
+  input: "inception_5b/double3x3a_w"
+  output: "inception_5b/double3x3a"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_5b/double3x3a"
+  input: "inception_5b/double3x3a/bn_scale"
+  input: "inception_5b/double3x3a/bn_bias"
+  input: "inception_5b/double3x3a/bn_mean"
+  input: "inception_5b/double3x3a/bn_var"
+  output: "inception_5b/double3x3a/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5b/double3x3a/bn"
+  input: "inception_5b/double3x3a/bn/sc_w"
+  output: "inception_5b/double3x3a/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/double3x3a/bn/sc_internal"
+  input: "inception_5b/double3x3a/bn/sc_b"
+  output: "inception_5b/double3x3a/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/double3x3a/bn/sc"
+  output: "inception_5b/double3x3a/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_5b/double3x3a/bn/sc"
+  input: "inception_5b/double3x3b_w"
+  output: "inception_5b/double3x3b"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+}
+op {
+  input: "inception_5b/double3x3b"
+  input: "inception_5b/double3x3b/bn_scale"
+  input: "inception_5b/double3x3b/bn_bias"
+  input: "inception_5b/double3x3b/bn_mean"
+  input: "inception_5b/double3x3b/bn_var"
+  output: "inception_5b/double3x3b/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5b/double3x3b/bn"
+  input: "inception_5b/double3x3b/bn/sc_w"
+  output: "inception_5b/double3x3b/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/double3x3b/bn/sc_internal"
+  input: "inception_5b/double3x3b/bn/sc_b"
+  output: "inception_5b/double3x3b/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/double3x3b/bn/sc"
+  output: "inception_5b/double3x3b/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_5a/output"
+  output: "inception_5b/pool"
+  type: "MaxPool"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5b/pool"
+  input: "inception_5b/pool_proj_w"
+  output: "inception_5b/pool_proj"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/pool_proj"
+  input: "inception_5b/pool_proj/bn_scale"
+  input: "inception_5b/pool_proj/bn_bias"
+  input: "inception_5b/pool_proj/bn_mean"
+  input: "inception_5b/pool_proj/bn_var"
+  output: "inception_5b/pool_proj/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 1e-05
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5b/pool_proj/bn"
+  input: "inception_5b/pool_proj/bn/sc_w"
+  output: "inception_5b/pool_proj/bn/sc_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/pool_proj/bn/sc_internal"
+  input: "inception_5b/pool_proj/bn/sc_b"
+  output: "inception_5b/pool_proj/bn/sc"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+}
+op {
+  input: "inception_5b/pool_proj/bn/sc"
+  output: "inception_5b/pool_proj/bn/sc"
+  type: "Relu"
+}
+op {
+  input: "inception_5b/1x1/bn/sc"
+  input: "inception_5b/3x3/bn/sc"
+  input: "inception_5b/double3x3b/bn/sc"
+  input: "inception_5b/pool_proj/bn/sc"
+  output: "inception_5b/output"
+  output: "_inception_5b/output_dims"
+  type: "Concat"
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "inception_5b/output"
+  output: "pool5/7x7_s1"
+  type: "AveragePool"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 7
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+}
+op {
+  input: "pool5/7x7_s1"
+  input: "loss3/classifier_w"
+  input: "loss3/classifier_b"
+  output: "loss3/classifier"
+  type: "FC"
+}
+op {
+  input: "loss3/classifier"
+  output: "prob"
+  type: "Softmax"
+}
+external_input: "data"
+external_input: "conv1/7x7_s2_w"
+external_input: "conv1/7x7_s2/bn_scale"
+external_input: "conv1/7x7_s2/bn_bias"
+external_input: "conv1/7x7_s2/bn_mean"
+external_input: "conv1/7x7_s2/bn_var"
+external_input: "conv1/7x7_s2/bn/sc_w"
+external_input: "conv1/7x7_s2/bn/sc_b"
+external_input: "conv2/3x3_reduce_w"
+external_input: "conv2/3x3_reduce/bn_scale"
+external_input: "conv2/3x3_reduce/bn_bias"
+external_input: "conv2/3x3_reduce/bn_mean"
+external_input: "conv2/3x3_reduce/bn_var"
+external_input: "conv2/3x3_reduce/bn/sc_w"
+external_input: "conv2/3x3_reduce/bn/sc_b"
+external_input: "conv2/3x3_w"
+external_input: "conv2/3x3/bn_scale"
+external_input: "conv2/3x3/bn_bias"
+external_input: "conv2/3x3/bn_mean"
+external_input: "conv2/3x3/bn_var"
+external_input: "conv2/3x3/bn/sc_w"
+external_input: "conv2/3x3/bn/sc_b"
+external_input: "inception_3a/1x1_w"
+external_input: "inception_3a/1x1/bn_scale"
+external_input: "inception_3a/1x1/bn_bias"
+external_input: "inception_3a/1x1/bn_mean"
+external_input: "inception_3a/1x1/bn_var"
+external_input: "inception_3a/1x1/bn/sc_w"
+external_input: "inception_3a/1x1/bn/sc_b"
+external_input: "inception_3a/3x3_reduce_w"
+external_input: "inception_3a/3x3_reduce/bn_scale"
+external_input: "inception_3a/3x3_reduce/bn_bias"
+external_input: "inception_3a/3x3_reduce/bn_mean"
+external_input: "inception_3a/3x3_reduce/bn_var"
+external_input: "inception_3a/3x3_reduce/bn/sc_w"
+external_input: "inception_3a/3x3_reduce/bn/sc_b"
+external_input: "inception_3a/3x3_w"
+external_input: "inception_3a/3x3/bn_scale"
+external_input: "inception_3a/3x3/bn_bias"
+external_input: "inception_3a/3x3/bn_mean"
+external_input: "inception_3a/3x3/bn_var"
+external_input: "inception_3a/3x3/bn/sc_w"
+external_input: "inception_3a/3x3/bn/sc_b"
+external_input: "inception_3a/double3x3_reduce_w"
+external_input: "inception_3a/double3x3_reduce/bn_scale"
+external_input: "inception_3a/double3x3_reduce/bn_bias"
+external_input: "inception_3a/double3x3_reduce/bn_mean"
+external_input: "inception_3a/double3x3_reduce/bn_var"
+external_input: "inception_3a/double3x3_reduce/bn/sc_w"
+external_input: "inception_3a/double3x3_reduce/bn/sc_b"
+external_input: "inception_3a/double3x3a_w"
+external_input: "inception_3a/double3x3a/bn_scale"
+external_input: "inception_3a/double3x3a/bn_bias"
+external_input: "inception_3a/double3x3a/bn_mean"
+external_input: "inception_3a/double3x3a/bn_var"
+external_input: "inception_3a/double3x3a/bn/sc_w"
+external_input: "inception_3a/double3x3a/bn/sc_b"
+external_input: "inception_3a/double3x3b_w"
+external_input: "inception_3a/double3x3b/bn_scale"
+external_input: "inception_3a/double3x3b/bn_bias"
+external_input: "inception_3a/double3x3b/bn_mean"
+external_input: "inception_3a/double3x3b/bn_var"
+external_input: "inception_3a/double3x3b/bn/sc_w"
+external_input: "inception_3a/double3x3b/bn/sc_b"
+external_input: "inception_3a/pool_proj_w"
+external_input: "inception_3a/pool_proj/bn_scale"
+external_input: "inception_3a/pool_proj/bn_bias"
+external_input: "inception_3a/pool_proj/bn_mean"
+external_input: "inception_3a/pool_proj/bn_var"
+external_input: "inception_3a/pool_proj/bn/sc_w"
+external_input: "inception_3a/pool_proj/bn/sc_b"
+external_input: "inception_3b/1x1_w"
+external_input: "inception_3b/1x1/bn_scale"
+external_input: "inception_3b/1x1/bn_bias"
+external_input: "inception_3b/1x1/bn_mean"
+external_input: "inception_3b/1x1/bn_var"
+external_input: "inception_3b/1x1/bn/sc_w"
+external_input: "inception_3b/1x1/bn/sc_b"
+external_input: "inception_3b/3x3_reduce_w"
+external_input: "inception_3b/3x3_reduce/bn_scale"
+external_input: "inception_3b/3x3_reduce/bn_bias"
+external_input: "inception_3b/3x3_reduce/bn_mean"
+external_input: "inception_3b/3x3_reduce/bn_var"
+external_input: "inception_3b/3x3_reduce/bn/sc_w"
+external_input: "inception_3b/3x3_reduce/bn/sc_b"
+external_input: "inception_3b/3x3_w"
+external_input: "inception_3b/3x3/bn_scale"
+external_input: "inception_3b/3x3/bn_bias"
+external_input: "inception_3b/3x3/bn_mean"
+external_input: "inception_3b/3x3/bn_var"
+external_input: "inception_3b/3x3/bn/sc_w"
+external_input: "inception_3b/3x3/bn/sc_b"
+external_input: "inception_3b/double3x3_reduce_w"
+external_input: "inception_3b/double3x3_reduce/bn_scale"
+external_input: "inception_3b/double3x3_reduce/bn_bias"
+external_input: "inception_3b/double3x3_reduce/bn_mean"
+external_input: "inception_3b/double3x3_reduce/bn_var"
+external_input: "inception_3b/double3x3_reduce/bn/sc_w"
+external_input: "inception_3b/double3x3_reduce/bn/sc_b"
+external_input: "inception_3b/double3x3a_w"
+external_input: "inception_3b/double3x3a/bn_scale"
+external_input: "inception_3b/double3x3a/bn_bias"
+external_input: "inception_3b/double3x3a/bn_mean"
+external_input: "inception_3b/double3x3a/bn_var"
+external_input: "inception_3b/double3x3a/bn/sc_w"
+external_input: "inception_3b/double3x3a/bn/sc_b"
+external_input: "inception_3b/double3x3b_w"
+external_input: "inception_3b/double3x3b/bn_scale"
+external_input: "inception_3b/double3x3b/bn_bias"
+external_input: "inception_3b/double3x3b/bn_mean"
+external_input: "inception_3b/double3x3b/bn_var"
+external_input: "inception_3b/double3x3b/bn/sc_w"
+external_input: "inception_3b/double3x3b/bn/sc_b"
+external_input: "inception_3b/pool_proj_w"
+external_input: "inception_3b/pool_proj/bn_scale"
+external_input: "inception_3b/pool_proj/bn_bias"
+external_input: "inception_3b/pool_proj/bn_mean"
+external_input: "inception_3b/pool_proj/bn_var"
+external_input: "inception_3b/pool_proj/bn/sc_w"
+external_input: "inception_3b/pool_proj/bn/sc_b"
+external_input: "inception_3c/3x3_reduce_w"
+external_input: "inception_3c/3x3_reduce/bn_scale"
+external_input: "inception_3c/3x3_reduce/bn_bias"
+external_input: "inception_3c/3x3_reduce/bn_mean"
+external_input: "inception_3c/3x3_reduce/bn_var"
+external_input: "inception_3c/3x3_reduce/bn/sc_w"
+external_input: "inception_3c/3x3_reduce/bn/sc_b"
+external_input: "inception_3c/3x3_w"
+external_input: "inception_3c/3x3/bn_scale"
+external_input: "inception_3c/3x3/bn_bias"
+external_input: "inception_3c/3x3/bn_mean"
+external_input: "inception_3c/3x3/bn_var"
+external_input: "inception_3c/3x3/bn/sc_w"
+external_input: "inception_3c/3x3/bn/sc_b"
+external_input: "inception_3c/double3x3_reduce_w"
+external_input: "inception_3c/double3x3_reduce/bn_scale"
+external_input: "inception_3c/double3x3_reduce/bn_bias"
+external_input: "inception_3c/double3x3_reduce/bn_mean"
+external_input: "inception_3c/double3x3_reduce/bn_var"
+external_input: "inception_3c/double3x3_reduce/bn/sc_w"
+external_input: "inception_3c/double3x3_reduce/bn/sc_b"
+external_input: "inception_3c/double3x3a_w"
+external_input: "inception_3c/double3x3a/bn_scale"
+external_input: "inception_3c/double3x3a/bn_bias"
+external_input: "inception_3c/double3x3a/bn_mean"
+external_input: "inception_3c/double3x3a/bn_var"
+external_input: "inception_3c/double3x3a/bn/sc_w"
+external_input: "inception_3c/double3x3a/bn/sc_b"
+external_input: "inception_3c/double3x3b_w"
+external_input: "inception_3c/double3x3b/bn_scale"
+external_input: "inception_3c/double3x3b/bn_bias"
+external_input: "inception_3c/double3x3b/bn_mean"
+external_input: "inception_3c/double3x3b/bn_var"
+external_input: "inception_3c/double3x3b/bn/sc_w"
+external_input: "inception_3c/double3x3b/bn/sc_b"
+external_input: "inception_4a/1x1_w"
+external_input: "inception_4a/1x1/bn_scale"
+external_input: "inception_4a/1x1/bn_bias"
+external_input: "inception_4a/1x1/bn_mean"
+external_input: "inception_4a/1x1/bn_var"
+external_input: "inception_4a/1x1/bn/sc_w"
+external_input: "inception_4a/1x1/bn/sc_b"
+external_input: "inception_4a/3x3_reduce_w"
+external_input: "inception_4a/3x3_reduce/bn_scale"
+external_input: "inception_4a/3x3_reduce/bn_bias"
+external_input: "inception_4a/3x3_reduce/bn_mean"
+external_input: "inception_4a/3x3_reduce/bn_var"
+external_input: "inception_4a/3x3_reduce/bn/sc_w"
+external_input: "inception_4a/3x3_reduce/bn/sc_b"
+external_input: "inception_4a/3x3_w"
+external_input: "inception_4a/3x3/bn_scale"
+external_input: "inception_4a/3x3/bn_bias"
+external_input: "inception_4a/3x3/bn_mean"
+external_input: "inception_4a/3x3/bn_var"
+external_input: "inception_4a/3x3/bn/sc_w"
+external_input: "inception_4a/3x3/bn/sc_b"
+external_input: "inception_4a/double3x3_reduce_w"
+external_input: "inception_4a/double3x3_reduce/bn_scale"
+external_input: "inception_4a/double3x3_reduce/bn_bias"
+external_input: "inception_4a/double3x3_reduce/bn_mean"
+external_input: "inception_4a/double3x3_reduce/bn_var"
+external_input: "inception_4a/double3x3_reduce/bn/sc_w"
+external_input: "inception_4a/double3x3_reduce/bn/sc_b"
+external_input: "inception_4a/double3x3a_w"
+external_input: "inception_4a/double3x3a/bn_scale"
+external_input: "inception_4a/double3x3a/bn_bias"
+external_input: "inception_4a/double3x3a/bn_mean"
+external_input: "inception_4a/double3x3a/bn_var"
+external_input: "inception_4a/double3x3a/bn/sc_w"
+external_input: "inception_4a/double3x3a/bn/sc_b"
+external_input: "inception_4a/double3x3b_w"
+external_input: "inception_4a/double3x3b/bn_scale"
+external_input: "inception_4a/double3x3b/bn_bias"
+external_input: "inception_4a/double3x3b/bn_mean"
+external_input: "inception_4a/double3x3b/bn_var"
+external_input: "inception_4a/double3x3b/bn/sc_w"
+external_input: "inception_4a/double3x3b/bn/sc_b"
+external_input: "inception_4a/pool_proj_w"
+external_input: "inception_4a/pool_proj/bn_scale"
+external_input: "inception_4a/pool_proj/bn_bias"
+external_input: "inception_4a/pool_proj/bn_mean"
+external_input: "inception_4a/pool_proj/bn_var"
+external_input: "inception_4a/pool_proj/bn/sc_w"
+external_input: "inception_4a/pool_proj/bn/sc_b"
+external_input: "inception_4b/1x1_w"
+external_input: "inception_4b/1x1/bn_scale"
+external_input: "inception_4b/1x1/bn_bias"
+external_input: "inception_4b/1x1/bn_mean"
+external_input: "inception_4b/1x1/bn_var"
+external_input: "inception_4b/1x1/bn/sc_w"
+external_input: "inception_4b/1x1/bn/sc_b"
+external_input: "inception_4b/3x3_reduce_w"
+external_input: "inception_4b/3x3_reduce/bn_scale"
+external_input: "inception_4b/3x3_reduce/bn_bias"
+external_input: "inception_4b/3x3_reduce/bn_mean"
+external_input: "inception_4b/3x3_reduce/bn_var"
+external_input: "inception_4b/3x3_reduce/bn/sc_w"
+external_input: "inception_4b/3x3_reduce/bn/sc_b"
+external_input: "inception_4b/3x3_w"
+external_input: "inception_4b/3x3/bn_scale"
+external_input: "inception_4b/3x3/bn_bias"
+external_input: "inception_4b/3x3/bn_mean"
+external_input: "inception_4b/3x3/bn_var"
+external_input: "inception_4b/3x3/bn/sc_w"
+external_input: "inception_4b/3x3/bn/sc_b"
+external_input: "inception_4b/double3x3_reduce_w"
+external_input: "inception_4b/double3x3_reduce/bn_scale"
+external_input: "inception_4b/double3x3_reduce/bn_bias"
+external_input: "inception_4b/double3x3_reduce/bn_mean"
+external_input: "inception_4b/double3x3_reduce/bn_var"
+external_input: "inception_4b/double3x3_reduce/bn/sc_w"
+external_input: "inception_4b/double3x3_reduce/bn/sc_b"
+external_input: "inception_4b/double3x3a_w"
+external_input: "inception_4b/double3x3a/bn_scale"
+external_input: "inception_4b/double3x3a/bn_bias"
+external_input: "inception_4b/double3x3a/bn_mean"
+external_input: "inception_4b/double3x3a/bn_var"
+external_input: "inception_4b/double3x3a/bn/sc_w"
+external_input: "inception_4b/double3x3a/bn/sc_b"
+external_input: "inception_4b/double3x3b_w"
+external_input: "inception_4b/double3x3b/bn_scale"
+external_input: "inception_4b/double3x3b/bn_bias"
+external_input: "inception_4b/double3x3b/bn_mean"
+external_input: "inception_4b/double3x3b/bn_var"
+external_input: "inception_4b/double3x3b/bn/sc_w"
+external_input: "inception_4b/double3x3b/bn/sc_b"
+external_input: "inception_4b/pool_proj_w"
+external_input: "inception_4b/pool_proj/bn_scale"
+external_input: "inception_4b/pool_proj/bn_bias"
+external_input: "inception_4b/pool_proj/bn_mean"
+external_input: "inception_4b/pool_proj/bn_var"
+external_input: "inception_4b/pool_proj/bn/sc_w"
+external_input: "inception_4b/pool_proj/bn/sc_b"
+external_input: "inception_4c/1x1_w"
+external_input: "inception_4c/1x1/bn_scale"
+external_input: "inception_4c/1x1/bn_bias"
+external_input: "inception_4c/1x1/bn_mean"
+external_input: "inception_4c/1x1/bn_var"
+external_input: "inception_4c/1x1/bn/sc_w"
+external_input: "inception_4c/1x1/bn/sc_b"
+external_input: "inception_4c/3x3_reduce_w"
+external_input: "inception_4c/3x3_reduce/bn_scale"
+external_input: "inception_4c/3x3_reduce/bn_bias"
+external_input: "inception_4c/3x3_reduce/bn_mean"
+external_input: "inception_4c/3x3_reduce/bn_var"
+external_input: "inception_4c/3x3_reduce/bn/sc_w"
+external_input: "inception_4c/3x3_reduce/bn/sc_b"
+external_input: "inception_4c/3x3_w"
+external_input: "inception_4c/3x3/bn_scale"
+external_input: "inception_4c/3x3/bn_bias"
+external_input: "inception_4c/3x3/bn_mean"
+external_input: "inception_4c/3x3/bn_var"
+external_input: "inception_4c/3x3/bn/sc_w"
+external_input: "inception_4c/3x3/bn/sc_b"
+external_input: "inception_4c/double3x3_reduce_w"
+external_input: "inception_4c/double3x3_reduce/bn_scale"
+external_input: "inception_4c/double3x3_reduce/bn_bias"
+external_input: "inception_4c/double3x3_reduce/bn_mean"
+external_input: "inception_4c/double3x3_reduce/bn_var"
+external_input: "inception_4c/double3x3_reduce/bn/sc_w"
+external_input: "inception_4c/double3x3_reduce/bn/sc_b"
+external_input: "inception_4c/double3x3a_w"
+external_input: "inception_4c/double3x3a/bn_scale"
+external_input: "inception_4c/double3x3a/bn_bias"
+external_input: "inception_4c/double3x3a/bn_mean"
+external_input: "inception_4c/double3x3a/bn_var"
+external_input: "inception_4c/double3x3a/bn/sc_w"
+external_input: "inception_4c/double3x3a/bn/sc_b"
+external_input: "inception_4c/double3x3b_w"
+external_input: "inception_4c/double3x3b/bn_scale"
+external_input: "inception_4c/double3x3b/bn_bias"
+external_input: "inception_4c/double3x3b/bn_mean"
+external_input: "inception_4c/double3x3b/bn_var"
+external_input: "inception_4c/double3x3b/bn/sc_w"
+external_input: "inception_4c/double3x3b/bn/sc_b"
+external_input: "inception_4c/pool_proj_w"
+external_input: "inception_4c/pool_proj/bn_scale"
+external_input: "inception_4c/pool_proj/bn_bias"
+external_input: "inception_4c/pool_proj/bn_mean"
+external_input: "inception_4c/pool_proj/bn_var"
+external_input: "inception_4c/pool_proj/bn/sc_w"
+external_input: "inception_4c/pool_proj/bn/sc_b"
+external_input: "inception_4d/1x1_w"
+external_input: "inception_4d/1x1/bn_scale"
+external_input: "inception_4d/1x1/bn_bias"
+external_input: "inception_4d/1x1/bn_mean"
+external_input: "inception_4d/1x1/bn_var"
+external_input: "inception_4d/1x1/bn/sc_w"
+external_input: "inception_4d/1x1/bn/sc_b"
+external_input: "inception_4d/3x3_reduce_w"
+external_input: "inception_4d/3x3_reduce/bn_scale"
+external_input: "inception_4d/3x3_reduce/bn_bias"
+external_input: "inception_4d/3x3_reduce/bn_mean"
+external_input: "inception_4d/3x3_reduce/bn_var"
+external_input: "inception_4d/3x3_reduce/bn/sc_w"
+external_input: "inception_4d/3x3_reduce/bn/sc_b"
+external_input: "inception_4d/3x3_w"
+external_input: "inception_4d/3x3/bn_scale"
+external_input: "inception_4d/3x3/bn_bias"
+external_input: "inception_4d/3x3/bn_mean"
+external_input: "inception_4d/3x3/bn_var"
+external_input: "inception_4d/3x3/bn/sc_w"
+external_input: "inception_4d/3x3/bn/sc_b"
+external_input: "inception_4d/double3x3_reduce_w"
+external_input: "inception_4d/double3x3_reduce/bn_scale"
+external_input: "inception_4d/double3x3_reduce/bn_bias"
+external_input: "inception_4d/double3x3_reduce/bn_mean"
+external_input: "inception_4d/double3x3_reduce/bn_var"
+external_input: "inception_4d/double3x3_reduce/bn/sc_w"
+external_input: "inception_4d/double3x3_reduce/bn/sc_b"
+external_input: "inception_4d/double3x3a_w"
+external_input: "inception_4d/double3x3a/bn_scale"
+external_input: "inception_4d/double3x3a/bn_bias"
+external_input: "inception_4d/double3x3a/bn_mean"
+external_input: "inception_4d/double3x3a/bn_var"
+external_input: "inception_4d/double3x3a/bn/sc_w"
+external_input: "inception_4d/double3x3a/bn/sc_b"
+external_input: "inception_4d/double3x3b_w"
+external_input: "inception_4d/double3x3b/bn_scale"
+external_input: "inception_4d/double3x3b/bn_bias"
+external_input: "inception_4d/double3x3b/bn_mean"
+external_input: "inception_4d/double3x3b/bn_var"
+external_input: "inception_4d/double3x3b/bn/sc_w"
+external_input: "inception_4d/double3x3b/bn/sc_b"
+external_input: "inception_4d/pool_proj_w"
+external_input: "inception_4d/pool_proj/bn_scale"
+external_input: "inception_4d/pool_proj/bn_bias"
+external_input: "inception_4d/pool_proj/bn_mean"
+external_input: "inception_4d/pool_proj/bn_var"
+external_input: "inception_4d/pool_proj/bn/sc_w"
+external_input: "inception_4d/pool_proj/bn/sc_b"
+external_input: "inception_4e/3x3_reduce_w"
+external_input: "inception_4e/3x3_reduce/bn_scale"
+external_input: "inception_4e/3x3_reduce/bn_bias"
+external_input: "inception_4e/3x3_reduce/bn_mean"
+external_input: "inception_4e/3x3_reduce/bn_var"
+external_input: "inception_4e/3x3_reduce/bn/sc_w"
+external_input: "inception_4e/3x3_reduce/bn/sc_b"
+external_input: "inception_4e/3x3_w"
+external_input: "inception_4e/3x3/bn_scale"
+external_input: "inception_4e/3x3/bn_bias"
+external_input: "inception_4e/3x3/bn_mean"
+external_input: "inception_4e/3x3/bn_var"
+external_input: "inception_4e/3x3/bn/sc_w"
+external_input: "inception_4e/3x3/bn/sc_b"
+external_input: "inception_4e/double3x3_reduce_w"
+external_input: "inception_4e/double3x3_reduce/bn_scale"
+external_input: "inception_4e/double3x3_reduce/bn_bias"
+external_input: "inception_4e/double3x3_reduce/bn_mean"
+external_input: "inception_4e/double3x3_reduce/bn_var"
+external_input: "inception_4e/double3x3_reduce/bn/sc_w"
+external_input: "inception_4e/double3x3_reduce/bn/sc_b"
+external_input: "inception_4e/double3x3a_w"
+external_input: "inception_4e/double3x3a/bn_scale"
+external_input: "inception_4e/double3x3a/bn_bias"
+external_input: "inception_4e/double3x3a/bn_mean"
+external_input: "inception_4e/double3x3a/bn_var"
+external_input: "inception_4e/double3x3a/bn/sc_w"
+external_input: "inception_4e/double3x3a/bn/sc_b"
+external_input: "inception_4e/double3x3b_w"
+external_input: "inception_4e/double3x3b/bn_scale"
+external_input: "inception_4e/double3x3b/bn_bias"
+external_input: "inception_4e/double3x3b/bn_mean"
+external_input: "inception_4e/double3x3b/bn_var"
+external_input: "inception_4e/double3x3b/bn/sc_w"
+external_input: "inception_4e/double3x3b/bn/sc_b"
+external_input: "inception_5a/1x1_w"
+external_input: "inception_5a/1x1/bn_scale"
+external_input: "inception_5a/1x1/bn_bias"
+external_input: "inception_5a/1x1/bn_mean"
+external_input: "inception_5a/1x1/bn_var"
+external_input: "inception_5a/1x1/bn/sc_w"
+external_input: "inception_5a/1x1/bn/sc_b"
+external_input: "inception_5a/3x3_reduce_w"
+external_input: "inception_5a/3x3_reduce/bn_scale"
+external_input: "inception_5a/3x3_reduce/bn_bias"
+external_input: "inception_5a/3x3_reduce/bn_mean"
+external_input: "inception_5a/3x3_reduce/bn_var"
+external_input: "inception_5a/3x3_reduce/bn/sc_w"
+external_input: "inception_5a/3x3_reduce/bn/sc_b"
+external_input: "inception_5a/3x3_w"
+external_input: "inception_5a/3x3/bn_scale"
+external_input: "inception_5a/3x3/bn_bias"
+external_input: "inception_5a/3x3/bn_mean"
+external_input: "inception_5a/3x3/bn_var"
+external_input: "inception_5a/3x3/bn/sc_w"
+external_input: "inception_5a/3x3/bn/sc_b"
+external_input: "inception_5a/double3x3_reduce_w"
+external_input: "inception_5a/double3x3_reduce/bn_scale"
+external_input: "inception_5a/double3x3_reduce/bn_bias"
+external_input: "inception_5a/double3x3_reduce/bn_mean"
+external_input: "inception_5a/double3x3_reduce/bn_var"
+external_input: "inception_5a/double3x3_reduce/bn/sc_w"
+external_input: "inception_5a/double3x3_reduce/bn/sc_b"
+external_input: "inception_5a/double3x3a_w"
+external_input: "inception_5a/double3x3a/bn_scale"
+external_input: "inception_5a/double3x3a/bn_bias"
+external_input: "inception_5a/double3x3a/bn_mean"
+external_input: "inception_5a/double3x3a/bn_var"
+external_input: "inception_5a/double3x3a/bn/sc_w"
+external_input: "inception_5a/double3x3a/bn/sc_b"
+external_input: "inception_5a/double3x3b_w"
+external_input: "inception_5a/double3x3b/bn_scale"
+external_input: "inception_5a/double3x3b/bn_bias"
+external_input: "inception_5a/double3x3b/bn_mean"
+external_input: "inception_5a/double3x3b/bn_var"
+external_input: "inception_5a/double3x3b/bn/sc_w"
+external_input: "inception_5a/double3x3b/bn/sc_b"
+external_input: "inception_5a/pool_proj_w"
+external_input: "inception_5a/pool_proj/bn_scale"
+external_input: "inception_5a/pool_proj/bn_bias"
+external_input: "inception_5a/pool_proj/bn_mean"
+external_input: "inception_5a/pool_proj/bn_var"
+external_input: "inception_5a/pool_proj/bn/sc_w"
+external_input: "inception_5a/pool_proj/bn/sc_b"
+external_input: "inception_5b/1x1_w"
+external_input: "inception_5b/1x1/bn_scale"
+external_input: "inception_5b/1x1/bn_bias"
+external_input: "inception_5b/1x1/bn_mean"
+external_input: "inception_5b/1x1/bn_var"
+external_input: "inception_5b/1x1/bn/sc_w"
+external_input: "inception_5b/1x1/bn/sc_b"
+external_input: "inception_5b/3x3_reduce_w"
+external_input: "inception_5b/3x3_reduce/bn_scale"
+external_input: "inception_5b/3x3_reduce/bn_bias"
+external_input: "inception_5b/3x3_reduce/bn_mean"
+external_input: "inception_5b/3x3_reduce/bn_var"
+external_input: "inception_5b/3x3_reduce/bn/sc_w"
+external_input: "inception_5b/3x3_reduce/bn/sc_b"
+external_input: "inception_5b/3x3_w"
+external_input: "inception_5b/3x3/bn_scale"
+external_input: "inception_5b/3x3/bn_bias"
+external_input: "inception_5b/3x3/bn_mean"
+external_input: "inception_5b/3x3/bn_var"
+external_input: "inception_5b/3x3/bn/sc_w"
+external_input: "inception_5b/3x3/bn/sc_b"
+external_input: "inception_5b/double3x3_reduce_w"
+external_input: "inception_5b/double3x3_reduce/bn_scale"
+external_input: "inception_5b/double3x3_reduce/bn_bias"
+external_input: "inception_5b/double3x3_reduce/bn_mean"
+external_input: "inception_5b/double3x3_reduce/bn_var"
+external_input: "inception_5b/double3x3_reduce/bn/sc_w"
+external_input: "inception_5b/double3x3_reduce/bn/sc_b"
+external_input: "inception_5b/double3x3a_w"
+external_input: "inception_5b/double3x3a/bn_scale"
+external_input: "inception_5b/double3x3a/bn_bias"
+external_input: "inception_5b/double3x3a/bn_mean"
+external_input: "inception_5b/double3x3a/bn_var"
+external_input: "inception_5b/double3x3a/bn/sc_w"
+external_input: "inception_5b/double3x3a/bn/sc_b"
+external_input: "inception_5b/double3x3b_w"
+external_input: "inception_5b/double3x3b/bn_scale"
+external_input: "inception_5b/double3x3b/bn_bias"
+external_input: "inception_5b/double3x3b/bn_mean"
+external_input: "inception_5b/double3x3b/bn_var"
+external_input: "inception_5b/double3x3b/bn/sc_w"
+external_input: "inception_5b/double3x3b/bn/sc_b"
+external_input: "inception_5b/pool_proj_w"
+external_input: "inception_5b/pool_proj/bn_scale"
+external_input: "inception_5b/pool_proj/bn_bias"
+external_input: "inception_5b/pool_proj/bn_mean"
+external_input: "inception_5b/pool_proj/bn_var"
+external_input: "inception_5b/pool_proj/bn/sc_w"
+external_input: "inception_5b/pool_proj/bn/sc_b"
+external_input: "loss3/classifier_w"
+external_input: "loss3/classifier_b"
+external_output: "prob"
