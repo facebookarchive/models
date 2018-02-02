@@ -1,0 +1,11579 @@
+name: "densenet121"
+op {
+  input: "data"
+  input: "conv1_w"
+  output: "conv1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 3
+  }
+  arg {
+    name: "kernel"
+    i: 7
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv1"
+  input: "conv1/bn_scale"
+  input: "conv1/bn_bias"
+  input: "conv1/bn_mean"
+  input: "conv1/bn_var"
+  output: "conv1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv1/bn"
+  input: "conv1/bn_w"
+  output: "conv1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv1/bn_internal"
+  input: "conv1/bn_b"
+  output: "conv1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv1/bn"
+  output: "conv1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv1/bn"
+  output: "pool1"
+  type: "MaxPool"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "pool1"
+  input: "conv2_1/x1/bn_scale"
+  input: "conv2_1/x1/bn_bias"
+  input: "conv2_1/x1/bn_mean"
+  input: "conv2_1/x1/bn_var"
+  output: "conv2_1/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_1/x1/bn"
+  input: "conv2_1/x1/bn_w"
+  output: "conv2_1/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_1/x1/bn_internal"
+  input: "conv2_1/x1/bn_b"
+  output: "conv2_1/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_1/x1/bn"
+  output: "conv2_1/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_1/x1/bn"
+  input: "conv2_1/x1_w"
+  output: "conv2_1/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_1/x1"
+  input: "conv2_1/x2/bn_scale"
+  input: "conv2_1/x2/bn_bias"
+  input: "conv2_1/x2/bn_mean"
+  input: "conv2_1/x2/bn_var"
+  output: "conv2_1/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_1/x2/bn"
+  input: "conv2_1/x2/bn_w"
+  output: "conv2_1/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_1/x2/bn_internal"
+  input: "conv2_1/x2/bn_b"
+  output: "conv2_1/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_1/x2/bn"
+  output: "conv2_1/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_1/x2/bn"
+  input: "conv2_1/x2_w"
+  output: "conv2_1/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "pool1"
+  input: "conv2_1/x2"
+  output: "concat_2_1"
+  output: "_concat_2_1_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_2_1"
+  input: "conv2_2/x1/bn_scale"
+  input: "conv2_2/x1/bn_bias"
+  input: "conv2_2/x1/bn_mean"
+  input: "conv2_2/x1/bn_var"
+  output: "conv2_2/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_2/x1/bn"
+  input: "conv2_2/x1/bn_w"
+  output: "conv2_2/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_2/x1/bn_internal"
+  input: "conv2_2/x1/bn_b"
+  output: "conv2_2/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_2/x1/bn"
+  output: "conv2_2/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_2/x1/bn"
+  input: "conv2_2/x1_w"
+  output: "conv2_2/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_2/x1"
+  input: "conv2_2/x2/bn_scale"
+  input: "conv2_2/x2/bn_bias"
+  input: "conv2_2/x2/bn_mean"
+  input: "conv2_2/x2/bn_var"
+  output: "conv2_2/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_2/x2/bn"
+  input: "conv2_2/x2/bn_w"
+  output: "conv2_2/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_2/x2/bn_internal"
+  input: "conv2_2/x2/bn_b"
+  output: "conv2_2/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_2/x2/bn"
+  output: "conv2_2/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_2/x2/bn"
+  input: "conv2_2/x2_w"
+  output: "conv2_2/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_2_1"
+  input: "conv2_2/x2"
+  output: "concat_2_2"
+  output: "_concat_2_2_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_2_2"
+  input: "conv2_3/x1/bn_scale"
+  input: "conv2_3/x1/bn_bias"
+  input: "conv2_3/x1/bn_mean"
+  input: "conv2_3/x1/bn_var"
+  output: "conv2_3/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_3/x1/bn"
+  input: "conv2_3/x1/bn_w"
+  output: "conv2_3/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_3/x1/bn_internal"
+  input: "conv2_3/x1/bn_b"
+  output: "conv2_3/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_3/x1/bn"
+  output: "conv2_3/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_3/x1/bn"
+  input: "conv2_3/x1_w"
+  output: "conv2_3/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_3/x1"
+  input: "conv2_3/x2/bn_scale"
+  input: "conv2_3/x2/bn_bias"
+  input: "conv2_3/x2/bn_mean"
+  input: "conv2_3/x2/bn_var"
+  output: "conv2_3/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_3/x2/bn"
+  input: "conv2_3/x2/bn_w"
+  output: "conv2_3/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_3/x2/bn_internal"
+  input: "conv2_3/x2/bn_b"
+  output: "conv2_3/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_3/x2/bn"
+  output: "conv2_3/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_3/x2/bn"
+  input: "conv2_3/x2_w"
+  output: "conv2_3/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_2_2"
+  input: "conv2_3/x2"
+  output: "concat_2_3"
+  output: "_concat_2_3_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_2_3"
+  input: "conv2_4/x1/bn_scale"
+  input: "conv2_4/x1/bn_bias"
+  input: "conv2_4/x1/bn_mean"
+  input: "conv2_4/x1/bn_var"
+  output: "conv2_4/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_4/x1/bn"
+  input: "conv2_4/x1/bn_w"
+  output: "conv2_4/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_4/x1/bn_internal"
+  input: "conv2_4/x1/bn_b"
+  output: "conv2_4/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_4/x1/bn"
+  output: "conv2_4/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_4/x1/bn"
+  input: "conv2_4/x1_w"
+  output: "conv2_4/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_4/x1"
+  input: "conv2_4/x2/bn_scale"
+  input: "conv2_4/x2/bn_bias"
+  input: "conv2_4/x2/bn_mean"
+  input: "conv2_4/x2/bn_var"
+  output: "conv2_4/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_4/x2/bn"
+  input: "conv2_4/x2/bn_w"
+  output: "conv2_4/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_4/x2/bn_internal"
+  input: "conv2_4/x2/bn_b"
+  output: "conv2_4/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_4/x2/bn"
+  output: "conv2_4/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_4/x2/bn"
+  input: "conv2_4/x2_w"
+  output: "conv2_4/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_2_3"
+  input: "conv2_4/x2"
+  output: "concat_2_4"
+  output: "_concat_2_4_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_2_4"
+  input: "conv2_5/x1/bn_scale"
+  input: "conv2_5/x1/bn_bias"
+  input: "conv2_5/x1/bn_mean"
+  input: "conv2_5/x1/bn_var"
+  output: "conv2_5/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_5/x1/bn"
+  input: "conv2_5/x1/bn_w"
+  output: "conv2_5/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_5/x1/bn_internal"
+  input: "conv2_5/x1/bn_b"
+  output: "conv2_5/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_5/x1/bn"
+  output: "conv2_5/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_5/x1/bn"
+  input: "conv2_5/x1_w"
+  output: "conv2_5/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_5/x1"
+  input: "conv2_5/x2/bn_scale"
+  input: "conv2_5/x2/bn_bias"
+  input: "conv2_5/x2/bn_mean"
+  input: "conv2_5/x2/bn_var"
+  output: "conv2_5/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_5/x2/bn"
+  input: "conv2_5/x2/bn_w"
+  output: "conv2_5/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_5/x2/bn_internal"
+  input: "conv2_5/x2/bn_b"
+  output: "conv2_5/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_5/x2/bn"
+  output: "conv2_5/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_5/x2/bn"
+  input: "conv2_5/x2_w"
+  output: "conv2_5/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_2_4"
+  input: "conv2_5/x2"
+  output: "concat_2_5"
+  output: "_concat_2_5_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_2_5"
+  input: "conv2_6/x1/bn_scale"
+  input: "conv2_6/x1/bn_bias"
+  input: "conv2_6/x1/bn_mean"
+  input: "conv2_6/x1/bn_var"
+  output: "conv2_6/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_6/x1/bn"
+  input: "conv2_6/x1/bn_w"
+  output: "conv2_6/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_6/x1/bn_internal"
+  input: "conv2_6/x1/bn_b"
+  output: "conv2_6/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_6/x1/bn"
+  output: "conv2_6/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_6/x1/bn"
+  input: "conv2_6/x1_w"
+  output: "conv2_6/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_6/x1"
+  input: "conv2_6/x2/bn_scale"
+  input: "conv2_6/x2/bn_bias"
+  input: "conv2_6/x2/bn_mean"
+  input: "conv2_6/x2/bn_var"
+  output: "conv2_6/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_6/x2/bn"
+  input: "conv2_6/x2/bn_w"
+  output: "conv2_6/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_6/x2/bn_internal"
+  input: "conv2_6/x2/bn_b"
+  output: "conv2_6/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_6/x2/bn"
+  output: "conv2_6/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_6/x2/bn"
+  input: "conv2_6/x2_w"
+  output: "conv2_6/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_2_5"
+  input: "conv2_6/x2"
+  output: "concat_2_6"
+  output: "_concat_2_6_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_2_6"
+  input: "conv2_blk/bn_scale"
+  input: "conv2_blk/bn_bias"
+  input: "conv2_blk/bn_mean"
+  input: "conv2_blk/bn_var"
+  output: "conv2_blk/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_blk/bn"
+  input: "conv2_blk/bn_w"
+  output: "conv2_blk/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_blk/bn_internal"
+  input: "conv2_blk/bn_b"
+  output: "conv2_blk/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_blk/bn"
+  output: "conv2_blk/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_blk/bn"
+  input: "conv2_blk_w"
+  output: "conv2_blk"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv2_blk"
+  output: "pool2"
+  type: "AveragePool"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 2
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "pool2"
+  input: "conv3_1/x1/bn_scale"
+  input: "conv3_1/x1/bn_bias"
+  input: "conv3_1/x1/bn_mean"
+  input: "conv3_1/x1/bn_var"
+  output: "conv3_1/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_1/x1/bn"
+  input: "conv3_1/x1/bn_w"
+  output: "conv3_1/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_1/x1/bn_internal"
+  input: "conv3_1/x1/bn_b"
+  output: "conv3_1/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_1/x1/bn"
+  output: "conv3_1/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_1/x1/bn"
+  input: "conv3_1/x1_w"
+  output: "conv3_1/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_1/x1"
+  input: "conv3_1/x2/bn_scale"
+  input: "conv3_1/x2/bn_bias"
+  input: "conv3_1/x2/bn_mean"
+  input: "conv3_1/x2/bn_var"
+  output: "conv3_1/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_1/x2/bn"
+  input: "conv3_1/x2/bn_w"
+  output: "conv3_1/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_1/x2/bn_internal"
+  input: "conv3_1/x2/bn_b"
+  output: "conv3_1/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_1/x2/bn"
+  output: "conv3_1/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_1/x2/bn"
+  input: "conv3_1/x2_w"
+  output: "conv3_1/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "pool2"
+  input: "conv3_1/x2"
+  output: "concat_3_1"
+  output: "_concat_3_1_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_1"
+  input: "conv3_2/x1/bn_scale"
+  input: "conv3_2/x1/bn_bias"
+  input: "conv3_2/x1/bn_mean"
+  input: "conv3_2/x1/bn_var"
+  output: "conv3_2/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_2/x1/bn"
+  input: "conv3_2/x1/bn_w"
+  output: "conv3_2/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_2/x1/bn_internal"
+  input: "conv3_2/x1/bn_b"
+  output: "conv3_2/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_2/x1/bn"
+  output: "conv3_2/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_2/x1/bn"
+  input: "conv3_2/x1_w"
+  output: "conv3_2/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_2/x1"
+  input: "conv3_2/x2/bn_scale"
+  input: "conv3_2/x2/bn_bias"
+  input: "conv3_2/x2/bn_mean"
+  input: "conv3_2/x2/bn_var"
+  output: "conv3_2/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_2/x2/bn"
+  input: "conv3_2/x2/bn_w"
+  output: "conv3_2/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_2/x2/bn_internal"
+  input: "conv3_2/x2/bn_b"
+  output: "conv3_2/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_2/x2/bn"
+  output: "conv3_2/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_2/x2/bn"
+  input: "conv3_2/x2_w"
+  output: "conv3_2/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_1"
+  input: "conv3_2/x2"
+  output: "concat_3_2"
+  output: "_concat_3_2_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_2"
+  input: "conv3_3/x1/bn_scale"
+  input: "conv3_3/x1/bn_bias"
+  input: "conv3_3/x1/bn_mean"
+  input: "conv3_3/x1/bn_var"
+  output: "conv3_3/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_3/x1/bn"
+  input: "conv3_3/x1/bn_w"
+  output: "conv3_3/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_3/x1/bn_internal"
+  input: "conv3_3/x1/bn_b"
+  output: "conv3_3/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_3/x1/bn"
+  output: "conv3_3/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_3/x1/bn"
+  input: "conv3_3/x1_w"
+  output: "conv3_3/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_3/x1"
+  input: "conv3_3/x2/bn_scale"
+  input: "conv3_3/x2/bn_bias"
+  input: "conv3_3/x2/bn_mean"
+  input: "conv3_3/x2/bn_var"
+  output: "conv3_3/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_3/x2/bn"
+  input: "conv3_3/x2/bn_w"
+  output: "conv3_3/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_3/x2/bn_internal"
+  input: "conv3_3/x2/bn_b"
+  output: "conv3_3/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_3/x2/bn"
+  output: "conv3_3/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_3/x2/bn"
+  input: "conv3_3/x2_w"
+  output: "conv3_3/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_2"
+  input: "conv3_3/x2"
+  output: "concat_3_3"
+  output: "_concat_3_3_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_3"
+  input: "conv3_4/x1/bn_scale"
+  input: "conv3_4/x1/bn_bias"
+  input: "conv3_4/x1/bn_mean"
+  input: "conv3_4/x1/bn_var"
+  output: "conv3_4/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_4/x1/bn"
+  input: "conv3_4/x1/bn_w"
+  output: "conv3_4/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_4/x1/bn_internal"
+  input: "conv3_4/x1/bn_b"
+  output: "conv3_4/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_4/x1/bn"
+  output: "conv3_4/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_4/x1/bn"
+  input: "conv3_4/x1_w"
+  output: "conv3_4/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_4/x1"
+  input: "conv3_4/x2/bn_scale"
+  input: "conv3_4/x2/bn_bias"
+  input: "conv3_4/x2/bn_mean"
+  input: "conv3_4/x2/bn_var"
+  output: "conv3_4/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_4/x2/bn"
+  input: "conv3_4/x2/bn_w"
+  output: "conv3_4/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_4/x2/bn_internal"
+  input: "conv3_4/x2/bn_b"
+  output: "conv3_4/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_4/x2/bn"
+  output: "conv3_4/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_4/x2/bn"
+  input: "conv3_4/x2_w"
+  output: "conv3_4/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_3"
+  input: "conv3_4/x2"
+  output: "concat_3_4"
+  output: "_concat_3_4_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_4"
+  input: "conv3_5/x1/bn_scale"
+  input: "conv3_5/x1/bn_bias"
+  input: "conv3_5/x1/bn_mean"
+  input: "conv3_5/x1/bn_var"
+  output: "conv3_5/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_5/x1/bn"
+  input: "conv3_5/x1/bn_w"
+  output: "conv3_5/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_5/x1/bn_internal"
+  input: "conv3_5/x1/bn_b"
+  output: "conv3_5/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_5/x1/bn"
+  output: "conv3_5/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_5/x1/bn"
+  input: "conv3_5/x1_w"
+  output: "conv3_5/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_5/x1"
+  input: "conv3_5/x2/bn_scale"
+  input: "conv3_5/x2/bn_bias"
+  input: "conv3_5/x2/bn_mean"
+  input: "conv3_5/x2/bn_var"
+  output: "conv3_5/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_5/x2/bn"
+  input: "conv3_5/x2/bn_w"
+  output: "conv3_5/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_5/x2/bn_internal"
+  input: "conv3_5/x2/bn_b"
+  output: "conv3_5/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_5/x2/bn"
+  output: "conv3_5/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_5/x2/bn"
+  input: "conv3_5/x2_w"
+  output: "conv3_5/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_4"
+  input: "conv3_5/x2"
+  output: "concat_3_5"
+  output: "_concat_3_5_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_5"
+  input: "conv3_6/x1/bn_scale"
+  input: "conv3_6/x1/bn_bias"
+  input: "conv3_6/x1/bn_mean"
+  input: "conv3_6/x1/bn_var"
+  output: "conv3_6/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_6/x1/bn"
+  input: "conv3_6/x1/bn_w"
+  output: "conv3_6/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_6/x1/bn_internal"
+  input: "conv3_6/x1/bn_b"
+  output: "conv3_6/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_6/x1/bn"
+  output: "conv3_6/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_6/x1/bn"
+  input: "conv3_6/x1_w"
+  output: "conv3_6/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_6/x1"
+  input: "conv3_6/x2/bn_scale"
+  input: "conv3_6/x2/bn_bias"
+  input: "conv3_6/x2/bn_mean"
+  input: "conv3_6/x2/bn_var"
+  output: "conv3_6/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_6/x2/bn"
+  input: "conv3_6/x2/bn_w"
+  output: "conv3_6/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_6/x2/bn_internal"
+  input: "conv3_6/x2/bn_b"
+  output: "conv3_6/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_6/x2/bn"
+  output: "conv3_6/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_6/x2/bn"
+  input: "conv3_6/x2_w"
+  output: "conv3_6/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_5"
+  input: "conv3_6/x2"
+  output: "concat_3_6"
+  output: "_concat_3_6_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_6"
+  input: "conv3_7/x1/bn_scale"
+  input: "conv3_7/x1/bn_bias"
+  input: "conv3_7/x1/bn_mean"
+  input: "conv3_7/x1/bn_var"
+  output: "conv3_7/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_7/x1/bn"
+  input: "conv3_7/x1/bn_w"
+  output: "conv3_7/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_7/x1/bn_internal"
+  input: "conv3_7/x1/bn_b"
+  output: "conv3_7/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_7/x1/bn"
+  output: "conv3_7/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_7/x1/bn"
+  input: "conv3_7/x1_w"
+  output: "conv3_7/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_7/x1"
+  input: "conv3_7/x2/bn_scale"
+  input: "conv3_7/x2/bn_bias"
+  input: "conv3_7/x2/bn_mean"
+  input: "conv3_7/x2/bn_var"
+  output: "conv3_7/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_7/x2/bn"
+  input: "conv3_7/x2/bn_w"
+  output: "conv3_7/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_7/x2/bn_internal"
+  input: "conv3_7/x2/bn_b"
+  output: "conv3_7/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_7/x2/bn"
+  output: "conv3_7/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_7/x2/bn"
+  input: "conv3_7/x2_w"
+  output: "conv3_7/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_6"
+  input: "conv3_7/x2"
+  output: "concat_3_7"
+  output: "_concat_3_7_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_7"
+  input: "conv3_8/x1/bn_scale"
+  input: "conv3_8/x1/bn_bias"
+  input: "conv3_8/x1/bn_mean"
+  input: "conv3_8/x1/bn_var"
+  output: "conv3_8/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_8/x1/bn"
+  input: "conv3_8/x1/bn_w"
+  output: "conv3_8/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_8/x1/bn_internal"
+  input: "conv3_8/x1/bn_b"
+  output: "conv3_8/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_8/x1/bn"
+  output: "conv3_8/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_8/x1/bn"
+  input: "conv3_8/x1_w"
+  output: "conv3_8/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_8/x1"
+  input: "conv3_8/x2/bn_scale"
+  input: "conv3_8/x2/bn_bias"
+  input: "conv3_8/x2/bn_mean"
+  input: "conv3_8/x2/bn_var"
+  output: "conv3_8/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_8/x2/bn"
+  input: "conv3_8/x2/bn_w"
+  output: "conv3_8/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_8/x2/bn_internal"
+  input: "conv3_8/x2/bn_b"
+  output: "conv3_8/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_8/x2/bn"
+  output: "conv3_8/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_8/x2/bn"
+  input: "conv3_8/x2_w"
+  output: "conv3_8/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_7"
+  input: "conv3_8/x2"
+  output: "concat_3_8"
+  output: "_concat_3_8_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_8"
+  input: "conv3_9/x1/bn_scale"
+  input: "conv3_9/x1/bn_bias"
+  input: "conv3_9/x1/bn_mean"
+  input: "conv3_9/x1/bn_var"
+  output: "conv3_9/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_9/x1/bn"
+  input: "conv3_9/x1/bn_w"
+  output: "conv3_9/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_9/x1/bn_internal"
+  input: "conv3_9/x1/bn_b"
+  output: "conv3_9/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_9/x1/bn"
+  output: "conv3_9/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_9/x1/bn"
+  input: "conv3_9/x1_w"
+  output: "conv3_9/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_9/x1"
+  input: "conv3_9/x2/bn_scale"
+  input: "conv3_9/x2/bn_bias"
+  input: "conv3_9/x2/bn_mean"
+  input: "conv3_9/x2/bn_var"
+  output: "conv3_9/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_9/x2/bn"
+  input: "conv3_9/x2/bn_w"
+  output: "conv3_9/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_9/x2/bn_internal"
+  input: "conv3_9/x2/bn_b"
+  output: "conv3_9/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_9/x2/bn"
+  output: "conv3_9/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_9/x2/bn"
+  input: "conv3_9/x2_w"
+  output: "conv3_9/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_8"
+  input: "conv3_9/x2"
+  output: "concat_3_9"
+  output: "_concat_3_9_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_9"
+  input: "conv3_10/x1/bn_scale"
+  input: "conv3_10/x1/bn_bias"
+  input: "conv3_10/x1/bn_mean"
+  input: "conv3_10/x1/bn_var"
+  output: "conv3_10/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_10/x1/bn"
+  input: "conv3_10/x1/bn_w"
+  output: "conv3_10/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_10/x1/bn_internal"
+  input: "conv3_10/x1/bn_b"
+  output: "conv3_10/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_10/x1/bn"
+  output: "conv3_10/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_10/x1/bn"
+  input: "conv3_10/x1_w"
+  output: "conv3_10/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_10/x1"
+  input: "conv3_10/x2/bn_scale"
+  input: "conv3_10/x2/bn_bias"
+  input: "conv3_10/x2/bn_mean"
+  input: "conv3_10/x2/bn_var"
+  output: "conv3_10/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_10/x2/bn"
+  input: "conv3_10/x2/bn_w"
+  output: "conv3_10/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_10/x2/bn_internal"
+  input: "conv3_10/x2/bn_b"
+  output: "conv3_10/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_10/x2/bn"
+  output: "conv3_10/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_10/x2/bn"
+  input: "conv3_10/x2_w"
+  output: "conv3_10/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_9"
+  input: "conv3_10/x2"
+  output: "concat_3_10"
+  output: "_concat_3_10_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_10"
+  input: "conv3_11/x1/bn_scale"
+  input: "conv3_11/x1/bn_bias"
+  input: "conv3_11/x1/bn_mean"
+  input: "conv3_11/x1/bn_var"
+  output: "conv3_11/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_11/x1/bn"
+  input: "conv3_11/x1/bn_w"
+  output: "conv3_11/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_11/x1/bn_internal"
+  input: "conv3_11/x1/bn_b"
+  output: "conv3_11/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_11/x1/bn"
+  output: "conv3_11/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_11/x1/bn"
+  input: "conv3_11/x1_w"
+  output: "conv3_11/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_11/x1"
+  input: "conv3_11/x2/bn_scale"
+  input: "conv3_11/x2/bn_bias"
+  input: "conv3_11/x2/bn_mean"
+  input: "conv3_11/x2/bn_var"
+  output: "conv3_11/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_11/x2/bn"
+  input: "conv3_11/x2/bn_w"
+  output: "conv3_11/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_11/x2/bn_internal"
+  input: "conv3_11/x2/bn_b"
+  output: "conv3_11/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_11/x2/bn"
+  output: "conv3_11/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_11/x2/bn"
+  input: "conv3_11/x2_w"
+  output: "conv3_11/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_10"
+  input: "conv3_11/x2"
+  output: "concat_3_11"
+  output: "_concat_3_11_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_11"
+  input: "conv3_12/x1/bn_scale"
+  input: "conv3_12/x1/bn_bias"
+  input: "conv3_12/x1/bn_mean"
+  input: "conv3_12/x1/bn_var"
+  output: "conv3_12/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_12/x1/bn"
+  input: "conv3_12/x1/bn_w"
+  output: "conv3_12/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_12/x1/bn_internal"
+  input: "conv3_12/x1/bn_b"
+  output: "conv3_12/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_12/x1/bn"
+  output: "conv3_12/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_12/x1/bn"
+  input: "conv3_12/x1_w"
+  output: "conv3_12/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_12/x1"
+  input: "conv3_12/x2/bn_scale"
+  input: "conv3_12/x2/bn_bias"
+  input: "conv3_12/x2/bn_mean"
+  input: "conv3_12/x2/bn_var"
+  output: "conv3_12/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_12/x2/bn"
+  input: "conv3_12/x2/bn_w"
+  output: "conv3_12/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_12/x2/bn_internal"
+  input: "conv3_12/x2/bn_b"
+  output: "conv3_12/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_12/x2/bn"
+  output: "conv3_12/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_12/x2/bn"
+  input: "conv3_12/x2_w"
+  output: "conv3_12/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_11"
+  input: "conv3_12/x2"
+  output: "concat_3_12"
+  output: "_concat_3_12_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_3_12"
+  input: "conv3_blk/bn_scale"
+  input: "conv3_blk/bn_bias"
+  input: "conv3_blk/bn_mean"
+  input: "conv3_blk/bn_var"
+  output: "conv3_blk/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_blk/bn"
+  input: "conv3_blk/bn_w"
+  output: "conv3_blk/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_blk/bn_internal"
+  input: "conv3_blk/bn_b"
+  output: "conv3_blk/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_blk/bn"
+  output: "conv3_blk/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_blk/bn"
+  input: "conv3_blk_w"
+  output: "conv3_blk"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv3_blk"
+  output: "pool3"
+  type: "AveragePool"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 2
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "pool3"
+  input: "conv4_1/x1/bn_scale"
+  input: "conv4_1/x1/bn_bias"
+  input: "conv4_1/x1/bn_mean"
+  input: "conv4_1/x1/bn_var"
+  output: "conv4_1/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_1/x1/bn"
+  input: "conv4_1/x1/bn_w"
+  output: "conv4_1/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_1/x1/bn_internal"
+  input: "conv4_1/x1/bn_b"
+  output: "conv4_1/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_1/x1/bn"
+  output: "conv4_1/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_1/x1/bn"
+  input: "conv4_1/x1_w"
+  output: "conv4_1/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_1/x1"
+  input: "conv4_1/x2/bn_scale"
+  input: "conv4_1/x2/bn_bias"
+  input: "conv4_1/x2/bn_mean"
+  input: "conv4_1/x2/bn_var"
+  output: "conv4_1/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_1/x2/bn"
+  input: "conv4_1/x2/bn_w"
+  output: "conv4_1/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_1/x2/bn_internal"
+  input: "conv4_1/x2/bn_b"
+  output: "conv4_1/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_1/x2/bn"
+  output: "conv4_1/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_1/x2/bn"
+  input: "conv4_1/x2_w"
+  output: "conv4_1/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "pool3"
+  input: "conv4_1/x2"
+  output: "concat_4_1"
+  output: "_concat_4_1_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_1"
+  input: "conv4_2/x1/bn_scale"
+  input: "conv4_2/x1/bn_bias"
+  input: "conv4_2/x1/bn_mean"
+  input: "conv4_2/x1/bn_var"
+  output: "conv4_2/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_2/x1/bn"
+  input: "conv4_2/x1/bn_w"
+  output: "conv4_2/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_2/x1/bn_internal"
+  input: "conv4_2/x1/bn_b"
+  output: "conv4_2/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_2/x1/bn"
+  output: "conv4_2/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_2/x1/bn"
+  input: "conv4_2/x1_w"
+  output: "conv4_2/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_2/x1"
+  input: "conv4_2/x2/bn_scale"
+  input: "conv4_2/x2/bn_bias"
+  input: "conv4_2/x2/bn_mean"
+  input: "conv4_2/x2/bn_var"
+  output: "conv4_2/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_2/x2/bn"
+  input: "conv4_2/x2/bn_w"
+  output: "conv4_2/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_2/x2/bn_internal"
+  input: "conv4_2/x2/bn_b"
+  output: "conv4_2/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_2/x2/bn"
+  output: "conv4_2/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_2/x2/bn"
+  input: "conv4_2/x2_w"
+  output: "conv4_2/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_1"
+  input: "conv4_2/x2"
+  output: "concat_4_2"
+  output: "_concat_4_2_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_2"
+  input: "conv4_3/x1/bn_scale"
+  input: "conv4_3/x1/bn_bias"
+  input: "conv4_3/x1/bn_mean"
+  input: "conv4_3/x1/bn_var"
+  output: "conv4_3/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_3/x1/bn"
+  input: "conv4_3/x1/bn_w"
+  output: "conv4_3/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_3/x1/bn_internal"
+  input: "conv4_3/x1/bn_b"
+  output: "conv4_3/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_3/x1/bn"
+  output: "conv4_3/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_3/x1/bn"
+  input: "conv4_3/x1_w"
+  output: "conv4_3/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_3/x1"
+  input: "conv4_3/x2/bn_scale"
+  input: "conv4_3/x2/bn_bias"
+  input: "conv4_3/x2/bn_mean"
+  input: "conv4_3/x2/bn_var"
+  output: "conv4_3/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_3/x2/bn"
+  input: "conv4_3/x2/bn_w"
+  output: "conv4_3/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_3/x2/bn_internal"
+  input: "conv4_3/x2/bn_b"
+  output: "conv4_3/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_3/x2/bn"
+  output: "conv4_3/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_3/x2/bn"
+  input: "conv4_3/x2_w"
+  output: "conv4_3/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_2"
+  input: "conv4_3/x2"
+  output: "concat_4_3"
+  output: "_concat_4_3_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_3"
+  input: "conv4_4/x1/bn_scale"
+  input: "conv4_4/x1/bn_bias"
+  input: "conv4_4/x1/bn_mean"
+  input: "conv4_4/x1/bn_var"
+  output: "conv4_4/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_4/x1/bn"
+  input: "conv4_4/x1/bn_w"
+  output: "conv4_4/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_4/x1/bn_internal"
+  input: "conv4_4/x1/bn_b"
+  output: "conv4_4/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_4/x1/bn"
+  output: "conv4_4/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_4/x1/bn"
+  input: "conv4_4/x1_w"
+  output: "conv4_4/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_4/x1"
+  input: "conv4_4/x2/bn_scale"
+  input: "conv4_4/x2/bn_bias"
+  input: "conv4_4/x2/bn_mean"
+  input: "conv4_4/x2/bn_var"
+  output: "conv4_4/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_4/x2/bn"
+  input: "conv4_4/x2/bn_w"
+  output: "conv4_4/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_4/x2/bn_internal"
+  input: "conv4_4/x2/bn_b"
+  output: "conv4_4/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_4/x2/bn"
+  output: "conv4_4/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_4/x2/bn"
+  input: "conv4_4/x2_w"
+  output: "conv4_4/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_3"
+  input: "conv4_4/x2"
+  output: "concat_4_4"
+  output: "_concat_4_4_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_4"
+  input: "conv4_5/x1/bn_scale"
+  input: "conv4_5/x1/bn_bias"
+  input: "conv4_5/x1/bn_mean"
+  input: "conv4_5/x1/bn_var"
+  output: "conv4_5/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_5/x1/bn"
+  input: "conv4_5/x1/bn_w"
+  output: "conv4_5/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_5/x1/bn_internal"
+  input: "conv4_5/x1/bn_b"
+  output: "conv4_5/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_5/x1/bn"
+  output: "conv4_5/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_5/x1/bn"
+  input: "conv4_5/x1_w"
+  output: "conv4_5/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_5/x1"
+  input: "conv4_5/x2/bn_scale"
+  input: "conv4_5/x2/bn_bias"
+  input: "conv4_5/x2/bn_mean"
+  input: "conv4_5/x2/bn_var"
+  output: "conv4_5/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_5/x2/bn"
+  input: "conv4_5/x2/bn_w"
+  output: "conv4_5/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_5/x2/bn_internal"
+  input: "conv4_5/x2/bn_b"
+  output: "conv4_5/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_5/x2/bn"
+  output: "conv4_5/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_5/x2/bn"
+  input: "conv4_5/x2_w"
+  output: "conv4_5/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_4"
+  input: "conv4_5/x2"
+  output: "concat_4_5"
+  output: "_concat_4_5_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_5"
+  input: "conv4_6/x1/bn_scale"
+  input: "conv4_6/x1/bn_bias"
+  input: "conv4_6/x1/bn_mean"
+  input: "conv4_6/x1/bn_var"
+  output: "conv4_6/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_6/x1/bn"
+  input: "conv4_6/x1/bn_w"
+  output: "conv4_6/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_6/x1/bn_internal"
+  input: "conv4_6/x1/bn_b"
+  output: "conv4_6/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_6/x1/bn"
+  output: "conv4_6/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_6/x1/bn"
+  input: "conv4_6/x1_w"
+  output: "conv4_6/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_6/x1"
+  input: "conv4_6/x2/bn_scale"
+  input: "conv4_6/x2/bn_bias"
+  input: "conv4_6/x2/bn_mean"
+  input: "conv4_6/x2/bn_var"
+  output: "conv4_6/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_6/x2/bn"
+  input: "conv4_6/x2/bn_w"
+  output: "conv4_6/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_6/x2/bn_internal"
+  input: "conv4_6/x2/bn_b"
+  output: "conv4_6/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_6/x2/bn"
+  output: "conv4_6/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_6/x2/bn"
+  input: "conv4_6/x2_w"
+  output: "conv4_6/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_5"
+  input: "conv4_6/x2"
+  output: "concat_4_6"
+  output: "_concat_4_6_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_6"
+  input: "conv4_7/x1/bn_scale"
+  input: "conv4_7/x1/bn_bias"
+  input: "conv4_7/x1/bn_mean"
+  input: "conv4_7/x1/bn_var"
+  output: "conv4_7/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_7/x1/bn"
+  input: "conv4_7/x1/bn_w"
+  output: "conv4_7/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_7/x1/bn_internal"
+  input: "conv4_7/x1/bn_b"
+  output: "conv4_7/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_7/x1/bn"
+  output: "conv4_7/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_7/x1/bn"
+  input: "conv4_7/x1_w"
+  output: "conv4_7/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_7/x1"
+  input: "conv4_7/x2/bn_scale"
+  input: "conv4_7/x2/bn_bias"
+  input: "conv4_7/x2/bn_mean"
+  input: "conv4_7/x2/bn_var"
+  output: "conv4_7/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_7/x2/bn"
+  input: "conv4_7/x2/bn_w"
+  output: "conv4_7/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_7/x2/bn_internal"
+  input: "conv4_7/x2/bn_b"
+  output: "conv4_7/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_7/x2/bn"
+  output: "conv4_7/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_7/x2/bn"
+  input: "conv4_7/x2_w"
+  output: "conv4_7/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_6"
+  input: "conv4_7/x2"
+  output: "concat_4_7"
+  output: "_concat_4_7_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_7"
+  input: "conv4_8/x1/bn_scale"
+  input: "conv4_8/x1/bn_bias"
+  input: "conv4_8/x1/bn_mean"
+  input: "conv4_8/x1/bn_var"
+  output: "conv4_8/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_8/x1/bn"
+  input: "conv4_8/x1/bn_w"
+  output: "conv4_8/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_8/x1/bn_internal"
+  input: "conv4_8/x1/bn_b"
+  output: "conv4_8/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_8/x1/bn"
+  output: "conv4_8/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_8/x1/bn"
+  input: "conv4_8/x1_w"
+  output: "conv4_8/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_8/x1"
+  input: "conv4_8/x2/bn_scale"
+  input: "conv4_8/x2/bn_bias"
+  input: "conv4_8/x2/bn_mean"
+  input: "conv4_8/x2/bn_var"
+  output: "conv4_8/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_8/x2/bn"
+  input: "conv4_8/x2/bn_w"
+  output: "conv4_8/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_8/x2/bn_internal"
+  input: "conv4_8/x2/bn_b"
+  output: "conv4_8/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_8/x2/bn"
+  output: "conv4_8/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_8/x2/bn"
+  input: "conv4_8/x2_w"
+  output: "conv4_8/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_7"
+  input: "conv4_8/x2"
+  output: "concat_4_8"
+  output: "_concat_4_8_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_8"
+  input: "conv4_9/x1/bn_scale"
+  input: "conv4_9/x1/bn_bias"
+  input: "conv4_9/x1/bn_mean"
+  input: "conv4_9/x1/bn_var"
+  output: "conv4_9/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_9/x1/bn"
+  input: "conv4_9/x1/bn_w"
+  output: "conv4_9/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_9/x1/bn_internal"
+  input: "conv4_9/x1/bn_b"
+  output: "conv4_9/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_9/x1/bn"
+  output: "conv4_9/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_9/x1/bn"
+  input: "conv4_9/x1_w"
+  output: "conv4_9/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_9/x1"
+  input: "conv4_9/x2/bn_scale"
+  input: "conv4_9/x2/bn_bias"
+  input: "conv4_9/x2/bn_mean"
+  input: "conv4_9/x2/bn_var"
+  output: "conv4_9/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_9/x2/bn"
+  input: "conv4_9/x2/bn_w"
+  output: "conv4_9/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_9/x2/bn_internal"
+  input: "conv4_9/x2/bn_b"
+  output: "conv4_9/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_9/x2/bn"
+  output: "conv4_9/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_9/x2/bn"
+  input: "conv4_9/x2_w"
+  output: "conv4_9/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_8"
+  input: "conv4_9/x2"
+  output: "concat_4_9"
+  output: "_concat_4_9_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_9"
+  input: "conv4_10/x1/bn_scale"
+  input: "conv4_10/x1/bn_bias"
+  input: "conv4_10/x1/bn_mean"
+  input: "conv4_10/x1/bn_var"
+  output: "conv4_10/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_10/x1/bn"
+  input: "conv4_10/x1/bn_w"
+  output: "conv4_10/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_10/x1/bn_internal"
+  input: "conv4_10/x1/bn_b"
+  output: "conv4_10/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_10/x1/bn"
+  output: "conv4_10/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_10/x1/bn"
+  input: "conv4_10/x1_w"
+  output: "conv4_10/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_10/x1"
+  input: "conv4_10/x2/bn_scale"
+  input: "conv4_10/x2/bn_bias"
+  input: "conv4_10/x2/bn_mean"
+  input: "conv4_10/x2/bn_var"
+  output: "conv4_10/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_10/x2/bn"
+  input: "conv4_10/x2/bn_w"
+  output: "conv4_10/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_10/x2/bn_internal"
+  input: "conv4_10/x2/bn_b"
+  output: "conv4_10/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_10/x2/bn"
+  output: "conv4_10/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_10/x2/bn"
+  input: "conv4_10/x2_w"
+  output: "conv4_10/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_9"
+  input: "conv4_10/x2"
+  output: "concat_4_10"
+  output: "_concat_4_10_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_10"
+  input: "conv4_11/x1/bn_scale"
+  input: "conv4_11/x1/bn_bias"
+  input: "conv4_11/x1/bn_mean"
+  input: "conv4_11/x1/bn_var"
+  output: "conv4_11/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_11/x1/bn"
+  input: "conv4_11/x1/bn_w"
+  output: "conv4_11/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_11/x1/bn_internal"
+  input: "conv4_11/x1/bn_b"
+  output: "conv4_11/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_11/x1/bn"
+  output: "conv4_11/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_11/x1/bn"
+  input: "conv4_11/x1_w"
+  output: "conv4_11/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_11/x1"
+  input: "conv4_11/x2/bn_scale"
+  input: "conv4_11/x2/bn_bias"
+  input: "conv4_11/x2/bn_mean"
+  input: "conv4_11/x2/bn_var"
+  output: "conv4_11/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_11/x2/bn"
+  input: "conv4_11/x2/bn_w"
+  output: "conv4_11/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_11/x2/bn_internal"
+  input: "conv4_11/x2/bn_b"
+  output: "conv4_11/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_11/x2/bn"
+  output: "conv4_11/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_11/x2/bn"
+  input: "conv4_11/x2_w"
+  output: "conv4_11/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_10"
+  input: "conv4_11/x2"
+  output: "concat_4_11"
+  output: "_concat_4_11_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_11"
+  input: "conv4_12/x1/bn_scale"
+  input: "conv4_12/x1/bn_bias"
+  input: "conv4_12/x1/bn_mean"
+  input: "conv4_12/x1/bn_var"
+  output: "conv4_12/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_12/x1/bn"
+  input: "conv4_12/x1/bn_w"
+  output: "conv4_12/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_12/x1/bn_internal"
+  input: "conv4_12/x1/bn_b"
+  output: "conv4_12/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_12/x1/bn"
+  output: "conv4_12/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_12/x1/bn"
+  input: "conv4_12/x1_w"
+  output: "conv4_12/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_12/x1"
+  input: "conv4_12/x2/bn_scale"
+  input: "conv4_12/x2/bn_bias"
+  input: "conv4_12/x2/bn_mean"
+  input: "conv4_12/x2/bn_var"
+  output: "conv4_12/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_12/x2/bn"
+  input: "conv4_12/x2/bn_w"
+  output: "conv4_12/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_12/x2/bn_internal"
+  input: "conv4_12/x2/bn_b"
+  output: "conv4_12/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_12/x2/bn"
+  output: "conv4_12/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_12/x2/bn"
+  input: "conv4_12/x2_w"
+  output: "conv4_12/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_11"
+  input: "conv4_12/x2"
+  output: "concat_4_12"
+  output: "_concat_4_12_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_12"
+  input: "conv4_13/x1/bn_scale"
+  input: "conv4_13/x1/bn_bias"
+  input: "conv4_13/x1/bn_mean"
+  input: "conv4_13/x1/bn_var"
+  output: "conv4_13/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_13/x1/bn"
+  input: "conv4_13/x1/bn_w"
+  output: "conv4_13/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_13/x1/bn_internal"
+  input: "conv4_13/x1/bn_b"
+  output: "conv4_13/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_13/x1/bn"
+  output: "conv4_13/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_13/x1/bn"
+  input: "conv4_13/x1_w"
+  output: "conv4_13/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_13/x1"
+  input: "conv4_13/x2/bn_scale"
+  input: "conv4_13/x2/bn_bias"
+  input: "conv4_13/x2/bn_mean"
+  input: "conv4_13/x2/bn_var"
+  output: "conv4_13/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_13/x2/bn"
+  input: "conv4_13/x2/bn_w"
+  output: "conv4_13/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_13/x2/bn_internal"
+  input: "conv4_13/x2/bn_b"
+  output: "conv4_13/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_13/x2/bn"
+  output: "conv4_13/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_13/x2/bn"
+  input: "conv4_13/x2_w"
+  output: "conv4_13/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_12"
+  input: "conv4_13/x2"
+  output: "concat_4_13"
+  output: "_concat_4_13_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_13"
+  input: "conv4_14/x1/bn_scale"
+  input: "conv4_14/x1/bn_bias"
+  input: "conv4_14/x1/bn_mean"
+  input: "conv4_14/x1/bn_var"
+  output: "conv4_14/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_14/x1/bn"
+  input: "conv4_14/x1/bn_w"
+  output: "conv4_14/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_14/x1/bn_internal"
+  input: "conv4_14/x1/bn_b"
+  output: "conv4_14/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_14/x1/bn"
+  output: "conv4_14/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_14/x1/bn"
+  input: "conv4_14/x1_w"
+  output: "conv4_14/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_14/x1"
+  input: "conv4_14/x2/bn_scale"
+  input: "conv4_14/x2/bn_bias"
+  input: "conv4_14/x2/bn_mean"
+  input: "conv4_14/x2/bn_var"
+  output: "conv4_14/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_14/x2/bn"
+  input: "conv4_14/x2/bn_w"
+  output: "conv4_14/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_14/x2/bn_internal"
+  input: "conv4_14/x2/bn_b"
+  output: "conv4_14/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_14/x2/bn"
+  output: "conv4_14/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_14/x2/bn"
+  input: "conv4_14/x2_w"
+  output: "conv4_14/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_13"
+  input: "conv4_14/x2"
+  output: "concat_4_14"
+  output: "_concat_4_14_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_14"
+  input: "conv4_15/x1/bn_scale"
+  input: "conv4_15/x1/bn_bias"
+  input: "conv4_15/x1/bn_mean"
+  input: "conv4_15/x1/bn_var"
+  output: "conv4_15/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_15/x1/bn"
+  input: "conv4_15/x1/bn_w"
+  output: "conv4_15/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_15/x1/bn_internal"
+  input: "conv4_15/x1/bn_b"
+  output: "conv4_15/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_15/x1/bn"
+  output: "conv4_15/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_15/x1/bn"
+  input: "conv4_15/x1_w"
+  output: "conv4_15/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_15/x1"
+  input: "conv4_15/x2/bn_scale"
+  input: "conv4_15/x2/bn_bias"
+  input: "conv4_15/x2/bn_mean"
+  input: "conv4_15/x2/bn_var"
+  output: "conv4_15/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_15/x2/bn"
+  input: "conv4_15/x2/bn_w"
+  output: "conv4_15/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_15/x2/bn_internal"
+  input: "conv4_15/x2/bn_b"
+  output: "conv4_15/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_15/x2/bn"
+  output: "conv4_15/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_15/x2/bn"
+  input: "conv4_15/x2_w"
+  output: "conv4_15/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_14"
+  input: "conv4_15/x2"
+  output: "concat_4_15"
+  output: "_concat_4_15_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_15"
+  input: "conv4_16/x1/bn_scale"
+  input: "conv4_16/x1/bn_bias"
+  input: "conv4_16/x1/bn_mean"
+  input: "conv4_16/x1/bn_var"
+  output: "conv4_16/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_16/x1/bn"
+  input: "conv4_16/x1/bn_w"
+  output: "conv4_16/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_16/x1/bn_internal"
+  input: "conv4_16/x1/bn_b"
+  output: "conv4_16/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_16/x1/bn"
+  output: "conv4_16/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_16/x1/bn"
+  input: "conv4_16/x1_w"
+  output: "conv4_16/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_16/x1"
+  input: "conv4_16/x2/bn_scale"
+  input: "conv4_16/x2/bn_bias"
+  input: "conv4_16/x2/bn_mean"
+  input: "conv4_16/x2/bn_var"
+  output: "conv4_16/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_16/x2/bn"
+  input: "conv4_16/x2/bn_w"
+  output: "conv4_16/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_16/x2/bn_internal"
+  input: "conv4_16/x2/bn_b"
+  output: "conv4_16/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_16/x2/bn"
+  output: "conv4_16/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_16/x2/bn"
+  input: "conv4_16/x2_w"
+  output: "conv4_16/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_15"
+  input: "conv4_16/x2"
+  output: "concat_4_16"
+  output: "_concat_4_16_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_16"
+  input: "conv4_17/x1/bn_scale"
+  input: "conv4_17/x1/bn_bias"
+  input: "conv4_17/x1/bn_mean"
+  input: "conv4_17/x1/bn_var"
+  output: "conv4_17/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_17/x1/bn"
+  input: "conv4_17/x1/bn_w"
+  output: "conv4_17/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_17/x1/bn_internal"
+  input: "conv4_17/x1/bn_b"
+  output: "conv4_17/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_17/x1/bn"
+  output: "conv4_17/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_17/x1/bn"
+  input: "conv4_17/x1_w"
+  output: "conv4_17/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_17/x1"
+  input: "conv4_17/x2/bn_scale"
+  input: "conv4_17/x2/bn_bias"
+  input: "conv4_17/x2/bn_mean"
+  input: "conv4_17/x2/bn_var"
+  output: "conv4_17/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_17/x2/bn"
+  input: "conv4_17/x2/bn_w"
+  output: "conv4_17/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_17/x2/bn_internal"
+  input: "conv4_17/x2/bn_b"
+  output: "conv4_17/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_17/x2/bn"
+  output: "conv4_17/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_17/x2/bn"
+  input: "conv4_17/x2_w"
+  output: "conv4_17/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_16"
+  input: "conv4_17/x2"
+  output: "concat_4_17"
+  output: "_concat_4_17_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_17"
+  input: "conv4_18/x1/bn_scale"
+  input: "conv4_18/x1/bn_bias"
+  input: "conv4_18/x1/bn_mean"
+  input: "conv4_18/x1/bn_var"
+  output: "conv4_18/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_18/x1/bn"
+  input: "conv4_18/x1/bn_w"
+  output: "conv4_18/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_18/x1/bn_internal"
+  input: "conv4_18/x1/bn_b"
+  output: "conv4_18/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_18/x1/bn"
+  output: "conv4_18/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_18/x1/bn"
+  input: "conv4_18/x1_w"
+  output: "conv4_18/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_18/x1"
+  input: "conv4_18/x2/bn_scale"
+  input: "conv4_18/x2/bn_bias"
+  input: "conv4_18/x2/bn_mean"
+  input: "conv4_18/x2/bn_var"
+  output: "conv4_18/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_18/x2/bn"
+  input: "conv4_18/x2/bn_w"
+  output: "conv4_18/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_18/x2/bn_internal"
+  input: "conv4_18/x2/bn_b"
+  output: "conv4_18/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_18/x2/bn"
+  output: "conv4_18/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_18/x2/bn"
+  input: "conv4_18/x2_w"
+  output: "conv4_18/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_17"
+  input: "conv4_18/x2"
+  output: "concat_4_18"
+  output: "_concat_4_18_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_18"
+  input: "conv4_19/x1/bn_scale"
+  input: "conv4_19/x1/bn_bias"
+  input: "conv4_19/x1/bn_mean"
+  input: "conv4_19/x1/bn_var"
+  output: "conv4_19/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_19/x1/bn"
+  input: "conv4_19/x1/bn_w"
+  output: "conv4_19/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_19/x1/bn_internal"
+  input: "conv4_19/x1/bn_b"
+  output: "conv4_19/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_19/x1/bn"
+  output: "conv4_19/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_19/x1/bn"
+  input: "conv4_19/x1_w"
+  output: "conv4_19/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_19/x1"
+  input: "conv4_19/x2/bn_scale"
+  input: "conv4_19/x2/bn_bias"
+  input: "conv4_19/x2/bn_mean"
+  input: "conv4_19/x2/bn_var"
+  output: "conv4_19/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_19/x2/bn"
+  input: "conv4_19/x2/bn_w"
+  output: "conv4_19/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_19/x2/bn_internal"
+  input: "conv4_19/x2/bn_b"
+  output: "conv4_19/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_19/x2/bn"
+  output: "conv4_19/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_19/x2/bn"
+  input: "conv4_19/x2_w"
+  output: "conv4_19/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_18"
+  input: "conv4_19/x2"
+  output: "concat_4_19"
+  output: "_concat_4_19_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_19"
+  input: "conv4_20/x1/bn_scale"
+  input: "conv4_20/x1/bn_bias"
+  input: "conv4_20/x1/bn_mean"
+  input: "conv4_20/x1/bn_var"
+  output: "conv4_20/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_20/x1/bn"
+  input: "conv4_20/x1/bn_w"
+  output: "conv4_20/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_20/x1/bn_internal"
+  input: "conv4_20/x1/bn_b"
+  output: "conv4_20/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_20/x1/bn"
+  output: "conv4_20/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_20/x1/bn"
+  input: "conv4_20/x1_w"
+  output: "conv4_20/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_20/x1"
+  input: "conv4_20/x2/bn_scale"
+  input: "conv4_20/x2/bn_bias"
+  input: "conv4_20/x2/bn_mean"
+  input: "conv4_20/x2/bn_var"
+  output: "conv4_20/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_20/x2/bn"
+  input: "conv4_20/x2/bn_w"
+  output: "conv4_20/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_20/x2/bn_internal"
+  input: "conv4_20/x2/bn_b"
+  output: "conv4_20/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_20/x2/bn"
+  output: "conv4_20/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_20/x2/bn"
+  input: "conv4_20/x2_w"
+  output: "conv4_20/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_19"
+  input: "conv4_20/x2"
+  output: "concat_4_20"
+  output: "_concat_4_20_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_20"
+  input: "conv4_21/x1/bn_scale"
+  input: "conv4_21/x1/bn_bias"
+  input: "conv4_21/x1/bn_mean"
+  input: "conv4_21/x1/bn_var"
+  output: "conv4_21/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_21/x1/bn"
+  input: "conv4_21/x1/bn_w"
+  output: "conv4_21/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_21/x1/bn_internal"
+  input: "conv4_21/x1/bn_b"
+  output: "conv4_21/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_21/x1/bn"
+  output: "conv4_21/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_21/x1/bn"
+  input: "conv4_21/x1_w"
+  output: "conv4_21/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_21/x1"
+  input: "conv4_21/x2/bn_scale"
+  input: "conv4_21/x2/bn_bias"
+  input: "conv4_21/x2/bn_mean"
+  input: "conv4_21/x2/bn_var"
+  output: "conv4_21/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_21/x2/bn"
+  input: "conv4_21/x2/bn_w"
+  output: "conv4_21/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_21/x2/bn_internal"
+  input: "conv4_21/x2/bn_b"
+  output: "conv4_21/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_21/x2/bn"
+  output: "conv4_21/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_21/x2/bn"
+  input: "conv4_21/x2_w"
+  output: "conv4_21/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_20"
+  input: "conv4_21/x2"
+  output: "concat_4_21"
+  output: "_concat_4_21_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_21"
+  input: "conv4_22/x1/bn_scale"
+  input: "conv4_22/x1/bn_bias"
+  input: "conv4_22/x1/bn_mean"
+  input: "conv4_22/x1/bn_var"
+  output: "conv4_22/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_22/x1/bn"
+  input: "conv4_22/x1/bn_w"
+  output: "conv4_22/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_22/x1/bn_internal"
+  input: "conv4_22/x1/bn_b"
+  output: "conv4_22/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_22/x1/bn"
+  output: "conv4_22/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_22/x1/bn"
+  input: "conv4_22/x1_w"
+  output: "conv4_22/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_22/x1"
+  input: "conv4_22/x2/bn_scale"
+  input: "conv4_22/x2/bn_bias"
+  input: "conv4_22/x2/bn_mean"
+  input: "conv4_22/x2/bn_var"
+  output: "conv4_22/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_22/x2/bn"
+  input: "conv4_22/x2/bn_w"
+  output: "conv4_22/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_22/x2/bn_internal"
+  input: "conv4_22/x2/bn_b"
+  output: "conv4_22/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_22/x2/bn"
+  output: "conv4_22/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_22/x2/bn"
+  input: "conv4_22/x2_w"
+  output: "conv4_22/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_21"
+  input: "conv4_22/x2"
+  output: "concat_4_22"
+  output: "_concat_4_22_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_22"
+  input: "conv4_23/x1/bn_scale"
+  input: "conv4_23/x1/bn_bias"
+  input: "conv4_23/x1/bn_mean"
+  input: "conv4_23/x1/bn_var"
+  output: "conv4_23/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_23/x1/bn"
+  input: "conv4_23/x1/bn_w"
+  output: "conv4_23/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_23/x1/bn_internal"
+  input: "conv4_23/x1/bn_b"
+  output: "conv4_23/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_23/x1/bn"
+  output: "conv4_23/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_23/x1/bn"
+  input: "conv4_23/x1_w"
+  output: "conv4_23/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_23/x1"
+  input: "conv4_23/x2/bn_scale"
+  input: "conv4_23/x2/bn_bias"
+  input: "conv4_23/x2/bn_mean"
+  input: "conv4_23/x2/bn_var"
+  output: "conv4_23/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_23/x2/bn"
+  input: "conv4_23/x2/bn_w"
+  output: "conv4_23/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_23/x2/bn_internal"
+  input: "conv4_23/x2/bn_b"
+  output: "conv4_23/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_23/x2/bn"
+  output: "conv4_23/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_23/x2/bn"
+  input: "conv4_23/x2_w"
+  output: "conv4_23/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_22"
+  input: "conv4_23/x2"
+  output: "concat_4_23"
+  output: "_concat_4_23_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_23"
+  input: "conv4_24/x1/bn_scale"
+  input: "conv4_24/x1/bn_bias"
+  input: "conv4_24/x1/bn_mean"
+  input: "conv4_24/x1/bn_var"
+  output: "conv4_24/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_24/x1/bn"
+  input: "conv4_24/x1/bn_w"
+  output: "conv4_24/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_24/x1/bn_internal"
+  input: "conv4_24/x1/bn_b"
+  output: "conv4_24/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_24/x1/bn"
+  output: "conv4_24/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_24/x1/bn"
+  input: "conv4_24/x1_w"
+  output: "conv4_24/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_24/x1"
+  input: "conv4_24/x2/bn_scale"
+  input: "conv4_24/x2/bn_bias"
+  input: "conv4_24/x2/bn_mean"
+  input: "conv4_24/x2/bn_var"
+  output: "conv4_24/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_24/x2/bn"
+  input: "conv4_24/x2/bn_w"
+  output: "conv4_24/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_24/x2/bn_internal"
+  input: "conv4_24/x2/bn_b"
+  output: "conv4_24/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_24/x2/bn"
+  output: "conv4_24/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_24/x2/bn"
+  input: "conv4_24/x2_w"
+  output: "conv4_24/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_23"
+  input: "conv4_24/x2"
+  output: "concat_4_24"
+  output: "_concat_4_24_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_4_24"
+  input: "conv4_blk/bn_scale"
+  input: "conv4_blk/bn_bias"
+  input: "conv4_blk/bn_mean"
+  input: "conv4_blk/bn_var"
+  output: "conv4_blk/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_blk/bn"
+  input: "conv4_blk/bn_w"
+  output: "conv4_blk/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_blk/bn_internal"
+  input: "conv4_blk/bn_b"
+  output: "conv4_blk/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_blk/bn"
+  output: "conv4_blk/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_blk/bn"
+  input: "conv4_blk_w"
+  output: "conv4_blk"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv4_blk"
+  output: "pool4"
+  type: "AveragePool"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 2
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "pool4"
+  input: "conv5_1/x1/bn_scale"
+  input: "conv5_1/x1/bn_bias"
+  input: "conv5_1/x1/bn_mean"
+  input: "conv5_1/x1/bn_var"
+  output: "conv5_1/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_1/x1/bn"
+  input: "conv5_1/x1/bn_w"
+  output: "conv5_1/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_1/x1/bn_internal"
+  input: "conv5_1/x1/bn_b"
+  output: "conv5_1/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_1/x1/bn"
+  output: "conv5_1/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_1/x1/bn"
+  input: "conv5_1/x1_w"
+  output: "conv5_1/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_1/x1"
+  input: "conv5_1/x2/bn_scale"
+  input: "conv5_1/x2/bn_bias"
+  input: "conv5_1/x2/bn_mean"
+  input: "conv5_1/x2/bn_var"
+  output: "conv5_1/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_1/x2/bn"
+  input: "conv5_1/x2/bn_w"
+  output: "conv5_1/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_1/x2/bn_internal"
+  input: "conv5_1/x2/bn_b"
+  output: "conv5_1/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_1/x2/bn"
+  output: "conv5_1/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_1/x2/bn"
+  input: "conv5_1/x2_w"
+  output: "conv5_1/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "pool4"
+  input: "conv5_1/x2"
+  output: "concat_5_1"
+  output: "_concat_5_1_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_1"
+  input: "conv5_2/x1/bn_scale"
+  input: "conv5_2/x1/bn_bias"
+  input: "conv5_2/x1/bn_mean"
+  input: "conv5_2/x1/bn_var"
+  output: "conv5_2/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_2/x1/bn"
+  input: "conv5_2/x1/bn_w"
+  output: "conv5_2/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_2/x1/bn_internal"
+  input: "conv5_2/x1/bn_b"
+  output: "conv5_2/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_2/x1/bn"
+  output: "conv5_2/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_2/x1/bn"
+  input: "conv5_2/x1_w"
+  output: "conv5_2/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_2/x1"
+  input: "conv5_2/x2/bn_scale"
+  input: "conv5_2/x2/bn_bias"
+  input: "conv5_2/x2/bn_mean"
+  input: "conv5_2/x2/bn_var"
+  output: "conv5_2/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_2/x2/bn"
+  input: "conv5_2/x2/bn_w"
+  output: "conv5_2/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_2/x2/bn_internal"
+  input: "conv5_2/x2/bn_b"
+  output: "conv5_2/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_2/x2/bn"
+  output: "conv5_2/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_2/x2/bn"
+  input: "conv5_2/x2_w"
+  output: "conv5_2/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_1"
+  input: "conv5_2/x2"
+  output: "concat_5_2"
+  output: "_concat_5_2_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_2"
+  input: "conv5_3/x1/bn_scale"
+  input: "conv5_3/x1/bn_bias"
+  input: "conv5_3/x1/bn_mean"
+  input: "conv5_3/x1/bn_var"
+  output: "conv5_3/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_3/x1/bn"
+  input: "conv5_3/x1/bn_w"
+  output: "conv5_3/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_3/x1/bn_internal"
+  input: "conv5_3/x1/bn_b"
+  output: "conv5_3/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_3/x1/bn"
+  output: "conv5_3/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_3/x1/bn"
+  input: "conv5_3/x1_w"
+  output: "conv5_3/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_3/x1"
+  input: "conv5_3/x2/bn_scale"
+  input: "conv5_3/x2/bn_bias"
+  input: "conv5_3/x2/bn_mean"
+  input: "conv5_3/x2/bn_var"
+  output: "conv5_3/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_3/x2/bn"
+  input: "conv5_3/x2/bn_w"
+  output: "conv5_3/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_3/x2/bn_internal"
+  input: "conv5_3/x2/bn_b"
+  output: "conv5_3/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_3/x2/bn"
+  output: "conv5_3/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_3/x2/bn"
+  input: "conv5_3/x2_w"
+  output: "conv5_3/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_2"
+  input: "conv5_3/x2"
+  output: "concat_5_3"
+  output: "_concat_5_3_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_3"
+  input: "conv5_4/x1/bn_scale"
+  input: "conv5_4/x1/bn_bias"
+  input: "conv5_4/x1/bn_mean"
+  input: "conv5_4/x1/bn_var"
+  output: "conv5_4/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_4/x1/bn"
+  input: "conv5_4/x1/bn_w"
+  output: "conv5_4/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_4/x1/bn_internal"
+  input: "conv5_4/x1/bn_b"
+  output: "conv5_4/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_4/x1/bn"
+  output: "conv5_4/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_4/x1/bn"
+  input: "conv5_4/x1_w"
+  output: "conv5_4/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_4/x1"
+  input: "conv5_4/x2/bn_scale"
+  input: "conv5_4/x2/bn_bias"
+  input: "conv5_4/x2/bn_mean"
+  input: "conv5_4/x2/bn_var"
+  output: "conv5_4/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_4/x2/bn"
+  input: "conv5_4/x2/bn_w"
+  output: "conv5_4/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_4/x2/bn_internal"
+  input: "conv5_4/x2/bn_b"
+  output: "conv5_4/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_4/x2/bn"
+  output: "conv5_4/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_4/x2/bn"
+  input: "conv5_4/x2_w"
+  output: "conv5_4/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_3"
+  input: "conv5_4/x2"
+  output: "concat_5_4"
+  output: "_concat_5_4_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_4"
+  input: "conv5_5/x1/bn_scale"
+  input: "conv5_5/x1/bn_bias"
+  input: "conv5_5/x1/bn_mean"
+  input: "conv5_5/x1/bn_var"
+  output: "conv5_5/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_5/x1/bn"
+  input: "conv5_5/x1/bn_w"
+  output: "conv5_5/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_5/x1/bn_internal"
+  input: "conv5_5/x1/bn_b"
+  output: "conv5_5/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_5/x1/bn"
+  output: "conv5_5/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_5/x1/bn"
+  input: "conv5_5/x1_w"
+  output: "conv5_5/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_5/x1"
+  input: "conv5_5/x2/bn_scale"
+  input: "conv5_5/x2/bn_bias"
+  input: "conv5_5/x2/bn_mean"
+  input: "conv5_5/x2/bn_var"
+  output: "conv5_5/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_5/x2/bn"
+  input: "conv5_5/x2/bn_w"
+  output: "conv5_5/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_5/x2/bn_internal"
+  input: "conv5_5/x2/bn_b"
+  output: "conv5_5/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_5/x2/bn"
+  output: "conv5_5/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_5/x2/bn"
+  input: "conv5_5/x2_w"
+  output: "conv5_5/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_4"
+  input: "conv5_5/x2"
+  output: "concat_5_5"
+  output: "_concat_5_5_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_5"
+  input: "conv5_6/x1/bn_scale"
+  input: "conv5_6/x1/bn_bias"
+  input: "conv5_6/x1/bn_mean"
+  input: "conv5_6/x1/bn_var"
+  output: "conv5_6/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_6/x1/bn"
+  input: "conv5_6/x1/bn_w"
+  output: "conv5_6/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_6/x1/bn_internal"
+  input: "conv5_6/x1/bn_b"
+  output: "conv5_6/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_6/x1/bn"
+  output: "conv5_6/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_6/x1/bn"
+  input: "conv5_6/x1_w"
+  output: "conv5_6/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_6/x1"
+  input: "conv5_6/x2/bn_scale"
+  input: "conv5_6/x2/bn_bias"
+  input: "conv5_6/x2/bn_mean"
+  input: "conv5_6/x2/bn_var"
+  output: "conv5_6/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_6/x2/bn"
+  input: "conv5_6/x2/bn_w"
+  output: "conv5_6/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_6/x2/bn_internal"
+  input: "conv5_6/x2/bn_b"
+  output: "conv5_6/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_6/x2/bn"
+  output: "conv5_6/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_6/x2/bn"
+  input: "conv5_6/x2_w"
+  output: "conv5_6/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_5"
+  input: "conv5_6/x2"
+  output: "concat_5_6"
+  output: "_concat_5_6_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_6"
+  input: "conv5_7/x1/bn_scale"
+  input: "conv5_7/x1/bn_bias"
+  input: "conv5_7/x1/bn_mean"
+  input: "conv5_7/x1/bn_var"
+  output: "conv5_7/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_7/x1/bn"
+  input: "conv5_7/x1/bn_w"
+  output: "conv5_7/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_7/x1/bn_internal"
+  input: "conv5_7/x1/bn_b"
+  output: "conv5_7/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_7/x1/bn"
+  output: "conv5_7/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_7/x1/bn"
+  input: "conv5_7/x1_w"
+  output: "conv5_7/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_7/x1"
+  input: "conv5_7/x2/bn_scale"
+  input: "conv5_7/x2/bn_bias"
+  input: "conv5_7/x2/bn_mean"
+  input: "conv5_7/x2/bn_var"
+  output: "conv5_7/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_7/x2/bn"
+  input: "conv5_7/x2/bn_w"
+  output: "conv5_7/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_7/x2/bn_internal"
+  input: "conv5_7/x2/bn_b"
+  output: "conv5_7/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_7/x2/bn"
+  output: "conv5_7/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_7/x2/bn"
+  input: "conv5_7/x2_w"
+  output: "conv5_7/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_6"
+  input: "conv5_7/x2"
+  output: "concat_5_7"
+  output: "_concat_5_7_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_7"
+  input: "conv5_8/x1/bn_scale"
+  input: "conv5_8/x1/bn_bias"
+  input: "conv5_8/x1/bn_mean"
+  input: "conv5_8/x1/bn_var"
+  output: "conv5_8/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_8/x1/bn"
+  input: "conv5_8/x1/bn_w"
+  output: "conv5_8/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_8/x1/bn_internal"
+  input: "conv5_8/x1/bn_b"
+  output: "conv5_8/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_8/x1/bn"
+  output: "conv5_8/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_8/x1/bn"
+  input: "conv5_8/x1_w"
+  output: "conv5_8/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_8/x1"
+  input: "conv5_8/x2/bn_scale"
+  input: "conv5_8/x2/bn_bias"
+  input: "conv5_8/x2/bn_mean"
+  input: "conv5_8/x2/bn_var"
+  output: "conv5_8/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_8/x2/bn"
+  input: "conv5_8/x2/bn_w"
+  output: "conv5_8/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_8/x2/bn_internal"
+  input: "conv5_8/x2/bn_b"
+  output: "conv5_8/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_8/x2/bn"
+  output: "conv5_8/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_8/x2/bn"
+  input: "conv5_8/x2_w"
+  output: "conv5_8/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_7"
+  input: "conv5_8/x2"
+  output: "concat_5_8"
+  output: "_concat_5_8_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_8"
+  input: "conv5_9/x1/bn_scale"
+  input: "conv5_9/x1/bn_bias"
+  input: "conv5_9/x1/bn_mean"
+  input: "conv5_9/x1/bn_var"
+  output: "conv5_9/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_9/x1/bn"
+  input: "conv5_9/x1/bn_w"
+  output: "conv5_9/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_9/x1/bn_internal"
+  input: "conv5_9/x1/bn_b"
+  output: "conv5_9/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_9/x1/bn"
+  output: "conv5_9/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_9/x1/bn"
+  input: "conv5_9/x1_w"
+  output: "conv5_9/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_9/x1"
+  input: "conv5_9/x2/bn_scale"
+  input: "conv5_9/x2/bn_bias"
+  input: "conv5_9/x2/bn_mean"
+  input: "conv5_9/x2/bn_var"
+  output: "conv5_9/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_9/x2/bn"
+  input: "conv5_9/x2/bn_w"
+  output: "conv5_9/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_9/x2/bn_internal"
+  input: "conv5_9/x2/bn_b"
+  output: "conv5_9/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_9/x2/bn"
+  output: "conv5_9/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_9/x2/bn"
+  input: "conv5_9/x2_w"
+  output: "conv5_9/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_8"
+  input: "conv5_9/x2"
+  output: "concat_5_9"
+  output: "_concat_5_9_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_9"
+  input: "conv5_10/x1/bn_scale"
+  input: "conv5_10/x1/bn_bias"
+  input: "conv5_10/x1/bn_mean"
+  input: "conv5_10/x1/bn_var"
+  output: "conv5_10/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_10/x1/bn"
+  input: "conv5_10/x1/bn_w"
+  output: "conv5_10/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_10/x1/bn_internal"
+  input: "conv5_10/x1/bn_b"
+  output: "conv5_10/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_10/x1/bn"
+  output: "conv5_10/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_10/x1/bn"
+  input: "conv5_10/x1_w"
+  output: "conv5_10/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_10/x1"
+  input: "conv5_10/x2/bn_scale"
+  input: "conv5_10/x2/bn_bias"
+  input: "conv5_10/x2/bn_mean"
+  input: "conv5_10/x2/bn_var"
+  output: "conv5_10/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_10/x2/bn"
+  input: "conv5_10/x2/bn_w"
+  output: "conv5_10/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_10/x2/bn_internal"
+  input: "conv5_10/x2/bn_b"
+  output: "conv5_10/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_10/x2/bn"
+  output: "conv5_10/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_10/x2/bn"
+  input: "conv5_10/x2_w"
+  output: "conv5_10/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_9"
+  input: "conv5_10/x2"
+  output: "concat_5_10"
+  output: "_concat_5_10_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_10"
+  input: "conv5_11/x1/bn_scale"
+  input: "conv5_11/x1/bn_bias"
+  input: "conv5_11/x1/bn_mean"
+  input: "conv5_11/x1/bn_var"
+  output: "conv5_11/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_11/x1/bn"
+  input: "conv5_11/x1/bn_w"
+  output: "conv5_11/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_11/x1/bn_internal"
+  input: "conv5_11/x1/bn_b"
+  output: "conv5_11/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_11/x1/bn"
+  output: "conv5_11/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_11/x1/bn"
+  input: "conv5_11/x1_w"
+  output: "conv5_11/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_11/x1"
+  input: "conv5_11/x2/bn_scale"
+  input: "conv5_11/x2/bn_bias"
+  input: "conv5_11/x2/bn_mean"
+  input: "conv5_11/x2/bn_var"
+  output: "conv5_11/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_11/x2/bn"
+  input: "conv5_11/x2/bn_w"
+  output: "conv5_11/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_11/x2/bn_internal"
+  input: "conv5_11/x2/bn_b"
+  output: "conv5_11/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_11/x2/bn"
+  output: "conv5_11/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_11/x2/bn"
+  input: "conv5_11/x2_w"
+  output: "conv5_11/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_10"
+  input: "conv5_11/x2"
+  output: "concat_5_11"
+  output: "_concat_5_11_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_11"
+  input: "conv5_12/x1/bn_scale"
+  input: "conv5_12/x1/bn_bias"
+  input: "conv5_12/x1/bn_mean"
+  input: "conv5_12/x1/bn_var"
+  output: "conv5_12/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_12/x1/bn"
+  input: "conv5_12/x1/bn_w"
+  output: "conv5_12/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_12/x1/bn_internal"
+  input: "conv5_12/x1/bn_b"
+  output: "conv5_12/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_12/x1/bn"
+  output: "conv5_12/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_12/x1/bn"
+  input: "conv5_12/x1_w"
+  output: "conv5_12/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_12/x1"
+  input: "conv5_12/x2/bn_scale"
+  input: "conv5_12/x2/bn_bias"
+  input: "conv5_12/x2/bn_mean"
+  input: "conv5_12/x2/bn_var"
+  output: "conv5_12/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_12/x2/bn"
+  input: "conv5_12/x2/bn_w"
+  output: "conv5_12/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_12/x2/bn_internal"
+  input: "conv5_12/x2/bn_b"
+  output: "conv5_12/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_12/x2/bn"
+  output: "conv5_12/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_12/x2/bn"
+  input: "conv5_12/x2_w"
+  output: "conv5_12/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_11"
+  input: "conv5_12/x2"
+  output: "concat_5_12"
+  output: "_concat_5_12_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_12"
+  input: "conv5_13/x1/bn_scale"
+  input: "conv5_13/x1/bn_bias"
+  input: "conv5_13/x1/bn_mean"
+  input: "conv5_13/x1/bn_var"
+  output: "conv5_13/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_13/x1/bn"
+  input: "conv5_13/x1/bn_w"
+  output: "conv5_13/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_13/x1/bn_internal"
+  input: "conv5_13/x1/bn_b"
+  output: "conv5_13/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_13/x1/bn"
+  output: "conv5_13/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_13/x1/bn"
+  input: "conv5_13/x1_w"
+  output: "conv5_13/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_13/x1"
+  input: "conv5_13/x2/bn_scale"
+  input: "conv5_13/x2/bn_bias"
+  input: "conv5_13/x2/bn_mean"
+  input: "conv5_13/x2/bn_var"
+  output: "conv5_13/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_13/x2/bn"
+  input: "conv5_13/x2/bn_w"
+  output: "conv5_13/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_13/x2/bn_internal"
+  input: "conv5_13/x2/bn_b"
+  output: "conv5_13/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_13/x2/bn"
+  output: "conv5_13/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_13/x2/bn"
+  input: "conv5_13/x2_w"
+  output: "conv5_13/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_12"
+  input: "conv5_13/x2"
+  output: "concat_5_13"
+  output: "_concat_5_13_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_13"
+  input: "conv5_14/x1/bn_scale"
+  input: "conv5_14/x1/bn_bias"
+  input: "conv5_14/x1/bn_mean"
+  input: "conv5_14/x1/bn_var"
+  output: "conv5_14/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_14/x1/bn"
+  input: "conv5_14/x1/bn_w"
+  output: "conv5_14/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_14/x1/bn_internal"
+  input: "conv5_14/x1/bn_b"
+  output: "conv5_14/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_14/x1/bn"
+  output: "conv5_14/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_14/x1/bn"
+  input: "conv5_14/x1_w"
+  output: "conv5_14/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_14/x1"
+  input: "conv5_14/x2/bn_scale"
+  input: "conv5_14/x2/bn_bias"
+  input: "conv5_14/x2/bn_mean"
+  input: "conv5_14/x2/bn_var"
+  output: "conv5_14/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_14/x2/bn"
+  input: "conv5_14/x2/bn_w"
+  output: "conv5_14/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_14/x2/bn_internal"
+  input: "conv5_14/x2/bn_b"
+  output: "conv5_14/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_14/x2/bn"
+  output: "conv5_14/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_14/x2/bn"
+  input: "conv5_14/x2_w"
+  output: "conv5_14/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_13"
+  input: "conv5_14/x2"
+  output: "concat_5_14"
+  output: "_concat_5_14_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_14"
+  input: "conv5_15/x1/bn_scale"
+  input: "conv5_15/x1/bn_bias"
+  input: "conv5_15/x1/bn_mean"
+  input: "conv5_15/x1/bn_var"
+  output: "conv5_15/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_15/x1/bn"
+  input: "conv5_15/x1/bn_w"
+  output: "conv5_15/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_15/x1/bn_internal"
+  input: "conv5_15/x1/bn_b"
+  output: "conv5_15/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_15/x1/bn"
+  output: "conv5_15/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_15/x1/bn"
+  input: "conv5_15/x1_w"
+  output: "conv5_15/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_15/x1"
+  input: "conv5_15/x2/bn_scale"
+  input: "conv5_15/x2/bn_bias"
+  input: "conv5_15/x2/bn_mean"
+  input: "conv5_15/x2/bn_var"
+  output: "conv5_15/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_15/x2/bn"
+  input: "conv5_15/x2/bn_w"
+  output: "conv5_15/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_15/x2/bn_internal"
+  input: "conv5_15/x2/bn_b"
+  output: "conv5_15/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_15/x2/bn"
+  output: "conv5_15/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_15/x2/bn"
+  input: "conv5_15/x2_w"
+  output: "conv5_15/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_14"
+  input: "conv5_15/x2"
+  output: "concat_5_15"
+  output: "_concat_5_15_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_15"
+  input: "conv5_16/x1/bn_scale"
+  input: "conv5_16/x1/bn_bias"
+  input: "conv5_16/x1/bn_mean"
+  input: "conv5_16/x1/bn_var"
+  output: "conv5_16/x1/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_16/x1/bn"
+  input: "conv5_16/x1/bn_w"
+  output: "conv5_16/x1/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_16/x1/bn_internal"
+  input: "conv5_16/x1/bn_b"
+  output: "conv5_16/x1/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_16/x1/bn"
+  output: "conv5_16/x1/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_16/x1/bn"
+  input: "conv5_16/x1_w"
+  output: "conv5_16/x1"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_16/x1"
+  input: "conv5_16/x2/bn_scale"
+  input: "conv5_16/x2/bn_bias"
+  input: "conv5_16/x2/bn_mean"
+  input: "conv5_16/x2/bn_var"
+  output: "conv5_16/x2/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_16/x2/bn"
+  input: "conv5_16/x2/bn_w"
+  output: "conv5_16/x2/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_16/x2/bn_internal"
+  input: "conv5_16/x2/bn_b"
+  output: "conv5_16/x2/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_16/x2/bn"
+  output: "conv5_16/x2/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_16/x2/bn"
+  input: "conv5_16/x2_w"
+  output: "conv5_16/x2"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_15"
+  input: "conv5_16/x2"
+  output: "concat_5_16"
+  output: "_concat_5_16_dims"
+  type: "Concat"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "concat_5_16"
+  input: "conv5_blk/bn_scale"
+  input: "conv5_blk/bn_bias"
+  input: "conv5_blk/bn_mean"
+  input: "conv5_blk/bn_var"
+  output: "conv5_blk/bn"
+  type: "SpatialBN"
+  arg {
+    name: "is_test"
+    i: 1
+  }
+  arg {
+    name: "epsilon"
+    f: 9.99999974738e-06
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_blk/bn"
+  input: "conv5_blk/bn_w"
+  output: "conv5_blk/bn_internal"
+  type: "Mul"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_blk/bn_internal"
+  input: "conv5_blk/bn_b"
+  output: "conv5_blk/bn"
+  type: "Add"
+  arg {
+    name: "axis"
+    i: 1
+  }
+  arg {
+    name: "broadcast"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_blk/bn"
+  output: "conv5_blk/bn"
+  type: "Relu"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv5_blk/bn"
+  output: "pool5"
+  type: "AveragePool"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 0
+  }
+  arg {
+    name: "global_pooling"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "pool5"
+  input: "fc6_w"
+  input: "fc6_b"
+  output: "fc6"
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+external_input: "conv1_w"
+external_input: "conv1/bn_scale"
+external_input: "conv1/bn_bias"
+external_input: "conv1/bn_mean"
+external_input: "conv1/bn_var"
+external_input: "conv1/bn_w"
+external_input: "conv1/bn_b"
+external_input: "conv2_1/x1/bn_scale"
+external_input: "conv2_1/x1/bn_bias"
+external_input: "conv2_1/x1/bn_mean"
+external_input: "conv2_1/x1/bn_var"
+external_input: "conv2_1/x1/bn_w"
+external_input: "conv2_1/x1/bn_b"
+external_input: "conv2_1/x1_w"
+external_input: "conv2_1/x2/bn_scale"
+external_input: "conv2_1/x2/bn_bias"
+external_input: "conv2_1/x2/bn_mean"
+external_input: "conv2_1/x2/bn_var"
+external_input: "conv2_1/x2/bn_w"
+external_input: "conv2_1/x2/bn_b"
+external_input: "conv2_1/x2_w"
+external_input: "conv2_2/x1/bn_scale"
+external_input: "conv2_2/x1/bn_bias"
+external_input: "conv2_2/x1/bn_mean"
+external_input: "conv2_2/x1/bn_var"
+external_input: "conv2_2/x1/bn_w"
+external_input: "conv2_2/x1/bn_b"
+external_input: "conv2_2/x1_w"
+external_input: "conv2_2/x2/bn_scale"
+external_input: "conv2_2/x2/bn_bias"
+external_input: "conv2_2/x2/bn_mean"
+external_input: "conv2_2/x2/bn_var"
+external_input: "conv2_2/x2/bn_w"
+external_input: "conv2_2/x2/bn_b"
+external_input: "conv2_2/x2_w"
+external_input: "conv2_3/x1/bn_scale"
+external_input: "conv2_3/x1/bn_bias"
+external_input: "conv2_3/x1/bn_mean"
+external_input: "conv2_3/x1/bn_var"
+external_input: "conv2_3/x1/bn_w"
+external_input: "conv2_3/x1/bn_b"
+external_input: "conv2_3/x1_w"
+external_input: "conv2_3/x2/bn_scale"
+external_input: "conv2_3/x2/bn_bias"
+external_input: "conv2_3/x2/bn_mean"
+external_input: "conv2_3/x2/bn_var"
+external_input: "conv2_3/x2/bn_w"
+external_input: "conv2_3/x2/bn_b"
+external_input: "conv2_3/x2_w"
+external_input: "conv2_4/x1/bn_scale"
+external_input: "conv2_4/x1/bn_bias"
+external_input: "conv2_4/x1/bn_mean"
+external_input: "conv2_4/x1/bn_var"
+external_input: "conv2_4/x1/bn_w"
+external_input: "conv2_4/x1/bn_b"
+external_input: "conv2_4/x1_w"
+external_input: "conv2_4/x2/bn_scale"
+external_input: "conv2_4/x2/bn_bias"
+external_input: "conv2_4/x2/bn_mean"
+external_input: "conv2_4/x2/bn_var"
+external_input: "conv2_4/x2/bn_w"
+external_input: "conv2_4/x2/bn_b"
+external_input: "conv2_4/x2_w"
+external_input: "conv2_5/x1/bn_scale"
+external_input: "conv2_5/x1/bn_bias"
+external_input: "conv2_5/x1/bn_mean"
+external_input: "conv2_5/x1/bn_var"
+external_input: "conv2_5/x1/bn_w"
+external_input: "conv2_5/x1/bn_b"
+external_input: "conv2_5/x1_w"
+external_input: "conv2_5/x2/bn_scale"
+external_input: "conv2_5/x2/bn_bias"
+external_input: "conv2_5/x2/bn_mean"
+external_input: "conv2_5/x2/bn_var"
+external_input: "conv2_5/x2/bn_w"
+external_input: "conv2_5/x2/bn_b"
+external_input: "conv2_5/x2_w"
+external_input: "conv2_6/x1/bn_scale"
+external_input: "conv2_6/x1/bn_bias"
+external_input: "conv2_6/x1/bn_mean"
+external_input: "conv2_6/x1/bn_var"
+external_input: "conv2_6/x1/bn_w"
+external_input: "conv2_6/x1/bn_b"
+external_input: "conv2_6/x1_w"
+external_input: "conv2_6/x2/bn_scale"
+external_input: "conv2_6/x2/bn_bias"
+external_input: "conv2_6/x2/bn_mean"
+external_input: "conv2_6/x2/bn_var"
+external_input: "conv2_6/x2/bn_w"
+external_input: "conv2_6/x2/bn_b"
+external_input: "conv2_6/x2_w"
+external_input: "conv2_blk/bn_scale"
+external_input: "conv2_blk/bn_bias"
+external_input: "conv2_blk/bn_mean"
+external_input: "conv2_blk/bn_var"
+external_input: "conv2_blk/bn_w"
+external_input: "conv2_blk/bn_b"
+external_input: "conv2_blk_w"
+external_input: "conv3_1/x1/bn_scale"
+external_input: "conv3_1/x1/bn_bias"
+external_input: "conv3_1/x1/bn_mean"
+external_input: "conv3_1/x1/bn_var"
+external_input: "conv3_1/x1/bn_w"
+external_input: "conv3_1/x1/bn_b"
+external_input: "conv3_1/x1_w"
+external_input: "conv3_1/x2/bn_scale"
+external_input: "conv3_1/x2/bn_bias"
+external_input: "conv3_1/x2/bn_mean"
+external_input: "conv3_1/x2/bn_var"
+external_input: "conv3_1/x2/bn_w"
+external_input: "conv3_1/x2/bn_b"
+external_input: "conv3_1/x2_w"
+external_input: "conv3_2/x1/bn_scale"
+external_input: "conv3_2/x1/bn_bias"
+external_input: "conv3_2/x1/bn_mean"
+external_input: "conv3_2/x1/bn_var"
+external_input: "conv3_2/x1/bn_w"
+external_input: "conv3_2/x1/bn_b"
+external_input: "conv3_2/x1_w"
+external_input: "conv3_2/x2/bn_scale"
+external_input: "conv3_2/x2/bn_bias"
+external_input: "conv3_2/x2/bn_mean"
+external_input: "conv3_2/x2/bn_var"
+external_input: "conv3_2/x2/bn_w"
+external_input: "conv3_2/x2/bn_b"
+external_input: "conv3_2/x2_w"
+external_input: "conv3_3/x1/bn_scale"
+external_input: "conv3_3/x1/bn_bias"
+external_input: "conv3_3/x1/bn_mean"
+external_input: "conv3_3/x1/bn_var"
+external_input: "conv3_3/x1/bn_w"
+external_input: "conv3_3/x1/bn_b"
+external_input: "conv3_3/x1_w"
+external_input: "conv3_3/x2/bn_scale"
+external_input: "conv3_3/x2/bn_bias"
+external_input: "conv3_3/x2/bn_mean"
+external_input: "conv3_3/x2/bn_var"
+external_input: "conv3_3/x2/bn_w"
+external_input: "conv3_3/x2/bn_b"
+external_input: "conv3_3/x2_w"
+external_input: "conv3_4/x1/bn_scale"
+external_input: "conv3_4/x1/bn_bias"
+external_input: "conv3_4/x1/bn_mean"
+external_input: "conv3_4/x1/bn_var"
+external_input: "conv3_4/x1/bn_w"
+external_input: "conv3_4/x1/bn_b"
+external_input: "conv3_4/x1_w"
+external_input: "conv3_4/x2/bn_scale"
+external_input: "conv3_4/x2/bn_bias"
+external_input: "conv3_4/x2/bn_mean"
+external_input: "conv3_4/x2/bn_var"
+external_input: "conv3_4/x2/bn_w"
+external_input: "conv3_4/x2/bn_b"
+external_input: "conv3_4/x2_w"
+external_input: "conv3_5/x1/bn_scale"
+external_input: "conv3_5/x1/bn_bias"
+external_input: "conv3_5/x1/bn_mean"
+external_input: "conv3_5/x1/bn_var"
+external_input: "conv3_5/x1/bn_w"
+external_input: "conv3_5/x1/bn_b"
+external_input: "conv3_5/x1_w"
+external_input: "conv3_5/x2/bn_scale"
+external_input: "conv3_5/x2/bn_bias"
+external_input: "conv3_5/x2/bn_mean"
+external_input: "conv3_5/x2/bn_var"
+external_input: "conv3_5/x2/bn_w"
+external_input: "conv3_5/x2/bn_b"
+external_input: "conv3_5/x2_w"
+external_input: "conv3_6/x1/bn_scale"
+external_input: "conv3_6/x1/bn_bias"
+external_input: "conv3_6/x1/bn_mean"
+external_input: "conv3_6/x1/bn_var"
+external_input: "conv3_6/x1/bn_w"
+external_input: "conv3_6/x1/bn_b"
+external_input: "conv3_6/x1_w"
+external_input: "conv3_6/x2/bn_scale"
+external_input: "conv3_6/x2/bn_bias"
+external_input: "conv3_6/x2/bn_mean"
+external_input: "conv3_6/x2/bn_var"
+external_input: "conv3_6/x2/bn_w"
+external_input: "conv3_6/x2/bn_b"
+external_input: "conv3_6/x2_w"
+external_input: "conv3_7/x1/bn_scale"
+external_input: "conv3_7/x1/bn_bias"
+external_input: "conv3_7/x1/bn_mean"
+external_input: "conv3_7/x1/bn_var"
+external_input: "conv3_7/x1/bn_w"
+external_input: "conv3_7/x1/bn_b"
+external_input: "conv3_7/x1_w"
+external_input: "conv3_7/x2/bn_scale"
+external_input: "conv3_7/x2/bn_bias"
+external_input: "conv3_7/x2/bn_mean"
+external_input: "conv3_7/x2/bn_var"
+external_input: "conv3_7/x2/bn_w"
+external_input: "conv3_7/x2/bn_b"
+external_input: "conv3_7/x2_w"
+external_input: "conv3_8/x1/bn_scale"
+external_input: "conv3_8/x1/bn_bias"
+external_input: "conv3_8/x1/bn_mean"
+external_input: "conv3_8/x1/bn_var"
+external_input: "conv3_8/x1/bn_w"
+external_input: "conv3_8/x1/bn_b"
+external_input: "conv3_8/x1_w"
+external_input: "conv3_8/x2/bn_scale"
+external_input: "conv3_8/x2/bn_bias"
+external_input: "conv3_8/x2/bn_mean"
+external_input: "conv3_8/x2/bn_var"
+external_input: "conv3_8/x2/bn_w"
+external_input: "conv3_8/x2/bn_b"
+external_input: "conv3_8/x2_w"
+external_input: "conv3_9/x1/bn_scale"
+external_input: "conv3_9/x1/bn_bias"
+external_input: "conv3_9/x1/bn_mean"
+external_input: "conv3_9/x1/bn_var"
+external_input: "conv3_9/x1/bn_w"
+external_input: "conv3_9/x1/bn_b"
+external_input: "conv3_9/x1_w"
+external_input: "conv3_9/x2/bn_scale"
+external_input: "conv3_9/x2/bn_bias"
+external_input: "conv3_9/x2/bn_mean"
+external_input: "conv3_9/x2/bn_var"
+external_input: "conv3_9/x2/bn_w"
+external_input: "conv3_9/x2/bn_b"
+external_input: "conv3_9/x2_w"
+external_input: "conv3_10/x1/bn_scale"
+external_input: "conv3_10/x1/bn_bias"
+external_input: "conv3_10/x1/bn_mean"
+external_input: "conv3_10/x1/bn_var"
+external_input: "conv3_10/x1/bn_w"
+external_input: "conv3_10/x1/bn_b"
+external_input: "conv3_10/x1_w"
+external_input: "conv3_10/x2/bn_scale"
+external_input: "conv3_10/x2/bn_bias"
+external_input: "conv3_10/x2/bn_mean"
+external_input: "conv3_10/x2/bn_var"
+external_input: "conv3_10/x2/bn_w"
+external_input: "conv3_10/x2/bn_b"
+external_input: "conv3_10/x2_w"
+external_input: "conv3_11/x1/bn_scale"
+external_input: "conv3_11/x1/bn_bias"
+external_input: "conv3_11/x1/bn_mean"
+external_input: "conv3_11/x1/bn_var"
+external_input: "conv3_11/x1/bn_w"
+external_input: "conv3_11/x1/bn_b"
+external_input: "conv3_11/x1_w"
+external_input: "conv3_11/x2/bn_scale"
+external_input: "conv3_11/x2/bn_bias"
+external_input: "conv3_11/x2/bn_mean"
+external_input: "conv3_11/x2/bn_var"
+external_input: "conv3_11/x2/bn_w"
+external_input: "conv3_11/x2/bn_b"
+external_input: "conv3_11/x2_w"
+external_input: "conv3_12/x1/bn_scale"
+external_input: "conv3_12/x1/bn_bias"
+external_input: "conv3_12/x1/bn_mean"
+external_input: "conv3_12/x1/bn_var"
+external_input: "conv3_12/x1/bn_w"
+external_input: "conv3_12/x1/bn_b"
+external_input: "conv3_12/x1_w"
+external_input: "conv3_12/x2/bn_scale"
+external_input: "conv3_12/x2/bn_bias"
+external_input: "conv3_12/x2/bn_mean"
+external_input: "conv3_12/x2/bn_var"
+external_input: "conv3_12/x2/bn_w"
+external_input: "conv3_12/x2/bn_b"
+external_input: "conv3_12/x2_w"
+external_input: "conv3_blk/bn_scale"
+external_input: "conv3_blk/bn_bias"
+external_input: "conv3_blk/bn_mean"
+external_input: "conv3_blk/bn_var"
+external_input: "conv3_blk/bn_w"
+external_input: "conv3_blk/bn_b"
+external_input: "conv3_blk_w"
+external_input: "conv4_1/x1/bn_scale"
+external_input: "conv4_1/x1/bn_bias"
+external_input: "conv4_1/x1/bn_mean"
+external_input: "conv4_1/x1/bn_var"
+external_input: "conv4_1/x1/bn_w"
+external_input: "conv4_1/x1/bn_b"
+external_input: "conv4_1/x1_w"
+external_input: "conv4_1/x2/bn_scale"
+external_input: "conv4_1/x2/bn_bias"
+external_input: "conv4_1/x2/bn_mean"
+external_input: "conv4_1/x2/bn_var"
+external_input: "conv4_1/x2/bn_w"
+external_input: "conv4_1/x2/bn_b"
+external_input: "conv4_1/x2_w"
+external_input: "conv4_2/x1/bn_scale"
+external_input: "conv4_2/x1/bn_bias"
+external_input: "conv4_2/x1/bn_mean"
+external_input: "conv4_2/x1/bn_var"
+external_input: "conv4_2/x1/bn_w"
+external_input: "conv4_2/x1/bn_b"
+external_input: "conv4_2/x1_w"
+external_input: "conv4_2/x2/bn_scale"
+external_input: "conv4_2/x2/bn_bias"
+external_input: "conv4_2/x2/bn_mean"
+external_input: "conv4_2/x2/bn_var"
+external_input: "conv4_2/x2/bn_w"
+external_input: "conv4_2/x2/bn_b"
+external_input: "conv4_2/x2_w"
+external_input: "conv4_3/x1/bn_scale"
+external_input: "conv4_3/x1/bn_bias"
+external_input: "conv4_3/x1/bn_mean"
+external_input: "conv4_3/x1/bn_var"
+external_input: "conv4_3/x1/bn_w"
+external_input: "conv4_3/x1/bn_b"
+external_input: "conv4_3/x1_w"
+external_input: "conv4_3/x2/bn_scale"
+external_input: "conv4_3/x2/bn_bias"
+external_input: "conv4_3/x2/bn_mean"
+external_input: "conv4_3/x2/bn_var"
+external_input: "conv4_3/x2/bn_w"
+external_input: "conv4_3/x2/bn_b"
+external_input: "conv4_3/x2_w"
+external_input: "conv4_4/x1/bn_scale"
+external_input: "conv4_4/x1/bn_bias"
+external_input: "conv4_4/x1/bn_mean"
+external_input: "conv4_4/x1/bn_var"
+external_input: "conv4_4/x1/bn_w"
+external_input: "conv4_4/x1/bn_b"
+external_input: "conv4_4/x1_w"
+external_input: "conv4_4/x2/bn_scale"
+external_input: "conv4_4/x2/bn_bias"
+external_input: "conv4_4/x2/bn_mean"
+external_input: "conv4_4/x2/bn_var"
+external_input: "conv4_4/x2/bn_w"
+external_input: "conv4_4/x2/bn_b"
+external_input: "conv4_4/x2_w"
+external_input: "conv4_5/x1/bn_scale"
+external_input: "conv4_5/x1/bn_bias"
+external_input: "conv4_5/x1/bn_mean"
+external_input: "conv4_5/x1/bn_var"
+external_input: "conv4_5/x1/bn_w"
+external_input: "conv4_5/x1/bn_b"
+external_input: "conv4_5/x1_w"
+external_input: "conv4_5/x2/bn_scale"
+external_input: "conv4_5/x2/bn_bias"
+external_input: "conv4_5/x2/bn_mean"
+external_input: "conv4_5/x2/bn_var"
+external_input: "conv4_5/x2/bn_w"
+external_input: "conv4_5/x2/bn_b"
+external_input: "conv4_5/x2_w"
+external_input: "conv4_6/x1/bn_scale"
+external_input: "conv4_6/x1/bn_bias"
+external_input: "conv4_6/x1/bn_mean"
+external_input: "conv4_6/x1/bn_var"
+external_input: "conv4_6/x1/bn_w"
+external_input: "conv4_6/x1/bn_b"
+external_input: "conv4_6/x1_w"
+external_input: "conv4_6/x2/bn_scale"
+external_input: "conv4_6/x2/bn_bias"
+external_input: "conv4_6/x2/bn_mean"
+external_input: "conv4_6/x2/bn_var"
+external_input: "conv4_6/x2/bn_w"
+external_input: "conv4_6/x2/bn_b"
+external_input: "conv4_6/x2_w"
+external_input: "conv4_7/x1/bn_scale"
+external_input: "conv4_7/x1/bn_bias"
+external_input: "conv4_7/x1/bn_mean"
+external_input: "conv4_7/x1/bn_var"
+external_input: "conv4_7/x1/bn_w"
+external_input: "conv4_7/x1/bn_b"
+external_input: "conv4_7/x1_w"
+external_input: "conv4_7/x2/bn_scale"
+external_input: "conv4_7/x2/bn_bias"
+external_input: "conv4_7/x2/bn_mean"
+external_input: "conv4_7/x2/bn_var"
+external_input: "conv4_7/x2/bn_w"
+external_input: "conv4_7/x2/bn_b"
+external_input: "conv4_7/x2_w"
+external_input: "conv4_8/x1/bn_scale"
+external_input: "conv4_8/x1/bn_bias"
+external_input: "conv4_8/x1/bn_mean"
+external_input: "conv4_8/x1/bn_var"
+external_input: "conv4_8/x1/bn_w"
+external_input: "conv4_8/x1/bn_b"
+external_input: "conv4_8/x1_w"
+external_input: "conv4_8/x2/bn_scale"
+external_input: "conv4_8/x2/bn_bias"
+external_input: "conv4_8/x2/bn_mean"
+external_input: "conv4_8/x2/bn_var"
+external_input: "conv4_8/x2/bn_w"
+external_input: "conv4_8/x2/bn_b"
+external_input: "conv4_8/x2_w"
+external_input: "conv4_9/x1/bn_scale"
+external_input: "conv4_9/x1/bn_bias"
+external_input: "conv4_9/x1/bn_mean"
+external_input: "conv4_9/x1/bn_var"
+external_input: "conv4_9/x1/bn_w"
+external_input: "conv4_9/x1/bn_b"
+external_input: "conv4_9/x1_w"
+external_input: "conv4_9/x2/bn_scale"
+external_input: "conv4_9/x2/bn_bias"
+external_input: "conv4_9/x2/bn_mean"
+external_input: "conv4_9/x2/bn_var"
+external_input: "conv4_9/x2/bn_w"
+external_input: "conv4_9/x2/bn_b"
+external_input: "conv4_9/x2_w"
+external_input: "conv4_10/x1/bn_scale"
+external_input: "conv4_10/x1/bn_bias"
+external_input: "conv4_10/x1/bn_mean"
+external_input: "conv4_10/x1/bn_var"
+external_input: "conv4_10/x1/bn_w"
+external_input: "conv4_10/x1/bn_b"
+external_input: "conv4_10/x1_w"
+external_input: "conv4_10/x2/bn_scale"
+external_input: "conv4_10/x2/bn_bias"
+external_input: "conv4_10/x2/bn_mean"
+external_input: "conv4_10/x2/bn_var"
+external_input: "conv4_10/x2/bn_w"
+external_input: "conv4_10/x2/bn_b"
+external_input: "conv4_10/x2_w"
+external_input: "conv4_11/x1/bn_scale"
+external_input: "conv4_11/x1/bn_bias"
+external_input: "conv4_11/x1/bn_mean"
+external_input: "conv4_11/x1/bn_var"
+external_input: "conv4_11/x1/bn_w"
+external_input: "conv4_11/x1/bn_b"
+external_input: "conv4_11/x1_w"
+external_input: "conv4_11/x2/bn_scale"
+external_input: "conv4_11/x2/bn_bias"
+external_input: "conv4_11/x2/bn_mean"
+external_input: "conv4_11/x2/bn_var"
+external_input: "conv4_11/x2/bn_w"
+external_input: "conv4_11/x2/bn_b"
+external_input: "conv4_11/x2_w"
+external_input: "conv4_12/x1/bn_scale"
+external_input: "conv4_12/x1/bn_bias"
+external_input: "conv4_12/x1/bn_mean"
+external_input: "conv4_12/x1/bn_var"
+external_input: "conv4_12/x1/bn_w"
+external_input: "conv4_12/x1/bn_b"
+external_input: "conv4_12/x1_w"
+external_input: "conv4_12/x2/bn_scale"
+external_input: "conv4_12/x2/bn_bias"
+external_input: "conv4_12/x2/bn_mean"
+external_input: "conv4_12/x2/bn_var"
+external_input: "conv4_12/x2/bn_w"
+external_input: "conv4_12/x2/bn_b"
+external_input: "conv4_12/x2_w"
+external_input: "conv4_13/x1/bn_scale"
+external_input: "conv4_13/x1/bn_bias"
+external_input: "conv4_13/x1/bn_mean"
+external_input: "conv4_13/x1/bn_var"
+external_input: "conv4_13/x1/bn_w"
+external_input: "conv4_13/x1/bn_b"
+external_input: "conv4_13/x1_w"
+external_input: "conv4_13/x2/bn_scale"
+external_input: "conv4_13/x2/bn_bias"
+external_input: "conv4_13/x2/bn_mean"
+external_input: "conv4_13/x2/bn_var"
+external_input: "conv4_13/x2/bn_w"
+external_input: "conv4_13/x2/bn_b"
+external_input: "conv4_13/x2_w"
+external_input: "conv4_14/x1/bn_scale"
+external_input: "conv4_14/x1/bn_bias"
+external_input: "conv4_14/x1/bn_mean"
+external_input: "conv4_14/x1/bn_var"
+external_input: "conv4_14/x1/bn_w"
+external_input: "conv4_14/x1/bn_b"
+external_input: "conv4_14/x1_w"
+external_input: "conv4_14/x2/bn_scale"
+external_input: "conv4_14/x2/bn_bias"
+external_input: "conv4_14/x2/bn_mean"
+external_input: "conv4_14/x2/bn_var"
+external_input: "conv4_14/x2/bn_w"
+external_input: "conv4_14/x2/bn_b"
+external_input: "conv4_14/x2_w"
+external_input: "conv4_15/x1/bn_scale"
+external_input: "conv4_15/x1/bn_bias"
+external_input: "conv4_15/x1/bn_mean"
+external_input: "conv4_15/x1/bn_var"
+external_input: "conv4_15/x1/bn_w"
+external_input: "conv4_15/x1/bn_b"
+external_input: "conv4_15/x1_w"
+external_input: "conv4_15/x2/bn_scale"
+external_input: "conv4_15/x2/bn_bias"
+external_input: "conv4_15/x2/bn_mean"
+external_input: "conv4_15/x2/bn_var"
+external_input: "conv4_15/x2/bn_w"
+external_input: "conv4_15/x2/bn_b"
+external_input: "conv4_15/x2_w"
+external_input: "conv4_16/x1/bn_scale"
+external_input: "conv4_16/x1/bn_bias"
+external_input: "conv4_16/x1/bn_mean"
+external_input: "conv4_16/x1/bn_var"
+external_input: "conv4_16/x1/bn_w"
+external_input: "conv4_16/x1/bn_b"
+external_input: "conv4_16/x1_w"
+external_input: "conv4_16/x2/bn_scale"
+external_input: "conv4_16/x2/bn_bias"
+external_input: "conv4_16/x2/bn_mean"
+external_input: "conv4_16/x2/bn_var"
+external_input: "conv4_16/x2/bn_w"
+external_input: "conv4_16/x2/bn_b"
+external_input: "conv4_16/x2_w"
+external_input: "conv4_17/x1/bn_scale"
+external_input: "conv4_17/x1/bn_bias"
+external_input: "conv4_17/x1/bn_mean"
+external_input: "conv4_17/x1/bn_var"
+external_input: "conv4_17/x1/bn_w"
+external_input: "conv4_17/x1/bn_b"
+external_input: "conv4_17/x1_w"
+external_input: "conv4_17/x2/bn_scale"
+external_input: "conv4_17/x2/bn_bias"
+external_input: "conv4_17/x2/bn_mean"
+external_input: "conv4_17/x2/bn_var"
+external_input: "conv4_17/x2/bn_w"
+external_input: "conv4_17/x2/bn_b"
+external_input: "conv4_17/x2_w"
+external_input: "conv4_18/x1/bn_scale"
+external_input: "conv4_18/x1/bn_bias"
+external_input: "conv4_18/x1/bn_mean"
+external_input: "conv4_18/x1/bn_var"
+external_input: "conv4_18/x1/bn_w"
+external_input: "conv4_18/x1/bn_b"
+external_input: "conv4_18/x1_w"
+external_input: "conv4_18/x2/bn_scale"
+external_input: "conv4_18/x2/bn_bias"
+external_input: "conv4_18/x2/bn_mean"
+external_input: "conv4_18/x2/bn_var"
+external_input: "conv4_18/x2/bn_w"
+external_input: "conv4_18/x2/bn_b"
+external_input: "conv4_18/x2_w"
+external_input: "conv4_19/x1/bn_scale"
+external_input: "conv4_19/x1/bn_bias"
+external_input: "conv4_19/x1/bn_mean"
+external_input: "conv4_19/x1/bn_var"
+external_input: "conv4_19/x1/bn_w"
+external_input: "conv4_19/x1/bn_b"
+external_input: "conv4_19/x1_w"
+external_input: "conv4_19/x2/bn_scale"
+external_input: "conv4_19/x2/bn_bias"
+external_input: "conv4_19/x2/bn_mean"
+external_input: "conv4_19/x2/bn_var"
+external_input: "conv4_19/x2/bn_w"
+external_input: "conv4_19/x2/bn_b"
+external_input: "conv4_19/x2_w"
+external_input: "conv4_20/x1/bn_scale"
+external_input: "conv4_20/x1/bn_bias"
+external_input: "conv4_20/x1/bn_mean"
+external_input: "conv4_20/x1/bn_var"
+external_input: "conv4_20/x1/bn_w"
+external_input: "conv4_20/x1/bn_b"
+external_input: "conv4_20/x1_w"
+external_input: "conv4_20/x2/bn_scale"
+external_input: "conv4_20/x2/bn_bias"
+external_input: "conv4_20/x2/bn_mean"
+external_input: "conv4_20/x2/bn_var"
+external_input: "conv4_20/x2/bn_w"
+external_input: "conv4_20/x2/bn_b"
+external_input: "conv4_20/x2_w"
+external_input: "conv4_21/x1/bn_scale"
+external_input: "conv4_21/x1/bn_bias"
+external_input: "conv4_21/x1/bn_mean"
+external_input: "conv4_21/x1/bn_var"
+external_input: "conv4_21/x1/bn_w"
+external_input: "conv4_21/x1/bn_b"
+external_input: "conv4_21/x1_w"
+external_input: "conv4_21/x2/bn_scale"
+external_input: "conv4_21/x2/bn_bias"
+external_input: "conv4_21/x2/bn_mean"
+external_input: "conv4_21/x2/bn_var"
+external_input: "conv4_21/x2/bn_w"
+external_input: "conv4_21/x2/bn_b"
+external_input: "conv4_21/x2_w"
+external_input: "conv4_22/x1/bn_scale"
+external_input: "conv4_22/x1/bn_bias"
+external_input: "conv4_22/x1/bn_mean"
+external_input: "conv4_22/x1/bn_var"
+external_input: "conv4_22/x1/bn_w"
+external_input: "conv4_22/x1/bn_b"
+external_input: "conv4_22/x1_w"
+external_input: "conv4_22/x2/bn_scale"
+external_input: "conv4_22/x2/bn_bias"
+external_input: "conv4_22/x2/bn_mean"
+external_input: "conv4_22/x2/bn_var"
+external_input: "conv4_22/x2/bn_w"
+external_input: "conv4_22/x2/bn_b"
+external_input: "conv4_22/x2_w"
+external_input: "conv4_23/x1/bn_scale"
+external_input: "conv4_23/x1/bn_bias"
+external_input: "conv4_23/x1/bn_mean"
+external_input: "conv4_23/x1/bn_var"
+external_input: "conv4_23/x1/bn_w"
+external_input: "conv4_23/x1/bn_b"
+external_input: "conv4_23/x1_w"
+external_input: "conv4_23/x2/bn_scale"
+external_input: "conv4_23/x2/bn_bias"
+external_input: "conv4_23/x2/bn_mean"
+external_input: "conv4_23/x2/bn_var"
+external_input: "conv4_23/x2/bn_w"
+external_input: "conv4_23/x2/bn_b"
+external_input: "conv4_23/x2_w"
+external_input: "conv4_24/x1/bn_scale"
+external_input: "conv4_24/x1/bn_bias"
+external_input: "conv4_24/x1/bn_mean"
+external_input: "conv4_24/x1/bn_var"
+external_input: "conv4_24/x1/bn_w"
+external_input: "conv4_24/x1/bn_b"
+external_input: "conv4_24/x1_w"
+external_input: "conv4_24/x2/bn_scale"
+external_input: "conv4_24/x2/bn_bias"
+external_input: "conv4_24/x2/bn_mean"
+external_input: "conv4_24/x2/bn_var"
+external_input: "conv4_24/x2/bn_w"
+external_input: "conv4_24/x2/bn_b"
+external_input: "conv4_24/x2_w"
+external_input: "conv4_blk/bn_scale"
+external_input: "conv4_blk/bn_bias"
+external_input: "conv4_blk/bn_mean"
+external_input: "conv4_blk/bn_var"
+external_input: "conv4_blk/bn_w"
+external_input: "conv4_blk/bn_b"
+external_input: "conv4_blk_w"
+external_input: "conv5_1/x1/bn_scale"
+external_input: "conv5_1/x1/bn_bias"
+external_input: "conv5_1/x1/bn_mean"
+external_input: "conv5_1/x1/bn_var"
+external_input: "conv5_1/x1/bn_w"
+external_input: "conv5_1/x1/bn_b"
+external_input: "conv5_1/x1_w"
+external_input: "conv5_1/x2/bn_scale"
+external_input: "conv5_1/x2/bn_bias"
+external_input: "conv5_1/x2/bn_mean"
+external_input: "conv5_1/x2/bn_var"
+external_input: "conv5_1/x2/bn_w"
+external_input: "conv5_1/x2/bn_b"
+external_input: "conv5_1/x2_w"
+external_input: "conv5_2/x1/bn_scale"
+external_input: "conv5_2/x1/bn_bias"
+external_input: "conv5_2/x1/bn_mean"
+external_input: "conv5_2/x1/bn_var"
+external_input: "conv5_2/x1/bn_w"
+external_input: "conv5_2/x1/bn_b"
+external_input: "conv5_2/x1_w"
+external_input: "conv5_2/x2/bn_scale"
+external_input: "conv5_2/x2/bn_bias"
+external_input: "conv5_2/x2/bn_mean"
+external_input: "conv5_2/x2/bn_var"
+external_input: "conv5_2/x2/bn_w"
+external_input: "conv5_2/x2/bn_b"
+external_input: "conv5_2/x2_w"
+external_input: "conv5_3/x1/bn_scale"
+external_input: "conv5_3/x1/bn_bias"
+external_input: "conv5_3/x1/bn_mean"
+external_input: "conv5_3/x1/bn_var"
+external_input: "conv5_3/x1/bn_w"
+external_input: "conv5_3/x1/bn_b"
+external_input: "conv5_3/x1_w"
+external_input: "conv5_3/x2/bn_scale"
+external_input: "conv5_3/x2/bn_bias"
+external_input: "conv5_3/x2/bn_mean"
+external_input: "conv5_3/x2/bn_var"
+external_input: "conv5_3/x2/bn_w"
+external_input: "conv5_3/x2/bn_b"
+external_input: "conv5_3/x2_w"
+external_input: "conv5_4/x1/bn_scale"
+external_input: "conv5_4/x1/bn_bias"
+external_input: "conv5_4/x1/bn_mean"
+external_input: "conv5_4/x1/bn_var"
+external_input: "conv5_4/x1/bn_w"
+external_input: "conv5_4/x1/bn_b"
+external_input: "conv5_4/x1_w"
+external_input: "conv5_4/x2/bn_scale"
+external_input: "conv5_4/x2/bn_bias"
+external_input: "conv5_4/x2/bn_mean"
+external_input: "conv5_4/x2/bn_var"
+external_input: "conv5_4/x2/bn_w"
+external_input: "conv5_4/x2/bn_b"
+external_input: "conv5_4/x2_w"
+external_input: "conv5_5/x1/bn_scale"
+external_input: "conv5_5/x1/bn_bias"
+external_input: "conv5_5/x1/bn_mean"
+external_input: "conv5_5/x1/bn_var"
+external_input: "conv5_5/x1/bn_w"
+external_input: "conv5_5/x1/bn_b"
+external_input: "conv5_5/x1_w"
+external_input: "conv5_5/x2/bn_scale"
+external_input: "conv5_5/x2/bn_bias"
+external_input: "conv5_5/x2/bn_mean"
+external_input: "conv5_5/x2/bn_var"
+external_input: "conv5_5/x2/bn_w"
+external_input: "conv5_5/x2/bn_b"
+external_input: "conv5_5/x2_w"
+external_input: "conv5_6/x1/bn_scale"
+external_input: "conv5_6/x1/bn_bias"
+external_input: "conv5_6/x1/bn_mean"
+external_input: "conv5_6/x1/bn_var"
+external_input: "conv5_6/x1/bn_w"
+external_input: "conv5_6/x1/bn_b"
+external_input: "conv5_6/x1_w"
+external_input: "conv5_6/x2/bn_scale"
+external_input: "conv5_6/x2/bn_bias"
+external_input: "conv5_6/x2/bn_mean"
+external_input: "conv5_6/x2/bn_var"
+external_input: "conv5_6/x2/bn_w"
+external_input: "conv5_6/x2/bn_b"
+external_input: "conv5_6/x2_w"
+external_input: "conv5_7/x1/bn_scale"
+external_input: "conv5_7/x1/bn_bias"
+external_input: "conv5_7/x1/bn_mean"
+external_input: "conv5_7/x1/bn_var"
+external_input: "conv5_7/x1/bn_w"
+external_input: "conv5_7/x1/bn_b"
+external_input: "conv5_7/x1_w"
+external_input: "conv5_7/x2/bn_scale"
+external_input: "conv5_7/x2/bn_bias"
+external_input: "conv5_7/x2/bn_mean"
+external_input: "conv5_7/x2/bn_var"
+external_input: "conv5_7/x2/bn_w"
+external_input: "conv5_7/x2/bn_b"
+external_input: "conv5_7/x2_w"
+external_input: "conv5_8/x1/bn_scale"
+external_input: "conv5_8/x1/bn_bias"
+external_input: "conv5_8/x1/bn_mean"
+external_input: "conv5_8/x1/bn_var"
+external_input: "conv5_8/x1/bn_w"
+external_input: "conv5_8/x1/bn_b"
+external_input: "conv5_8/x1_w"
+external_input: "conv5_8/x2/bn_scale"
+external_input: "conv5_8/x2/bn_bias"
+external_input: "conv5_8/x2/bn_mean"
+external_input: "conv5_8/x2/bn_var"
+external_input: "conv5_8/x2/bn_w"
+external_input: "conv5_8/x2/bn_b"
+external_input: "conv5_8/x2_w"
+external_input: "conv5_9/x1/bn_scale"
+external_input: "conv5_9/x1/bn_bias"
+external_input: "conv5_9/x1/bn_mean"
+external_input: "conv5_9/x1/bn_var"
+external_input: "conv5_9/x1/bn_w"
+external_input: "conv5_9/x1/bn_b"
+external_input: "conv5_9/x1_w"
+external_input: "conv5_9/x2/bn_scale"
+external_input: "conv5_9/x2/bn_bias"
+external_input: "conv5_9/x2/bn_mean"
+external_input: "conv5_9/x2/bn_var"
+external_input: "conv5_9/x2/bn_w"
+external_input: "conv5_9/x2/bn_b"
+external_input: "conv5_9/x2_w"
+external_input: "conv5_10/x1/bn_scale"
+external_input: "conv5_10/x1/bn_bias"
+external_input: "conv5_10/x1/bn_mean"
+external_input: "conv5_10/x1/bn_var"
+external_input: "conv5_10/x1/bn_w"
+external_input: "conv5_10/x1/bn_b"
+external_input: "conv5_10/x1_w"
+external_input: "conv5_10/x2/bn_scale"
+external_input: "conv5_10/x2/bn_bias"
+external_input: "conv5_10/x2/bn_mean"
+external_input: "conv5_10/x2/bn_var"
+external_input: "conv5_10/x2/bn_w"
+external_input: "conv5_10/x2/bn_b"
+external_input: "conv5_10/x2_w"
+external_input: "conv5_11/x1/bn_scale"
+external_input: "conv5_11/x1/bn_bias"
+external_input: "conv5_11/x1/bn_mean"
+external_input: "conv5_11/x1/bn_var"
+external_input: "conv5_11/x1/bn_w"
+external_input: "conv5_11/x1/bn_b"
+external_input: "conv5_11/x1_w"
+external_input: "conv5_11/x2/bn_scale"
+external_input: "conv5_11/x2/bn_bias"
+external_input: "conv5_11/x2/bn_mean"
+external_input: "conv5_11/x2/bn_var"
+external_input: "conv5_11/x2/bn_w"
+external_input: "conv5_11/x2/bn_b"
+external_input: "conv5_11/x2_w"
+external_input: "conv5_12/x1/bn_scale"
+external_input: "conv5_12/x1/bn_bias"
+external_input: "conv5_12/x1/bn_mean"
+external_input: "conv5_12/x1/bn_var"
+external_input: "conv5_12/x1/bn_w"
+external_input: "conv5_12/x1/bn_b"
+external_input: "conv5_12/x1_w"
+external_input: "conv5_12/x2/bn_scale"
+external_input: "conv5_12/x2/bn_bias"
+external_input: "conv5_12/x2/bn_mean"
+external_input: "conv5_12/x2/bn_var"
+external_input: "conv5_12/x2/bn_w"
+external_input: "conv5_12/x2/bn_b"
+external_input: "conv5_12/x2_w"
+external_input: "conv5_13/x1/bn_scale"
+external_input: "conv5_13/x1/bn_bias"
+external_input: "conv5_13/x1/bn_mean"
+external_input: "conv5_13/x1/bn_var"
+external_input: "conv5_13/x1/bn_w"
+external_input: "conv5_13/x1/bn_b"
+external_input: "conv5_13/x1_w"
+external_input: "conv5_13/x2/bn_scale"
+external_input: "conv5_13/x2/bn_bias"
+external_input: "conv5_13/x2/bn_mean"
+external_input: "conv5_13/x2/bn_var"
+external_input: "conv5_13/x2/bn_w"
+external_input: "conv5_13/x2/bn_b"
+external_input: "conv5_13/x2_w"
+external_input: "conv5_14/x1/bn_scale"
+external_input: "conv5_14/x1/bn_bias"
+external_input: "conv5_14/x1/bn_mean"
+external_input: "conv5_14/x1/bn_var"
+external_input: "conv5_14/x1/bn_w"
+external_input: "conv5_14/x1/bn_b"
+external_input: "conv5_14/x1_w"
+external_input: "conv5_14/x2/bn_scale"
+external_input: "conv5_14/x2/bn_bias"
+external_input: "conv5_14/x2/bn_mean"
+external_input: "conv5_14/x2/bn_var"
+external_input: "conv5_14/x2/bn_w"
+external_input: "conv5_14/x2/bn_b"
+external_input: "conv5_14/x2_w"
+external_input: "conv5_15/x1/bn_scale"
+external_input: "conv5_15/x1/bn_bias"
+external_input: "conv5_15/x1/bn_mean"
+external_input: "conv5_15/x1/bn_var"
+external_input: "conv5_15/x1/bn_w"
+external_input: "conv5_15/x1/bn_b"
+external_input: "conv5_15/x1_w"
+external_input: "conv5_15/x2/bn_scale"
+external_input: "conv5_15/x2/bn_bias"
+external_input: "conv5_15/x2/bn_mean"
+external_input: "conv5_15/x2/bn_var"
+external_input: "conv5_15/x2/bn_w"
+external_input: "conv5_15/x2/bn_b"
+external_input: "conv5_15/x2_w"
+external_input: "conv5_16/x1/bn_scale"
+external_input: "conv5_16/x1/bn_bias"
+external_input: "conv5_16/x1/bn_mean"
+external_input: "conv5_16/x1/bn_var"
+external_input: "conv5_16/x1/bn_w"
+external_input: "conv5_16/x1/bn_b"
+external_input: "conv5_16/x1_w"
+external_input: "conv5_16/x2/bn_scale"
+external_input: "conv5_16/x2/bn_bias"
+external_input: "conv5_16/x2/bn_mean"
+external_input: "conv5_16/x2/bn_var"
+external_input: "conv5_16/x2/bn_w"
+external_input: "conv5_16/x2/bn_b"
+external_input: "conv5_16/x2_w"
+external_input: "conv5_blk/bn_scale"
+external_input: "conv5_blk/bn_bias"
+external_input: "conv5_blk/bn_mean"
+external_input: "conv5_blk/bn_var"
+external_input: "conv5_blk/bn_w"
+external_input: "conv5_blk/bn_b"
+external_input: "fc6_w"
+external_input: "fc6_b"
+external_input: "data"
+external_output: "fc6"
