@@ -97,11 +97,11 @@ function import_model {
         value_info_data='{"data": [1, [1, 3, 800, 800]]}'
         readme_data="# Detectron ${model}
 
-Original: https://github.com/facebookresearch/Detectron/blob/master/MODEL_ZOO.md#end-to-end-faster--mask-r-cnn-baselines
-Backbone: R-50-C4
-Type: Faster
-LR Schedule: 1x
-Model ID: ${id}
+* Original: https://github.com/facebookresearch/Detectron/blob/master/MODEL_ZOO.md#end-to-end-faster--mask-r-cnn-baselines
+* Backbone: R-50-C4
+* Type: Faster
+* LR Schedule: 1x
+* Model ID: ${id}
 
 ### Install
 
