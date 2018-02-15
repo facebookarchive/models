@@ -103,6 +103,7 @@ function upload_model {
 
     # We want to whitelist everything
     files+=(
+        "README.md"
         "original.caffemodel"
         "deploy.prototxt"
         "solver.prototxt"
@@ -111,6 +112,7 @@ function upload_model {
         "ilsvrc_2012_mean.npy"  # Under bvlc_alexnet and bvlc_reference_caffenet
         "predict_net.pb.del"  # Under shufflenet
         "predict_net.pbtxt.del"  # Under shufflenet
+        "predict_net_def.png"  # Under detectron
     )
 
     # Sync the valid files found
