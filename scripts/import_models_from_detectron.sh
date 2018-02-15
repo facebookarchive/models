@@ -30,6 +30,7 @@ DETECTRON_S3_ROOT="https://s3-us-west-2.amazonaws.com/detectron/"
 
 SUPPORTED_MODELS=(
   "e2e_faster_rcnn_R-50-C4_1x"
+  "e2e_faster_rcnn_R-50-C4_2x"
 )
 
 # Defaults
@@ -82,9 +83,11 @@ function import_model {
     pkl_url=""
     cfg=""
     value_info_data=""
-    readme_data=""
+    zoo_url=""
+    backbone=""
+    type=""
+    lr_schedule=""
 
-    # Check if model is supported and exit if it isn't
     if [ "${model}" == "e2e_faster_rcnn_R-50-C4_1x" ]; then
         # Include model id number at the end
         id="35857197"
@@ -93,14 +96,38 @@ function import_model {
         pkl_name="${base_name}.pkl"
         pkl_url="${DETECTRON_S3_ROOT}35857197/12_2017_baselines/e2e_faster_rcnn_R-50-C4_1x.yaml.01_33_49.iAX0mXvW/output/train/coco_2014_train%3Acoco_2014_valminusminival/generalized_rcnn/model_final.pkl"
         cfg="configs/12_2017_baselines/e2e_faster_rcnn_R-50-C4_1x.yaml"
-        # We can't reliably extract this from the model, so specified here
+        # We can't reliably extract these from the model, so specified here
         value_info_data='{"data": [1, [1, 3, 800, 800]]}'
-        readme_data="# Detectron ${model}
+        zoo_url="https://github.com/facebookresearch/Detectron/blob/master/MODEL_ZOO.md#end-to-end-faster--mask-r-cnn-baselines"
+        backbone="R-50-C4"
+        type="Faster"
+        lr_schedule="1x"
+    elif [ "${model}" == "e2e_faster_rcnn_R-50-C4_2x" ]; then
+        # Include model id number at the end
+        id="35857281"
+        base_name="${model}_${id}"
+        net_name="detectron_${base_name}"
+        pkl_name="${base_name}.pkl"
+        pkl_url="${DETECTRON_S3_ROOT}35857281/12_2017_baselines/e2e_faster_rcnn_R-50-C4_2x.yaml.01_34_56.ScPH0Z4r/output/train/coco_2014_train%3Acoco_2014_valminusminival/generalized_rcnn/model_final.pkl"
+        cfg="configs/12_2017_baselines/e2e_faster_rcnn_R-50-C4_2x.yaml"
+        # We can't reliably extract these from the model, so specified here
+        value_info_data='{"data": [1, [1, 3, 800, 800]]}'
+        zoo_url="https://github.com/facebookresearch/Detectron/blob/master/MODEL_ZOO.md#end-to-end-faster--mask-r-cnn-baselines"
+        backbone="R-50-C4"
+        type="Faster"
+        lr_schedule="2x"
+    else
+        echo "Detectron model ${model} isn't supported yet. Exiting."
+        exit 1
+    fi
 
-* Original: https://github.com/facebookresearch/Detectron/blob/master/MODEL_ZOO.md#end-to-end-faster--mask-r-cnn-baselines
-* Backbone: R-50-C4
-* Type: Faster
-* LR Schedule: 1x
+    # Construct README.md content
+    readme_data="# Detectron ${model}
+
+* Original: ${zoo_url}
+* Backbone: ${backbone}
+* Type: ${type}
+* LR Schedule: ${lr_schedule}
 * Model ID: ${id}
 
 ### Install
@@ -110,10 +137,6 @@ To install this model, run
     python -m caffe2.python.models.download -i detectron/${model}
 
 "
-    else
-        echo "Detectron model ${model} isn't supported yet. Exiting."
-        exit 1
-    fi
 
     pushd "${detectron_dir}"
     mkdir -p "models/pb_output"
@@ -195,7 +218,7 @@ git lfs pull
 if [[ ! -z "${model}" ]]; then
     import_model "${model}"
 else
-    for model_dir in ${SUPPORTED_MODELS}; do
+    for model_dir in ${SUPPORTED_MODELS[@]}; do
         import_model "${model_dir}"
     done
 fi

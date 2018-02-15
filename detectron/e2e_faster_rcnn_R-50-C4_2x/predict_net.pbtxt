@@ -1,0 +1,3285 @@
+name: "detectron_e2e_faster_rcnn_R-50-C4_2x_35857281"
+op {
+  input: "data"
+  input: "conv1_w"
+  input: "res_conv1_bn_b"
+  output: "conv1"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 7
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "pad"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "stride"
+    i: 2
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv1"
+  output: "conv1"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv1"
+  output: "pool1"
+  name: ""
+  type: "MaxPool"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 2
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "pool1"
+  input: "res2_0_branch2a_w"
+  input: "res2_0_branch2a_bn_b"
+  output: "res2_0_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_0_branch2a"
+  output: "res2_0_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_0_branch2a"
+  input: "res2_0_branch2b_w"
+  input: "res2_0_branch2b_bn_b"
+  output: "res2_0_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_0_branch2b"
+  output: "res2_0_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_0_branch2b"
+  input: "res2_0_branch2c_w"
+  input: "res2_0_branch2c_bn_b"
+  output: "res2_0_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "pool1"
+  input: "res2_0_branch1_w"
+  input: "res2_0_branch1_bn_b"
+  output: "res2_0_branch1_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_0_branch2c_bn"
+  input: "res2_0_branch1_bn"
+  output: "res2_0_branch2c_bn"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_0_branch2c_bn"
+  output: "res2_0_branch2c_bn"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_0_branch2c_bn"
+  input: "res2_1_branch2a_w"
+  input: "res2_1_branch2a_bn_b"
+  output: "res2_1_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_1_branch2a"
+  output: "res2_1_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_1_branch2a"
+  input: "res2_1_branch2b_w"
+  input: "res2_1_branch2b_bn_b"
+  output: "res2_1_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_1_branch2b"
+  output: "res2_1_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_1_branch2b"
+  input: "res2_1_branch2c_w"
+  input: "res2_1_branch2c_bn_b"
+  output: "res2_1_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_1_branch2c_bn"
+  input: "res2_0_branch2c_bn"
+  output: "res2_1_branch2c_bn"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_1_branch2c_bn"
+  output: "res2_1_branch2c_bn"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_1_branch2c_bn"
+  input: "res2_2_branch2a_w"
+  input: "res2_2_branch2a_bn_b"
+  output: "res2_2_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_2_branch2a"
+  output: "res2_2_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_2_branch2a"
+  input: "res2_2_branch2b_w"
+  input: "res2_2_branch2b_bn_b"
+  output: "res2_2_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_2_branch2b"
+  output: "res2_2_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_2_branch2b"
+  input: "res2_2_branch2c_w"
+  input: "res2_2_branch2c_bn_b"
+  output: "res2_2_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_2_branch2c_bn"
+  input: "res2_1_branch2c_bn"
+  output: "res2_2_sum"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_2_sum"
+  output: "res2_2_sum"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_2_sum"
+  input: "res3_0_branch2a_w"
+  input: "res3_0_branch2a_bn_b"
+  output: "res3_0_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_0_branch2a"
+  output: "res3_0_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_0_branch2a"
+  input: "res3_0_branch2b_w"
+  input: "res3_0_branch2b_bn_b"
+  output: "res3_0_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_0_branch2b"
+  output: "res3_0_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_0_branch2b"
+  input: "res3_0_branch2c_w"
+  input: "res3_0_branch2c_bn_b"
+  output: "res3_0_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res2_2_sum"
+  input: "res3_0_branch1_w"
+  input: "res3_0_branch1_bn_b"
+  output: "res3_0_branch1_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_0_branch2c_bn"
+  input: "res3_0_branch1_bn"
+  output: "res3_0_branch2c_bn"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_0_branch2c_bn"
+  output: "res3_0_branch2c_bn"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_0_branch2c_bn"
+  input: "res3_1_branch2a_w"
+  input: "res3_1_branch2a_bn_b"
+  output: "res3_1_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_1_branch2a"
+  output: "res3_1_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_1_branch2a"
+  input: "res3_1_branch2b_w"
+  input: "res3_1_branch2b_bn_b"
+  output: "res3_1_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_1_branch2b"
+  output: "res3_1_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_1_branch2b"
+  input: "res3_1_branch2c_w"
+  input: "res3_1_branch2c_bn_b"
+  output: "res3_1_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_1_branch2c_bn"
+  input: "res3_0_branch2c_bn"
+  output: "res3_1_branch2c_bn"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_1_branch2c_bn"
+  output: "res3_1_branch2c_bn"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_1_branch2c_bn"
+  input: "res3_2_branch2a_w"
+  input: "res3_2_branch2a_bn_b"
+  output: "res3_2_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_2_branch2a"
+  output: "res3_2_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_2_branch2a"
+  input: "res3_2_branch2b_w"
+  input: "res3_2_branch2b_bn_b"
+  output: "res3_2_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_2_branch2b"
+  output: "res3_2_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_2_branch2b"
+  input: "res3_2_branch2c_w"
+  input: "res3_2_branch2c_bn_b"
+  output: "res3_2_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_2_branch2c_bn"
+  input: "res3_1_branch2c_bn"
+  output: "res3_2_branch2c_bn"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_2_branch2c_bn"
+  output: "res3_2_branch2c_bn"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_2_branch2c_bn"
+  input: "res3_3_branch2a_w"
+  input: "res3_3_branch2a_bn_b"
+  output: "res3_3_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_3_branch2a"
+  output: "res3_3_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_3_branch2a"
+  input: "res3_3_branch2b_w"
+  input: "res3_3_branch2b_bn_b"
+  output: "res3_3_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_3_branch2b"
+  output: "res3_3_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_3_branch2b"
+  input: "res3_3_branch2c_w"
+  input: "res3_3_branch2c_bn_b"
+  output: "res3_3_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_3_branch2c_bn"
+  input: "res3_2_branch2c_bn"
+  output: "res3_3_sum"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_3_sum"
+  output: "res3_3_sum"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_3_sum"
+  input: "res4_0_branch2a_w"
+  input: "res4_0_branch2a_bn_b"
+  output: "res4_0_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_0_branch2a"
+  output: "res4_0_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_0_branch2a"
+  input: "res4_0_branch2b_w"
+  input: "res4_0_branch2b_bn_b"
+  output: "res4_0_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_0_branch2b"
+  output: "res4_0_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_0_branch2b"
+  input: "res4_0_branch2c_w"
+  input: "res4_0_branch2c_bn_b"
+  output: "res4_0_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res3_3_sum"
+  input: "res4_0_branch1_w"
+  input: "res4_0_branch1_bn_b"
+  output: "res4_0_branch1_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_0_branch2c_bn"
+  input: "res4_0_branch1_bn"
+  output: "res4_0_branch2c_bn"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_0_branch2c_bn"
+  output: "res4_0_branch2c_bn"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_0_branch2c_bn"
+  input: "res4_1_branch2a_w"
+  input: "res4_1_branch2a_bn_b"
+  output: "res4_1_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_1_branch2a"
+  output: "res4_1_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_1_branch2a"
+  input: "res4_1_branch2b_w"
+  input: "res4_1_branch2b_bn_b"
+  output: "res4_1_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_1_branch2b"
+  output: "res4_1_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_1_branch2b"
+  input: "res4_1_branch2c_w"
+  input: "res4_1_branch2c_bn_b"
+  output: "res4_1_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_1_branch2c_bn"
+  input: "res4_0_branch2c_bn"
+  output: "res4_1_branch2c_bn"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_1_branch2c_bn"
+  output: "res4_1_branch2c_bn"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_1_branch2c_bn"
+  input: "res4_2_branch2a_w"
+  input: "res4_2_branch2a_bn_b"
+  output: "res4_2_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_2_branch2a"
+  output: "res4_2_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_2_branch2a"
+  input: "res4_2_branch2b_w"
+  input: "res4_2_branch2b_bn_b"
+  output: "res4_2_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_2_branch2b"
+  output: "res4_2_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_2_branch2b"
+  input: "res4_2_branch2c_w"
+  input: "res4_2_branch2c_bn_b"
+  output: "res4_2_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_2_branch2c_bn"
+  input: "res4_1_branch2c_bn"
+  output: "res4_2_branch2c_bn"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_2_branch2c_bn"
+  output: "res4_2_branch2c_bn"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_2_branch2c_bn"
+  input: "res4_3_branch2a_w"
+  input: "res4_3_branch2a_bn_b"
+  output: "res4_3_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_3_branch2a"
+  output: "res4_3_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_3_branch2a"
+  input: "res4_3_branch2b_w"
+  input: "res4_3_branch2b_bn_b"
+  output: "res4_3_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_3_branch2b"
+  output: "res4_3_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_3_branch2b"
+  input: "res4_3_branch2c_w"
+  input: "res4_3_branch2c_bn_b"
+  output: "res4_3_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_3_branch2c_bn"
+  input: "res4_2_branch2c_bn"
+  output: "res4_3_branch2c_bn"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_3_branch2c_bn"
+  output: "res4_3_branch2c_bn"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_3_branch2c_bn"
+  input: "res4_4_branch2a_w"
+  input: "res4_4_branch2a_bn_b"
+  output: "res4_4_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_4_branch2a"
+  output: "res4_4_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_4_branch2a"
+  input: "res4_4_branch2b_w"
+  input: "res4_4_branch2b_bn_b"
+  output: "res4_4_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_4_branch2b"
+  output: "res4_4_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_4_branch2b"
+  input: "res4_4_branch2c_w"
+  input: "res4_4_branch2c_bn_b"
+  output: "res4_4_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_4_branch2c_bn"
+  input: "res4_3_branch2c_bn"
+  output: "res4_4_branch2c_bn"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_4_branch2c_bn"
+  output: "res4_4_branch2c_bn"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_4_branch2c_bn"
+  input: "res4_5_branch2a_w"
+  input: "res4_5_branch2a_bn_b"
+  output: "res4_5_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_5_branch2a"
+  output: "res4_5_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_5_branch2a"
+  input: "res4_5_branch2b_w"
+  input: "res4_5_branch2b_bn_b"
+  output: "res4_5_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_5_branch2b"
+  output: "res4_5_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_5_branch2b"
+  input: "res4_5_branch2c_w"
+  input: "res4_5_branch2c_bn_b"
+  output: "res4_5_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_5_branch2c_bn"
+  input: "res4_4_branch2c_bn"
+  output: "res4_5_sum"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_5_sum"
+  output: "res4_5_sum"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res4_5_sum"
+  input: "conv_rpn_w"
+  input: "conv_rpn_b"
+  output: "conv_rpn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv_rpn"
+  output: "conv_rpn"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv_rpn"
+  input: "rpn_cls_logits_w"
+  input: "rpn_cls_logits_b"
+  output: "rpn_cls_logits"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "conv_rpn"
+  input: "rpn_bbox_pred_w"
+  input: "rpn_bbox_pred_b"
+  output: "rpn_bbox_pred"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "rpn_cls_logits"
+  output: "rpn_cls_probs"
+  name: ""
+  type: "Sigmoid"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "rpn_cls_probs"
+  input: "rpn_bbox_pred"
+  input: "im_info"
+  input: "anchor"
+  output: "rpn_rois"
+  output: "rpn_roi_probs"
+  name: ""
+  type: "GenerateProposals"
+  arg {
+    name: "nms_thres"
+    f: 0.699999988079
+  }
+  arg {
+    name: "min_size"
+    f: 0.0
+  }
+  arg {
+    name: "spatial_scale"
+    f: 0.0625
+  }
+  arg {
+    name: "correct_transform_coords"
+    i: 1
+  }
+  arg {
+    name: "post_nms_topN"
+    i: 1000
+  }
+  arg {
+    name: "pre_nms_topN"
+    i: 6000
+  }
+}
+op {
+  input: "res4_5_sum"
+  input: "rpn_rois"
+  output: "pool5"
+  name: ""
+  type: "RoIAlign"
+  arg {
+    name: "pooled_h"
+    i: 14
+  }
+  arg {
+    name: "sampling_ratio"
+    i: 0
+  }
+  arg {
+    name: "spatial_scale"
+    f: 0.0625
+  }
+  arg {
+    name: "pooled_w"
+    i: 14
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "pool5"
+  input: "res5_0_branch2a_w"
+  input: "res5_0_branch2a_bn_b"
+  output: "res5_0_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_0_branch2a"
+  output: "res5_0_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_0_branch2a"
+  input: "res5_0_branch2b_w"
+  input: "res5_0_branch2b_bn_b"
+  output: "res5_0_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_0_branch2b"
+  output: "res5_0_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_0_branch2b"
+  input: "res5_0_branch2c_w"
+  input: "res5_0_branch2c_bn_b"
+  output: "res5_0_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "pool5"
+  input: "res5_0_branch1_w"
+  input: "res5_0_branch1_bn_b"
+  output: "res5_0_branch1_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "stride"
+    i: 2
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_0_branch2c_bn"
+  input: "res5_0_branch1_bn"
+  output: "res5_0_branch2c_bn"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_0_branch2c_bn"
+  output: "res5_0_branch2c_bn"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_0_branch2c_bn"
+  input: "res5_1_branch2a_w"
+  input: "res5_1_branch2a_bn_b"
+  output: "res5_1_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_1_branch2a"
+  output: "res5_1_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_1_branch2a"
+  input: "res5_1_branch2b_w"
+  input: "res5_1_branch2b_bn_b"
+  output: "res5_1_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_1_branch2b"
+  output: "res5_1_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_1_branch2b"
+  input: "res5_1_branch2c_w"
+  input: "res5_1_branch2c_bn_b"
+  output: "res5_1_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_1_branch2c_bn"
+  input: "res5_0_branch2c_bn"
+  output: "res5_1_branch2c_bn"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_1_branch2c_bn"
+  output: "res5_1_branch2c_bn"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_1_branch2c_bn"
+  input: "res5_2_branch2a_w"
+  input: "res5_2_branch2a_bn_b"
+  output: "res5_2_branch2a"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_2_branch2a"
+  output: "res5_2_branch2a"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_2_branch2a"
+  input: "res5_2_branch2b_w"
+  input: "res5_2_branch2b_bn_b"
+  output: "res5_2_branch2b"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 3
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 1
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_2_branch2b"
+  output: "res5_2_branch2b"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_2_branch2b"
+  input: "res5_2_branch2c_w"
+  input: "res5_2_branch2c_bn_b"
+  output: "res5_2_branch2c_bn"
+  name: ""
+  type: "Conv"
+  arg {
+    name: "kernel"
+    i: 1
+  }
+  arg {
+    name: "exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "stride"
+    i: 1
+  }
+  arg {
+    name: "pad"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "dilation"
+    i: 1
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_2_branch2c_bn"
+  input: "res5_1_branch2c_bn"
+  output: "res5_2_sum"
+  name: ""
+  type: "Sum"
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_2_sum"
+  output: "res5_2_sum"
+  name: ""
+  type: "Relu"
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_2_sum"
+  output: "res5_pool"
+  name: ""
+  type: "AveragePool"
+  arg {
+    name: "kernel"
+    i: 7
+  }
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_pool"
+  input: "cls_score_w"
+  input: "cls_score_b"
+  output: "cls_score"
+  name: ""
+  type: "FC"
+  arg {
+    name: "use_cudnn"
+    i: 1
+  }
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "cls_score"
+  output: "cls_prob"
+  name: ""
+  type: "Softmax"
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "res5_pool"
+  input: "bbox_pred_w"
+  input: "bbox_pred_b"
+  output: "bbox_pred"
+  name: ""
+  type: "FC"
+  arg {
+    name: "use_cudnn"
+    i: 1
+  }
+  arg {
+    name: "cudnn_exhaustive_search"
+    i: 0
+  }
+  arg {
+    name: "order"
+    s: "NCHW"
+  }
+  device_option {
+  }
+  engine: ""
+}
+op {
+  input: "rpn_rois"
+  input: "bbox_pred"
+  input: "im_info"
+  output: "pred_bbox"
+  name: ""
+  type: "BBoxTransform"
+  arg {
+    name: "correct_transform_coords"
+    i: 1
+  }
+  arg {
+    name: "apply_scale"
+    i: 0
+  }
+  arg {
+    name: "weights"
+    floats: 10.0
+    floats: 10.0
+    floats: 5.0
+    floats: 5.0
+  }
+}
+op {
+  input: "cls_prob"
+  input: "pred_bbox"
+  output: "score_nms"
+  output: "bbox_nms"
+  output: "class_nms"
+  name: ""
+  type: "BoxWithNMSLimit"
+  arg {
+    name: "score_thresh"
+    f: 0.0500000007451
+  }
+  arg {
+    name: "nms"
+    f: 0.5
+  }
+  arg {
+    name: "detections_per_im"
+    i: 100
+  }
+  arg {
+    name: "soft_nms_enabled"
+    i: 0
+  }
+  arg {
+    name: "soft_nms_method"
+    s: "linear"
+  }
+  arg {
+    name: "soft_nms_sigma"
+    f: 0.5
+  }
+}
+type: "simple"
+num_workers: 1
+external_input: "data"
+external_input: "conv1_w"
+external_input: "res_conv1_bn_b"
+external_input: "res2_0_branch2a_w"
+external_input: "res2_0_branch2a_bn_b"
+external_input: "res2_0_branch2b_w"
+external_input: "res2_0_branch2b_bn_b"
+external_input: "res2_0_branch2c_w"
+external_input: "res2_0_branch2c_bn_b"
+external_input: "res2_0_branch1_w"
+external_input: "res2_0_branch1_bn_b"
+external_input: "res2_1_branch2a_w"
+external_input: "res2_1_branch2a_bn_b"
+external_input: "res2_1_branch2b_w"
+external_input: "res2_1_branch2b_bn_b"
+external_input: "res2_1_branch2c_w"
+external_input: "res2_1_branch2c_bn_b"
+external_input: "res2_2_branch2a_w"
+external_input: "res2_2_branch2a_bn_b"
+external_input: "res2_2_branch2b_w"
+external_input: "res2_2_branch2b_bn_b"
+external_input: "res2_2_branch2c_w"
+external_input: "res2_2_branch2c_bn_b"
+external_input: "res3_0_branch2a_w"
+external_input: "res3_0_branch2a_bn_b"
+external_input: "res3_0_branch2b_w"
+external_input: "res3_0_branch2b_bn_b"
+external_input: "res3_0_branch2c_w"
+external_input: "res3_0_branch2c_bn_b"
+external_input: "res3_0_branch1_w"
+external_input: "res3_0_branch1_bn_b"
+external_input: "res3_1_branch2a_w"
+external_input: "res3_1_branch2a_bn_b"
+external_input: "res3_1_branch2b_w"
+external_input: "res3_1_branch2b_bn_b"
+external_input: "res3_1_branch2c_w"
+external_input: "res3_1_branch2c_bn_b"
+external_input: "res3_2_branch2a_w"
+external_input: "res3_2_branch2a_bn_b"
+external_input: "res3_2_branch2b_w"
+external_input: "res3_2_branch2b_bn_b"
+external_input: "res3_2_branch2c_w"
+external_input: "res3_2_branch2c_bn_b"
+external_input: "res3_3_branch2a_w"
+external_input: "res3_3_branch2a_bn_b"
+external_input: "res3_3_branch2b_w"
+external_input: "res3_3_branch2b_bn_b"
+external_input: "res3_3_branch2c_w"
+external_input: "res3_3_branch2c_bn_b"
+external_input: "res4_0_branch2a_w"
+external_input: "res4_0_branch2a_bn_b"
+external_input: "res4_0_branch2b_w"
+external_input: "res4_0_branch2b_bn_b"
+external_input: "res4_0_branch2c_w"
+external_input: "res4_0_branch2c_bn_b"
+external_input: "res4_0_branch1_w"
+external_input: "res4_0_branch1_bn_b"
+external_input: "res4_1_branch2a_w"
+external_input: "res4_1_branch2a_bn_b"
+external_input: "res4_1_branch2b_w"
+external_input: "res4_1_branch2b_bn_b"
+external_input: "res4_1_branch2c_w"
+external_input: "res4_1_branch2c_bn_b"
+external_input: "res4_2_branch2a_w"
+external_input: "res4_2_branch2a_bn_b"
+external_input: "res4_2_branch2b_w"
+external_input: "res4_2_branch2b_bn_b"
+external_input: "res4_2_branch2c_w"
+external_input: "res4_2_branch2c_bn_b"
+external_input: "res4_3_branch2a_w"
+external_input: "res4_3_branch2a_bn_b"
+external_input: "res4_3_branch2b_w"
+external_input: "res4_3_branch2b_bn_b"
+external_input: "res4_3_branch2c_w"
+external_input: "res4_3_branch2c_bn_b"
+external_input: "res4_4_branch2a_w"
+external_input: "res4_4_branch2a_bn_b"
+external_input: "res4_4_branch2b_w"
+external_input: "res4_4_branch2b_bn_b"
+external_input: "res4_4_branch2c_w"
+external_input: "res4_4_branch2c_bn_b"
+external_input: "res4_5_branch2a_w"
+external_input: "res4_5_branch2a_bn_b"
+external_input: "res4_5_branch2b_w"
+external_input: "res4_5_branch2b_bn_b"
+external_input: "res4_5_branch2c_w"
+external_input: "res4_5_branch2c_bn_b"
+external_input: "conv_rpn_w"
+external_input: "conv_rpn_b"
+external_input: "rpn_cls_logits_w"
+external_input: "rpn_cls_logits_b"
+external_input: "rpn_bbox_pred_w"
+external_input: "rpn_bbox_pred_b"
+external_input: "im_info"
+external_input: "res5_0_branch2a_w"
+external_input: "res5_0_branch2a_bn_b"
+external_input: "res5_0_branch2b_w"
+external_input: "res5_0_branch2b_bn_b"
+external_input: "res5_0_branch2c_w"
+external_input: "res5_0_branch2c_bn_b"
+external_input: "res5_0_branch1_w"
+external_input: "res5_0_branch1_bn_b"
+external_input: "res5_1_branch2a_w"
+external_input: "res5_1_branch2a_bn_b"
+external_input: "res5_1_branch2b_w"
+external_input: "res5_1_branch2b_bn_b"
+external_input: "res5_1_branch2c_w"
+external_input: "res5_1_branch2c_bn_b"
+external_input: "res5_2_branch2a_w"
+external_input: "res5_2_branch2a_bn_b"
+external_input: "res5_2_branch2b_w"
+external_input: "res5_2_branch2b_bn_b"
+external_input: "res5_2_branch2c_w"
+external_input: "res5_2_branch2c_bn_b"
+external_input: "cls_score_w"
+external_input: "cls_score_b"
+external_input: "bbox_pred_w"
+external_input: "bbox_pred_b"
+external_input: "anchor"
+external_output: "score_nms"
+external_output: "bbox_nms"
+external_output: "class_nms"
