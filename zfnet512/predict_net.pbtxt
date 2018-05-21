@@ -1,4 +1,4 @@
-name: "zfnet"
+name: "zfnet512"
 op {
   input: "gpu_0/data"
   input: "gpu_0/conv1_w"
