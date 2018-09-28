@@ -16,9 +16,10 @@ This quantized ResNet50 model is generated in the following steps. After trainin
 
 The model below are the original fp32 ResNet50 model and quantized int8 ResNet50 model trained on ImageNet data set. 
 
-Model Download Format Top-1 accuracy (%) Top-5 accuracy (%)
-ResNet50 Link (https://github.com/facebook/FAI-PEP/blob/master/specifications/models/caffe2/resnet50/resnet50.json) Caffe2 pb 75.9 92.9
-ResNet50 [resnet50_quantized_init_net.pb](https://s3.amazonaws.com/download.caffe2.ai/models/resnet50_quantized/resnet50_quantized_init_net.pb), [resnet50_quantized_predict_net.pb](https://s3.amazonaws.com/download.caffe2.ai/models/resnet50_quantized/resnet_quantized_predict_net.pb) Caffe2 pb 75.6 92.8
+| Model | Download | Format | Top-1 accuracy (%) | Top-5 accuracy (%) |
+|-|-|-|-|-|
+| Original ResNet50 |  [resnet50.json](https://github.com/facebook/FAI-PEP/blob/master/specifications/models/caffe2/resnet50/resnet50.json) | Caffe2 pb | 75.9 | 92.9 |
+| Quantized ResNet50 | [resnet50_quantized_init_net.pb](https://s3.amazonaws.com/download.caffe2.ai/models/resnet50_quantized/resnet50_quantized_init_net.pb), [resnet50_quantized_predict_net.pb](https://s3.amazonaws.com/download.caffe2.ai/models/resnet50_quantized/resnet_quantized_predict_net.pb) | Caffe2 pb | 75.6% | 92.8% |
 
 ## Inference
 
@@ -100,12 +101,12 @@ We used Caffe2 as framework to perform validation.
 
 ## Contributors
 
-* hx89 (https://github.com/hx89) (Facebook)
-* csummersea (https://github.com/csummersea) (Facebook)
-* dskhudia (https://github.com/dskhudia) (Facebook)
-* Yiming Wu
-* Priya Goyal
-* jspark1105 (https://github.com/jspark1105) (Facebook)
+* [hx89](https://github.com/hx89) (Facebook)
+* [csummersea](https://github.com/csummersea) (Facebook)
+* [dskhudia](https://github.com/dskhudia) (Facebook)
+* [Yiming Wu](https://github.com/harouwu) (Facebook)
+* [Priya Goyal](prigoyal) (Facebook)
+* [jspark1105](https://github.com/jspark1105) (Facebook)
 
 ## License
 
