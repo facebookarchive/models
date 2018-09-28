@@ -18,7 +18,7 @@ The model below are the original fp32 ResNet50 model and quantized int8 ResNet50
 
 Model Download Format Top-1 accuracy (%) Top-5 accuracy (%)
 ResNet50 Link (https://github.com/facebook/FAI-PEP/blob/master/specifications/models/caffe2/resnet50/resnet50.json) Caffe2 pb 75.9 92.9
-ResNet50 [resnet50_quantized_init_net.pb](https://s3.amazonaws.com/download.caffe2.ai/models/resnet50_quantized/resnet50_quantized_init_net.pb), [resnet50_quantized_predict_net.pb](https://s3.amazonaws.com/download.caffe2.ai/models/resnet50_quantized/resetnet_quantized_predict_net.pb) Caffe2 pb 75.6 92.8
+ResNet50 [resnet50_quantized_init_net.pb](https://s3.amazonaws.com/download.caffe2.ai/models/resnet50_quantized/resnet50_quantized_init_net.pb), [resnet50_quantized_predict_net.pb](https://s3.amazonaws.com/download.caffe2.ai/models/resnet50_quantized/resnet_quantized_predict_net.pb) Caffe2 pb 75.6 92.8
 
 ## Inference
 
