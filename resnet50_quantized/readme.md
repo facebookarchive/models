@@ -34,7 +34,7 @@ The pre-trained model expect input images normalized in the same way, i.e. mini-
 The images have to be loaded in to a range of [0, 255] and then normalized using mean = [0.406, 0.456, 0.485] and std = [0.225, 0.224, 0.229]. The transformation should preferrably happen at preprocessing.
 The following code shows how to preprocess a NCHW tensor and prepare the input to the model:
 
-```
+```python
 from caffe2.python import brew, core, model_helper
 
 test_data_db = <Input data path>
