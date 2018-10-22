@@ -18,8 +18,8 @@ predict_net: https://s3.amazonaws.com/download.caffe2.ai/models/mobilenet_v2_1.0
 | Model | Download | Format | Top-1 accuracy (%) | Top-5 accuracy (%) |
 |-|-|-|-|-|
 | quant mobilenet v2 1.0 224 | [init_net.pb](https://s3.amazonaws.com/download.caffe2.ai/models/mobilenet_v2_1.0_224_quant/init_net.pb), [predict_net.pb](https://s3.amazonaws.com/download.caffe2.ai/models/mobilenet_v2_1.0_224_quant/predict_net.pb) | caffe2 | 72.10% |
-| fp32 mobilenet v2 | https://arxiv.org/abs/1801.04381 https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/lite/g3doc/models.md | tensorflow | 72% |
-| Tensorflow quant mobilenet v2 1.0 224 | https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/lite/g3doc/models.md | tensorflow | 70.80% |
+| [fp32 mobilenet v2](https://arxiv.org/abs/1801.04381) | [tf lite model](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/lite/g3doc/models.md) | tensorflow | 72% |
+| Tensorflow quant mobilenet v2 1.0 224 | [tf lite model](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/lite/g3doc/models.md) | tensorflow | 70.80% |
 
 
 ## Inference
