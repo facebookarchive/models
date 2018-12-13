@@ -1,5 +1,5 @@
-DATASET_IM_DIR="/Users/feisun/caffe2/coco/val2014"
-DATASET_ANN="/Users/feisun/caffe2/instances_minival2014_100.json"
+DATASET_IM_DIR="path_to_/coco_val2014"
+DATASET_ANN="path_to_/coco/instances_minival2014.json"
 
 python code/eval_seg_cpu.py \
     --net "model/fp32/model.pb" \
