@@ -4,6 +4,7 @@ import argparse
 import logging
 import os
 import sys
+import multiprocessing
 
 import cv2  # NOQA (Must import before importing caffe2 due to bug in cv2)
 import infer_model_pb_utils as infer_pb_utils
@@ -56,6 +57,12 @@ def parse_args():
         default=640,
         help="Target size for max side while resizing",
     )
+    parser.add_argument(
+        "--parallel",
+        type=int,
+        default=0,
+        help="Run evaluation in parallel when 1",
+    )
     ret = parser.parse_args()
     ret.output_dir = os.path.abspath(ret.output_dir)
     return ret
@@ -85,6 +92,21 @@ def run_single_image(net, fname, target_min_size, target_max_size):
     return ret
 
 
+RUN_ARGS = None
+
+
+def _run_args_init(run_args):
+    global RUN_ARGS
+    RUN_ARGS = run_args
+
+
+def _run_single_entry(entry):
+    return run_single_image(
+        fname=entry['image'],
+        **RUN_ARGS
+    )
+
+
 def eval_segm_cpu(args, net):
     # load dataset
     ds = JsonDataset(args.dataset, args.dataset_dir, args.dataset_ann)
@@ -97,19 +119,46 @@ def eval_segm_cpu(args, net):
     all_segms = all_results["all_segms"]
 
     # run model
-    for i, entry in enumerate(roidb):
-        if i % 10 == 0:
-            logger.warning("{}/{}".format(i, len(roidb)))
-        ret = run_single_image(
-            net,
-            entry["image"],
-            target_min_size=args.min_size,
-            target_max_size=args.max_size,
+    if args.parallel == 0:
+        for i, entry in enumerate(roidb):
+            if i % 10 == 0:
+                logger.warning("{}/{}".format(i, len(roidb)))
+            ret = run_single_image(
+                net,
+                entry["image"],
+                target_min_size=args.min_size,
+                target_max_size=args.max_size,
+            )
+            if ret is not None:
+                extend_results_with_classes(i, all_boxes, (ret["boxes"], ret["classids"]))
+                extend_seg_results_with_classes(
+                    i, all_segms, (ret["im_masks"], ret["classids"])
+                )
+    else:
+        run_args = {
+            "net": net,
+            "target_min_size": args.min_size,
+            "target_max_size": args.max_size,
+        }
+
+        assert args.parallel >= 1
+        logger.info('CPU counts {}'.format(multiprocessing.cpu_count()))
+        mp_count = multiprocessing.cpu_count() if args.parallel == 1 else args.parallel
+        logger.info('Multiprocess counts {}'.format(mp_count))
+        pool = multiprocessing.Pool(
+            mp_count, _run_args_init, (run_args,),
         )
-        if ret is not None:
-            extend_results_with_classes(i, all_boxes, (ret["boxes"], ret["classids"]))
+
+        for i, ret in enumerate(pool.imap(
+            _run_single_entry,
+            roidb,
+            100
+        )):
+            if i % 10 == 0:
+                logger.warning("{}/{}".format(i, len(roidb)))
+            extend_results_with_classes(i, all_boxes, (ret['boxes'], ret['classids']))
             extend_seg_results_with_classes(
-                i, all_segms, (ret["im_masks"], ret["classids"])
+                i, all_segms, (ret['im_masks'], ret['classids'])
             )
 
     if not os.path.exists(args.output_dir):
@@ -126,7 +175,7 @@ def eval_segm_cpu(args, net):
 def main():
     args = parse_args()
 
-    num_threads = 8
+    num_threads = 8 if not args.parallel else 1
     workspace.GlobalInit(
         [
             "caffe2",
