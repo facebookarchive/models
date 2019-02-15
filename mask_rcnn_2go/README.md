@@ -8,15 +8,15 @@ Owner: Peizhao Zhang (stzpz@fb.com)
 * Trained on COCO 2014 dataset
 * int8 model fine-tuned with fake-quantization
 
-## Performance 
+## Performance
   * Evaluation dataset: COCO 2014 minival
-  * Metric: mAP[IoU=0.50:0.95]
-  * Proposals: 3000/100 (pre/post nms) 
+  * Metric: mAP[IoU=0.50:0.95] and latency (in microseconds)
+  * Proposals: 3000/100 (pre/post nms)
 
-   Model  | Bbox | Segmentation
-  ------- | ---- | ------------
-  float32 | 25.1 |     21.6
-  int8    | 24.8 |     21.7
+  |  Model  | Bbox | Segmentation | Latency Median | Latency MAD |
+  |:-------:|:----:|:------------:|:--------------:|:-----------:|
+  | float32 | 25.1 |     21.6     |        -       |      -      |
+  |   int8  | 24.8 |     21.7     |     152927     |   78201.05  |
 
 ## Input
   * data (1, 3, H, W), min(H, W) = 320, BGR in range [0, 255]
@@ -24,8 +24,8 @@ Owner: Peizhao Zhang (stzpz@fb.com)
 
 ## Evaluation
 * Download COCO 2014 minival dataset
-* Update path in run_eval.sh
-* Run run_eval.sh
+* Run ```run.sh [coco_dir] [model]```
+* The `model` argument can be either `fp32` for float 32 or `int8`
 
 ## Model source
 * f93520960
