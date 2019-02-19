@@ -9,7 +9,6 @@ FAI_PEP_DIR=/tmp/FAI-PEP
 CONFIG_DIR=/tmp/config
 LOCAL_REPORTER_DIR=/tmp/reporter
 REPO_DIR=/tmp/pytorch
-REPO_DIR=/Users/zhizhenqin/pytorch
 
 SCRIPT=$(realpath "$0")
 FILE_DIR=$(dirname "$SCRIPT")
@@ -49,6 +48,10 @@ echo "
 
 # clone/install pytorch
 pip install numpy pyyaml mkl mkl-include setuptools cmake cffi typing
+
+if [ ! -d "${REPO_DIR}" ]; then
+  git clone --recursive --quiet https://github.com/pytorch/pytorch.git "$REPO_DIR"
+fi
 
 # install ninja to speedup the build
 pip install ninja

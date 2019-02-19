@@ -19,7 +19,7 @@ Owner: Peizhao Zhang (stzpz@fb.com)
   |  Model  | Bbox | Segmentation | Latency Median | Latency MAD |
   |:-------:|:----:|:------------:|:--------------:|:-----------:|
   | float32 | 25.1 |     21.6     |        -       |      -      |
-  |   int8  | 24.8 |     21.7     |     152927     |   78201.05  |
+  |   int8  | 24.8 |     21.7     |     150088     |   78744.55  |
 
 ## Input
   * data (1, 3, H, W), min(H, W) = 320, BGR in range [0, 255]
