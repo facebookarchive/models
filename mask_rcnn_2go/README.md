@@ -12,6 +12,9 @@ Owner: Peizhao Zhang (stzpz@fb.com)
   * Evaluation dataset: COCO 2014 minival
   * Metric: mAP[IoU=0.50:0.95] and latency (in microseconds)
   * Proposals: 3000/100 (pre/post nms)
+  * The backend for evaluation is QNNPACK
+  * The unit of mensured latency is microseconds
+  * Latency is evaluated on Samsung S8 (SM-G950U-7.0-24)
 
   |  Model  | Bbox | Segmentation | Latency Median | Latency MAD |
   |:-------:|:----:|:------------:|:--------------:|:-----------:|
@@ -24,6 +27,7 @@ Owner: Peizhao Zhang (stzpz@fb.com)
 
 ## Evaluation
 * Download COCO 2014 minival dataset
+* OpenCV must be installed for image preprocessing
 * Run ```run.sh [coco_dir] [model]```
 * The `model` argument can be either `fp32` for float 32 or `int8`
 
@@ -33,4 +37,4 @@ Owner: Peizhao Zhang (stzpz@fb.com)
 
 ## Acknowledgement
 
-Thanks a lot for the help from Carole-Jean Wu, Fei Sun, Yiming Wu and Yanghan Wang.
+Thanks a lot for the help from Carole-Jean Wu, Fei Sun, Yiming Wu, Yanghan Wang and Zhizhen Qin.
