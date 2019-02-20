@@ -40,7 +40,7 @@
   "tests": [
     {
       "commands": [
-        "{program} --net {files.predict} --init_net {files.init} --warmup {warmup} --iter {iter} --input \"data,im_info\" --input_file {input_files.images_tensor},{input_files.im_info_tensor} --input_type float --output class_nms,score_nms,bbox_nms,mask_fcn_probs --text_output true --output_folder '{TGTDIR}'"
+        "{program} --net {files.predict} --init_net {files.init} --warmup {warmup} --iter {iter} --input \"data,im_info\" --input_file {input_files.images_tensor},{input_files.im_info_tensor} --input_type float --output class_nms,score_nms,bbox_nms,mask_fcn_probs --text_output true --output_folder '{TGTDIR}' --sleep_before_run 60"
       ],
       "identifier": "{ID}",
       "input_files": {
