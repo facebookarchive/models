@@ -1,0 +1,93 @@
+{
+  "model": {
+    "category": "CNN",
+    "description": "Trained MaskRCNN2Go model on Caffe2, running on coco dataset",
+    "files": {
+      "init": {
+        "filename": "model_init.pb",
+        "location": "{MODEL_DIR}/model_init.pb",
+        "md5": "47c6c1b6b3c03af969a4c2dbfbaa2813"
+      },
+      "predict": {
+        "filename": "model.pb",
+        "location": "{MODEL_DIR}/model.pb",
+        "md5": "8dad602eb98a07278de8d8031168aad2"
+      }
+    },
+    "format": "caffe2",
+    "images_per_iter": "{total_images}/{repeat}",
+    "kind": "deployment",
+    "log_output": "true",
+    "name": "MaskRCNN2Go",
+    "dataset_dir": "{COCO_DIR}/val2014/",
+    "dataset_ann": "{COCO_DIR}/annotations/instances_val2014.json",
+    "postprocess": {
+      "commands": [
+        "{FAIPEPROOT}/libraries/python/coco/test_engine.py --dataset coco_2014val --dataset_dir {dataset_dir} --dataset_ann {dataset_ann} --limit-files {repeat} --total-num {total_images} --input-dir {HOSTDIR}/outputs --result-prefix coco_result --output-dir {HOSTDIR}/result"
+      ]
+    },
+    "preprocess": {
+      "commands": [
+        "mkdir -p {HOSTDIR}/inputs",
+        "mkdir -p {HOSTDIR}/outputs",
+        "{FAIPEPROOT}/libraries/python/coco/json_dataset.py --dataset coco_2014val --dataset_dir {dataset_dir} --dataset_ann {dataset_ann} --output-file {HOSTDIR}/coco_database.txt --output-image-file {HOSTDIR}/coco_images.txt"
+      ]
+    },
+    "repeat": 100,
+    "batch_size": 1,
+    "total_images": 5000
+  },
+  "tests": [
+    {
+      "commands": [
+        "{program} --net {files.predict} --init_net {files.init} --warmup {warmup} --iter {iter} --input \"data,im_info\" --input_file {input_files.images_tensor},{input_files.im_info_tensor} --input_type float --output class_nms,score_nms,bbox_nms,mask_fcn_probs --text_output true --output_folder '{TGTDIR}' --sleep_before_run 60"
+      ],
+      "identifier": "{ID}",
+      "input_files": {
+        "im_info_tensor": {
+          "filename": "im_info_tensor.pb",
+          "location": "{HOSTDIR}/im_info_tensor.pb"
+        },
+        "images_tensor": {
+          "filename": "images_tensor.pb",
+          "location": "{HOSTDIR}/images_tensor.pb"
+        }
+      },
+      "iter": 50,
+      "log_output": "true",
+      "metric": "accuracy",
+      "output_files": {
+        "bbox_nms": {
+          "filename": "bbox_nms.txt",
+          "location": "{TGTDIR}/bbox_nms.txt"
+        },
+        "class_nms": {
+          "filename": "class_nms.txt",
+          "location": "{TGTDIR}/class_nms.txt"
+        },
+        "mask_fcn_probs": {
+          "filename": "mask_fcn_probs.txt",
+          "location": "{TGTDIR}/mask_fcn_probs.txt"
+        },
+        "score_nms": {
+          "filename": "score_nms.txt",
+          "location": "{TGTDIR}/score_nms.txt"
+        }
+      },
+      "postprocess": {
+        "commands": [
+          "{FAIPEPROOT}/libraries/python/coco/process_single_image_output.py --blob-names class_nms,score_nms,bbox_nms,mask_fcn_probs --blob-files {output_files.class_nms},{output_files.score_nms},{output_files.bbox_nms},{output_files.mask_fcn_probs} --im-info {HOSTDIR}/inputs/coco_database_{INDEX}.txt --output-file {HOSTDIR}/outputs/coco_result_{INDEX}.pkl --rle-encode --sleep_before_run 60"
+        ]
+      },
+      "preprocess": {
+        "commands": [
+          "awk '(NR>{INDEX}*{images_per_iter})&&(NR<={INDEX}*{images_per_iter}+{images_per_iter}) {print > \"{HOSTDIR}/inputs/coco_database_{INDEX}.txt\"}' {HOSTDIR}/coco_database.txt",
+          "awk '(NR>{INDEX}*{images_per_iter})&&(NR<={INDEX}*{images_per_iter}+{images_per_iter}) {print > \"{HOSTDIR}/inputs/coco_images_{INDEX}.txt\"}' {HOSTDIR}/coco_images.txt",
+          "{FAIPEPROOT}/libraries/python/coco/generate_im_info.py --dataset-file {HOSTDIR}/inputs/coco_database_{INDEX}.txt --min-size 320 --max-size 640 --batch-size {batch_size} --output-file {HOSTDIR}/inputs/coco_im_info_{INDEX}.txt",
+          "{convert_image_to_tensor} --input_image_file {HOSTDIR}/inputs/coco_images_{INDEX}.txt --output_tensor {input_files.images_tensor} --scale 320,640 --batch_size {batch_size} --input_text_file {HOSTDIR}/inputs/coco_im_info_{INDEX}.txt --output_text_tensor {input_files.im_info_tensor} --report_time \"json|Caffe2Observer \""
+        ]
+      },
+      "warmup": 50
+    }
+  ]
+}
